@@ -1,5 +1,17 @@
 <?php
 
+if(!function_exists("session")) {
+    function session($data) {
+        if(is_array($data)) {
+            foreach($data as $key=>$value) {
+                $_SESSION[$key] = $value;
+            }
+        } else {
+            return $_SESSION[$data];
+        }
+    }
+}
+
 if(!function_exists("config")) {
     /**
      * @param $name

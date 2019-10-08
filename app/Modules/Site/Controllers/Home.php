@@ -19,13 +19,4 @@ class Home extends Controller {
     {
         return view("site.home", [], 5);
     }
-
-    /**
-     * @param $param
-     * @route detail/foo/bar
-     */
-    public function detail($param) {
-        $users = DB("users")->all(1000);
-        dd($users);
-    }
 }
