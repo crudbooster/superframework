@@ -8,6 +8,7 @@ class Super
 
     public function __construct()
     {
+        session_name("SuperFW_".basename(getcwd()));
         session_start();
         $this->config = include getcwd()."../app/Configs/config.php";
     }
