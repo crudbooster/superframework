@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php require_once "vendor/autoload.php";
+
+echo "SUPER FRAMEWORK CLI TOOL\n";
+echo "=================================\n";
+
+switch ($argv[1]) {
+    case "make:route":
+        (new \System\Commands\Route())->run();
+        break;
+    default:
+        echo "No command found";
+        break;
+}

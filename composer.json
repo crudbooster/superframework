@@ -1,0 +1,29 @@
+{
+    "name": "super/framework",
+    "description": "The super fastest framework ever",
+    "type": "project",
+    "require": {
+      "php": ">=7.2",
+      "ext-Zend-OPcache":">=7.2",
+      "ext-json": "*",
+      "ext-pdo": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ferry",
+            "email": "ferdevelop15@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+      "psr-4": {
+        "App\\": "app/",
+        "System\\": "system/"
+      },
+      "files": [
+        "app/Helpers/Helper.php",
+        "system/Helpers/Helper.php"
+      ]
+    }
+}
