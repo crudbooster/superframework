@@ -1,29 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 10/8/2019
- * Time: 12:11 PM
- */
 
 namespace System\Commands;
 
 
-class Route
+class Route extends Command
 {
-    /**
-     * @param $expression
-     * @param bool $return
-     * @return mixed|null|string|string[]
-     */
-    private function var_min_export($expression, $return=FALSE) {
-        $export = var_export($expression, TRUE);
-        $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
-        $array = preg_split("/\r\n|\n|\r/", $export);
-        $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
-        $export = join(PHP_EOL, array_filter(["["] + $array));
-        if ((bool)$return) return $export; else echo $export;
-    }
 
     /**
      * @param $route
@@ -54,24 +35,13 @@ class Route
         return $resp;
     }
 
-    /**
-     * @param $class_file
-     * @return mixed|string
-     */
-    private function makeClassName($class_file) {
-        $class_name = str_replace(getcwd(),"",$class_file);
-        $class_name = str_replace("/","\\", $class_name);
-        $class_name = str_replace("\app","\App", $class_name);
-        $class_name = rtrim($class_name, ".php");
-        return $class_name;
-    }
 
     public function run() {
         $route = [];
         $list = glob(getcwd()."/app/Modules/{,*/,*/*/,*/*/*/}Controllers/*.php", GLOB_BRACE);
         foreach($list as $item) {
             $class_name = $this->makeClassName($item);
-            echo $class_name."\n";
+            echo $class_name." [added]\n";
             try {
                 $reflect = new \ReflectionClass($class_name);
                 $doc = $reflect->getDocComment();
@@ -87,15 +57,15 @@ class Route
                 }
 
             } catch (\ReflectionException $e) {
-                echo "err: ".$e->getMessage();
+                echo "err: ".$e->getMessage()."\n";
             }
         }
 
-        $route_data = $this->var_min_export($route, true);
+        $route_data = var_min_export($route, true);
 
         file_put_contents(getcwd()."/app/Configs/routes.php", "<?php\n\nreturn ".$route_data.";");
 
-        print "Route has been generated!";
+        print "Route has been generated!\n\n";
     }
 
 }

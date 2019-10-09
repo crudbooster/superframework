@@ -124,20 +124,36 @@ class Super
         return $response;
     }
 
+    private function middleware(callable $process) {
+        $middleware = include getcwd()."../app/Configs/middleware.php";
+        $response = null;
+        foreach($middleware as $middle) {
+            $response = call_user_func((new $middle())->handle(function() use ($process) {
+                return call_user_func($process);
+            }));
+        }
+        return $response;
+    }
+
     public function run() {
 
-        $start = $this->measureStart();
-        $args = $this->urlSlicing();
-        $selection = $this->controllerClassSelection($args);
+        $response = $this->middleware(function() {
+            $start = $this->measureStart();
+            $args = $this->urlSlicing();
+            $selection = $this->controllerClassSelection($args);
 
-        if($selection && $selection->class && $selection->method) {
-            $response = $this->responseBuilder($selection, $args);
-        } else {
-            http_response_code(404);
-            $response = rtrim(include "Views/error/404.php","1");
-        }
+            if($selection && $selection->class && $selection->method) {
+                $response = $this->responseBuilder($selection, $args);
+            } else {
+                http_response_code(404);
+                $response = rtrim(include "Views/error/404.php","1");
+            }
 
-        echo $this->measureEnd($response, $start);
+            $response = $this->measureEnd($response, $start);
+            return $response;
+        });
+
+        echo $response;
     }
 
 }

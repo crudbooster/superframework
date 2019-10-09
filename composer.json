@@ -6,7 +6,8 @@
       "php": ">=7.2",
       "ext-Zend-OPcache":">=7.2",
       "ext-json": "*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+      "ext-openssl": "*"
     },
     "license": "MIT",
     "authors": [

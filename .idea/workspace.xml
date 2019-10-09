@@ -2,13 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff658dcc-768b-4324-a9d1-355b7ce562f1" name="Default Changelist" comment="update">
-      <change afterPath="$PROJECT_DIR$/system/Caches/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Configs/middleware.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Modules/Site/Middleware/SiteMiddleware.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/Commands/Command.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/Commands/Middleware.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Configs/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Configs/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Modules/Site/Controllers/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Site/Controllers/Home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/Caches/71369b1307ae08ec4e1ddccdbb562b6e" beforeDir="false" afterPath="$PROJECT_DIR$/system/Caches/71369b1307ae08ec4e1ddccdbb562b6e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/super" beforeDir="false" afterPath="$PROJECT_DIR$/super" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/Caches/452249a40b71663341860999f156669e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/Caches/57342165e7ac512b7c98e54f416b62e6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/Caches/71369b1307ae08ec4e1ddccdbb562b6e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/Caches/c8e4e2f371c1034898a35c22337ad337" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/Commands/Route.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/Commands/Route.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/Helpers/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/Helpers/Helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/Super.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/Super.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +34,12 @@
     <session id="-573670335">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -35,30 +47,30 @@
           <entry key="LICENSE" value="1" />
           <entry key="gitignore" value="1" />
           <entry key="htaccess" value="3" />
-          <entry key="json" value="4" />
-          <entry key="md" value="1" />
-          <entry key="php" value="32" />
-          <entry key="super" value="1" />
+          <entry key="json" value="5" />
+          <entry key="md" value="2" />
+          <entry key="php" value="69" />
+          <entry key="super" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="4" />
-          <entry key="Markdown" value="1" />
-          <entry key="PHP" value="33" />
+          <entry key="JSON" value="5" />
+          <entry key="Markdown" value="2" />
+          <entry key="PHP" value="72" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="htaccess" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="4" />
+          <entry key="dummy" value="27" />
           <entry key="gitignore" value="13" />
           <entry key="htaccess" value="48" />
           <entry key="json" value="108" />
           <entry key="md" value="445" />
-          <entry key="php" value="1763" />
-          <entry key="super" value="2" />
+          <entry key="php" value="3479" />
+          <entry key="super" value="84" />
           <entry key="txt" value="8" />
         </counts>
       </usages-collector>
@@ -67,8 +79,8 @@
           <entry key="Bash" value="1" />
           <entry key="JSON" value="108" />
           <entry key="Markdown" value="444" />
-          <entry key="PHP" value="1765" />
-          <entry key="PLAIN_TEXT" value="25" />
+          <entry key="PHP" value="3563" />
+          <entry key="PLAIN_TEXT" value="48" />
           <entry key="htaccess" value="48" />
         </counts>
       </usages-collector>
@@ -79,7 +91,7 @@
       </usages-collector>
       <usages-collector id="statistics.php.new.class">
         <counts>
-          <entry key="PHP Class.type" value="1" />
+          <entry key="PHP Class.type" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -144,33 +156,12 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="41">
-                <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/Helpers/Helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/system/Caches/.gitignore">
+        <entry file="file://$PROJECT_DIR$/app/Modules/Site/Middleware/SiteMiddleware.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+            <state relative-caret-position="204">
+              <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -233,15 +224,26 @@
         <option value="$PROJECT_DIR$/app/controllers/ApiUser.php" />
         <option value="$PROJECT_DIR$/front/pages/user.vue" />
         <option value="$PROJECT_DIR$/front/nuxt.config.js" />
-        <option value="$PROJECT_DIR$/super" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/system/Session/Session.php" />
-        <option value="$PROJECT_DIR$/system/Helpers/Helper.php" />
-        <option value="$PROJECT_DIR$/system/Super.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Site/Controllers/Home.php" />
         <option value="$PROJECT_DIR$/system/Caches/.gitignore" />
+        <option value="$PROJECT_DIR$/app/Modules/Posts/Views/home.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Posts/Controllers/Home.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/app/Middlewares/AppMiddleware.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Site/Controllers/Home.php" />
+        <option value="$PROJECT_DIR$/app/Middleware/AppMiddleware.php" />
+        <option value="$PROJECT_DIR$/app/Configs/config.php" />
+        <option value="$PROJECT_DIR$/app/Configs/middleware.php" />
+        <option value="$PROJECT_DIR$/system/Helpers/Helper.php" />
+        <option value="$PROJECT_DIR$/system/Commands/Command.php" />
+        <option value="$PROJECT_DIR$/super" />
+        <option value="$PROJECT_DIR$/system/Commands/Route.php" />
+        <option value="$PROJECT_DIR$/system/Commands/Middleware.php" />
+        <option value="$PROJECT_DIR$/system/Super.php" />
+        <option value="$PROJECT_DIR$/app/Configs/routes.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Site/Middleware/SiteMiddleware.php" />
       </list>
     </option>
   </component>
@@ -268,6 +270,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -284,12 +287,6 @@
               <item name="super" type="b2602c69:ProjectViewProjectNode" />
               <item name="super" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Configs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -305,44 +302,33 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Site" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-              <item name="Caches" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="home.&#9;FILE&#9;file://C:/laragon/www/super/app/Modules/Site/Views/home.php&#10;Api&#9;FILE&#9;file://C:/laragon/www/super/super/app/controllers/ApiUser.php&#10;ORM&#9;FILE&#9;file://C:/laragon/www/super/super/system/ORM/ORM.php&#10;Hel&#9;FILE&#9;file://C:/laragon/www/super/super/system/helpers/Helper.php&#10;conf&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;list.&#9;FILE&#9;file://C:/laragon/www/super/super/app/views/list.php&#10;config&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;super.p&#9;FILE&#9;file://C:/laragon/www/super/super/system/Super.php&#10;Help&#9;FILE&#9;file://C:/laragon/www/super/super/system/helpers/Helper.php&#10;confi&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;home&#9;FILE&#9;file://C:/laragon/www/super/super/app/views/home.php&#10;hel&#9;FILE&#9;file://C:/laragon/www/super/super/app/helpers/Helper.php&#10;Home&#9;FILE&#9;file://C:/laragon/www/super/super/app/controllers/Home.php&#10;help&#9;FILE&#9;file://C:/laragon/www/super/app/helpers/Helper.php" />
+    <property name="SearchEverywhereHistoryKey" value="Super.&#9;FILE&#9;file://C:/laragon/www/super/system/Super.php&#10;home.&#9;FILE&#9;file://C:/laragon/www/super/app/Modules/Site/Views/home.php&#10;Api&#9;FILE&#9;file://C:/laragon/www/super/super/app/controllers/ApiUser.php&#10;ORM&#9;FILE&#9;file://C:/laragon/www/super/super/system/ORM/ORM.php&#10;Hel&#9;FILE&#9;file://C:/laragon/www/super/super/system/helpers/Helper.php&#10;conf&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;list.&#9;FILE&#9;file://C:/laragon/www/super/super/app/views/list.php&#10;config&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;super.p&#9;FILE&#9;file://C:/laragon/www/super/super/system/Super.php&#10;Help&#9;FILE&#9;file://C:/laragon/www/super/super/system/helpers/Helper.php&#10;confi&#9;FILE&#9;file://C:/laragon/www/super/super/app/configs/config.php&#10;home&#9;FILE&#9;file://C:/laragon/www/super/super/app/views/home.php&#10;hel&#9;FILE&#9;file://C:/laragon/www/super/super/app/helpers/Helper.php&#10;Home&#9;FILE&#9;file://C:/laragon/www/super/super/app/controllers/Home.php&#10;help&#9;FILE&#9;file://C:/laragon/www/super/app/helpers/Helper.php" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cbdoc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\super\app\Modules\Site" />
+      <recent name="C:\laragon\www\super" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\super\system\Commands" />
+      <recent name="C:\laragon\www\super\app\Modules" />
       <recent name="C:\laragon\www\super\super\front\pages" />
       <recent name="C:\laragon\www\super\super\assets\js" />
       <recent name="C:\laragon\www\super\super\assets" />
-      <recent name="C:\laragon\www\super\super\app\views" />
-      <recent name="C:\laragon\www\super\super\system\helpers" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\super" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -369,7 +355,9 @@
       <updated>1569852763763</updated>
       <workItem from="1569852766750" duration="5154000" />
       <workItem from="1569857989305" duration="45517000" />
-      <workItem from="1570519102985" duration="4666000" />
+      <workItem from="1570519102985" duration="7207000" />
+      <workItem from="1570603967683" duration="1072000" />
+      <workItem from="1570610895432" duration="6030000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1570522395865</created>
@@ -385,17 +373,31 @@
       <option name="project" value="LOCAL" />
       <updated>1570524142861</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update">
+      <created>1570525427103</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570525427103</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update">
+      <created>1570525866877</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1570525866877</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55337000" />
+    <option name="totallyTimeSpent" value="64980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2574899" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26639676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -424,6 +426,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/front" />
     </ignored-roots>
@@ -431,23 +435,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/index2.php" />
-    <entry file="file://$PROJECT_DIR$/application/controllers/HomeController.php" />
-    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_real.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-963" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_psr4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_namespaces.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_files.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -475,13 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Configs/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="2" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/home.php" />
     <entry file="file://$PROJECT_DIR$/app/views/detail.php" />
     <entry file="file://$PROJECT_DIR$/system/Caches/452249a40b71663341860999f156669e">
@@ -498,13 +478,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Configs/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -529,27 +502,6 @@
     <entry file="file://$PROJECT_DIR$/front/pages/user.vue" />
     <entry file="file://$PROJECT_DIR$/front/nuxt.config.js" />
     <entry file="file://$PROJECT_DIR$/front/pages/index.vue" />
-    <entry file="file://$PROJECT_DIR$/super">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Site/Views/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/ORM/ORM.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
@@ -557,48 +509,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/ORM/Drivers/Mysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
+    <entry file="file://$PROJECT_DIR$/system/Session/Session.php" />
+    <entry file="file://$PROJECT_DIR$/system/Caches/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="27" />
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/Session/Session.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="45" column="28" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="28" />
+        <state relative-caret-position="85">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Site/Views/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Posts/Views/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Posts/Controllers/Home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Configs/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="2" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/ORM/Drivers/Mysql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="87" column="47" lean-forward="true" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Middlewares.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Site/Controllers/Home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        <state relative-caret-position="323">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/Super.php">
+    <entry file="file://$PROJECT_DIR$/app/Configs/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="41">
+          <first_editor relative-caret-position="221">
             <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
           </first_editor>
           <second_editor />
@@ -607,15 +598,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/system/Helpers/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="51">
+          <caret line="3" column="57" lean-forward="true" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/Caches/.gitignore">
+    <entry file="file://$PROJECT_DIR$/system/Commands/Middleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/super">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/Commands/Route.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="43" column="38" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/Commands/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Configs/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Configs/middleware.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/Super.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="134" column="25" lean-forward="true" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Site/Middleware/SiteMiddleware.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
         </state>
       </provider>
     </entry>

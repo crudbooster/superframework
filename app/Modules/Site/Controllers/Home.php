@@ -17,6 +17,6 @@ class Home extends Controller {
      */
     public function index()
     {
-        return view("site.home", [], 5);
+        return view("site.home");
     }
 }

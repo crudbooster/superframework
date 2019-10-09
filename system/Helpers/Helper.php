@@ -1,11 +1,52 @@
 <?php
 
+if(!function_exists("var_min_export")) {
+    function var_min_export($expression, $return=FALSE) {
+        $export = var_export($expression, TRUE);
+        $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
+        $array = preg_split("/\r\n|\n|\r/", $export);
+        $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
+        $export = join(PHP_EOL, array_filter(["["] + $array));
+        if ((bool)$return) return $export; else echo $export;
+    }
+}
+
+if(!function_exists("string_random")) {
+    function string_random($length = 6) {
+        $random = bin2hex(openssl_random_pseudo_bytes($length, $cstrong));
+        return $random;
+    }
+}
+
+if(!function_exists("csrf_validation")) {
+    function csrf_validation() {
+        if(cache("csrf_".request_string("_token"))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+if(!function_exists("csrf_input")) {
+    function csrf_input() {
+        $hash = string_random();
+        cache("csrf_".$hash, $hash, 4320);
+        return "<input type='hidden' name='_token' value='".$hash."'/><br/>";
+    }
+}
+
 if(!function_exists("session")) {
+    /**
+     * @param $data
+     * @return mixed
+     */
     function session($data) {
         if(is_array($data)) {
             foreach($data as $key=>$value) {
                 $_SESSION[$key] = $value;
             }
+            return true;
         } else {
             return $_SESSION[$data];
         }
