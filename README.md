@@ -15,6 +15,7 @@ ab -n 200 -c 200
 **Server Information**
 1. Apache version 2.4.29
 1. PHP version 7.1.3 64 bit
+1. MySQL 5.7
 1. Processor Intel Core i7
 1. RAM 12 GB
 1. Windows 10 OS
@@ -40,7 +41,7 @@ The result may different depends on your server specification, and Web Server op
 Requirements
 - php 7.2 >= 
 - Apache 2.4 >= 
-- MySQL 8.0 or up / MariaDB 10.4 or up / SQL Server (Coming Soon) / Postgre (Coming Soon) 
+- MySQL 5.7 or up / MariaDB 10.4 or up / SQL Server (Coming Soon) / Postgre (Coming Soon) 
 - Composer
 - php Zend OPCache Extension (Optional but very Recommended for speed)
 
