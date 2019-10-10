@@ -19,9 +19,8 @@ composer create-project superframework/superframework
 app / Configs / database.php
 
 ## Module
-The default module is "app/Modules/Site". There are two main folders inside, Controllers and Views.
-
-To make another module, duplicate the Site directory to new directory.
+Super framework use a modular MVC Concept. You have a default MVC after make a installation, that is /app/Modules/Site
+If you want to make a new module, you can make a duplicate directory "Site" to your new module name. 
 
 ## Helper
 | Helper Name | Description |
