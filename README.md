@@ -2,7 +2,7 @@
 The lightweight and fastest PHP framework from the creator of CRUDBooster
 
 ## Benchmark Test
-We have a simple test with Apache Benchmark, to test load how much this framework can handle request.
+We have made a simple test with Apache Benchmark, to test load how much this framework can handle request.
 
 Command we use to test: 
 ```bash
