@@ -64,6 +64,13 @@ Now the routing will be
 ## Helper
 | Helper Name | Description |
 | ------------ | ----------- |
+| request_is_post() | To check the request is post (boolean) |
+| request_is_get() | To check the request is get (boolean) |
+| request_int($key) | To get request that should be integer |
+| request_string($key) | To get request that should be string | 
+| request_float($key) | To get request that should be float |
+| request_email($key) | To get request that should be a valid email |
+| request_url($key) | To get request that should be a valid URL |
 | session(["key"=>"value"]) | To set a session with array |
 | session("key") | To retrieve session by a key |
 | config("key") | To retrieve config by a key (from Configs/config.php)| 
