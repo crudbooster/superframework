@@ -28,7 +28,7 @@ The result
 
 | No | PHP Framework | Time Per Request ms (Mean) | Request Per Seconds (Mean) |
 | --- | ----- | ---- | --- |
-| 1. | Super Framework 1.0 | 367 ms | 544 | 
+| 1. | Super Framework 1.0 | 630 ms | 322 | 
 | 2. | Lumen 6.0 | 1100 ms | 180 | 
 | 3. | Codeigniter 3 | 1493 ms | 133 | 
 | 4. | Laravel 6.1 | No Comment | No Comment | 
