@@ -24,7 +24,7 @@ ab -n 200 -c 200
 1. Query with ORM and get 50 data from a table
 1. Response the data to JSON format.
 
-**The result** 
+**The Result** 
 
 | No | PHP Framework | Time Per Request ms (Mean) | Request Per Seconds (Mean) |
 | --- | ----- | ---- | --- |
