@@ -51,8 +51,18 @@ class Mysql
         return $this->connection->lastInsertId($this->table);
     }
 
-    public function delete($id) {
-        $count = $this->connection->exec("DELETE FROM ".$this->table." WHERE ".$this->table.".".$this->primary_key." = '".$id."'");
+    public function delete($id = null) {
+        $where_sql = "";
+
+        if($id) {
+            $where_sql = "WHERE ".$this->table.".".$this->primary_key." = '".$id."'";
+        }
+
+        if(isset($this->where)) {
+            $where_sql = ($where_sql)?$where_sql." ".$this->where:"WHERE ".$this->where;
+        }
+
+        $count = $this->connection->exec("DELETE FROM ".$this->table." WHERE ".$where_sql);
         return $count;
     }
 

@@ -172,10 +172,10 @@ class ORM
     }
 
     /**
-     * @param int $id
+     * @param int|array|null $id
      * @return mixed
      */
-    public function delete($id) {
+    public function delete($id = null) {
         $this->createConnection();
         if($this->config['driver'] == "mysql") {
             return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->delete($id);
