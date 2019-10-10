@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff658dcc-768b-4324-a9d1-355b7ce562f1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +30,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="4" />
           <entry key="htaccess" value="3" />
           <entry key="json" value="5" />
           <entry key="md" value="6" />
@@ -44,7 +43,7 @@
           <entry key="JSON" value="5" />
           <entry key="Markdown" value="6" />
           <entry key="PHP" value="95" />
-          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
           <entry key="htaccess" value="3" />
         </counts>
       </usages-collector>
@@ -54,7 +53,7 @@
           <entry key="gitignore" value="27" />
           <entry key="htaccess" value="48" />
           <entry key="json" value="108" />
-          <entry key="md" value="6775" />
+          <entry key="md" value="6780" />
           <entry key="php" value="5443" />
           <entry key="super" value="84" />
           <entry key="txt" value="8" />
@@ -64,7 +63,7 @@
         <counts>
           <entry key="Bash" value="1" />
           <entry key="JSON" value="108" />
-          <entry key="Markdown" value="6769" />
+          <entry key="Markdown" value="6774" />
           <entry key="PHP" value="5532" />
           <entry key="PLAIN_TEXT" value="62" />
           <entry key="htaccess" value="48" />
@@ -144,14 +143,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="272">
-                <caret line="16" column="105" selection-start-line="16" selection-start-column="105" selection-end-line="16" selection-end-column="105" />
+                <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -193,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/configs/database.php" />
         <option value="$PROJECT_DIR$/app/helpers/Helper.php" />
         <option value="$PROJECT_DIR$/system/orm/ORM.php" />
         <option value="$PROJECT_DIR$/system/ORM/drivers/mysql.php" />
@@ -244,6 +251,7 @@
         <option value="$PROJECT_DIR$/system/ORM/Drivers/Mysql.php" />
         <option value="$PROJECT_DIR$/system/ORM/ORM.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -277,11 +285,6 @@
             <path>
               <item name="super" type="b2602c69:ProjectViewProjectNode" />
               <item name="super" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -337,7 +340,7 @@
       <workItem from="1570519102985" duration="7207000" />
       <workItem from="1570603967683" duration="1072000" />
       <workItem from="1570610895432" duration="10733000" />
-      <workItem from="1570640410425" duration="14120000" />
+      <workItem from="1570640410425" duration="14342000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1570522395865</created>
@@ -591,11 +594,18 @@
       <option name="project" value="LOCAL" />
       <updated>1570693318646</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="update">
+      <created>1570693514348</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1570693514348</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83803000" />
+    <option name="totallyTimeSpent" value="84025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -639,9 +649,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/error/404.php" />
     <entry file="file://$PROJECT_DIR$/app/Helpers/Helper.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -850,9 +857,16 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="272">
-            <caret line="16" column="105" selection-start-line="16" selection-start-column="105" selection-end-line="16" selection-end-column="105" />
+            <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
         </state>
       </provider>
     </entry>
