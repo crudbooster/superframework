@@ -8,18 +8,28 @@ Command we use to test:
 ```bash
 ab -n 100 -c 10 
 ```
+**Command legend**<br/>
+-n = Number of requests to perform.<br/>
+-c = Number of multiple requests to make at a time
 
-Scenario Test
+**Server Information**
+1. Apache version 2.4.29
+1. PHP version 7.1.3 64 bit
+1. Processor Intel Core i7
+1. RAM 12 GB
+1. SSD
+
+**Scenario Test**
 1. Query with ORM and get 50 data from a table
-2. Response the data to JSON format.
+1. Response the data to JSON format.
 
 The result 
 
 | No | PHP Framework | Time Request ms (Mean) | Request Per Seconds (Mean) |
 | --- | ----- | ---- | --- |
-| 1. | Super Framework | 26 | 380 | 
-| 2. | Lumen 6.0 | 46 | 217 | 
-| 3. | Codeigniter 3 | 54.6 | 183 | 
+| 1. | Super Framework | 26 ms | 380 / Second | 
+| 2. | Lumen 6.0 | 46 ms | 217 | 
+| 3. | Codeigniter 3 | 54.6 ms | 183 | 
 
 ## Installation
 
