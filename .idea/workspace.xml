@@ -34,7 +34,7 @@
           <entry key="gitignore" value="3" />
           <entry key="htaccess" value="3" />
           <entry key="json" value="5" />
-          <entry key="md" value="3" />
+          <entry key="md" value="4" />
           <entry key="php" value="90" />
           <entry key="super" value="3" />
         </counts>
@@ -42,7 +42,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="5" />
-          <entry key="Markdown" value="3" />
+          <entry key="Markdown" value="4" />
           <entry key="PHP" value="93" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="htaccess" value="3" />
@@ -54,7 +54,7 @@
           <entry key="gitignore" value="27" />
           <entry key="htaccess" value="48" />
           <entry key="json" value="108" />
-          <entry key="md" value="4216" />
+          <entry key="md" value="4360" />
           <entry key="php" value="5443" />
           <entry key="super" value="84" />
           <entry key="txt" value="8" />
@@ -64,7 +64,7 @@
         <counts>
           <entry key="Bash" value="1" />
           <entry key="JSON" value="108" />
-          <entry key="Markdown" value="4215" />
+          <entry key="Markdown" value="4359" />
           <entry key="PHP" value="5527" />
           <entry key="PLAIN_TEXT" value="62" />
           <entry key="htaccess" value="48" />
@@ -144,41 +144,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/Helpers/Helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3026">
-              <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="136">
-                <caret line="8" column="89" selection-start-line="8" selection-start-column="89" selection-end-line="8" selection-end-column="89" />
+              <first_editor relative-caret-position="306">
+                <caret line="40" column="89" selection-start-line="40" selection-start-column="89" selection-end-line="40" selection-end-column="89" />
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/ORM/ORM.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1809">
-              <caret line="175" column="20" lean-forward="true" selection-start-line="175" selection-start-column="20" selection-end-line="175" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/ORM/Drivers/Mysql.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="65" column="22" lean-forward="true" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -361,7 +334,7 @@
       <workItem from="1570519102985" duration="7207000" />
       <workItem from="1570603967683" duration="1072000" />
       <workItem from="1570610895432" duration="10733000" />
-      <workItem from="1570640410425" duration="7001000" />
+      <workItem from="1570640410425" duration="7801000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1570522395865</created>
@@ -461,11 +434,25 @@
       <option name="project" value="LOCAL" />
       <updated>1570686096817</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update">
+      <created>1570686168130</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1570686168130</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update">
+      <created>1570686802357</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1570686802357</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76684000" />
+    <option name="totallyTimeSpent" value="77484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -695,13 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/Helpers/Helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3026">
-          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/ORM/Drivers/Mysql.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -716,11 +696,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/system/Helpers/Helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3026">
+          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="136">
-            <caret line="8" column="89" selection-start-line="8" selection-start-column="89" selection-end-line="8" selection-end-column="89" />
+          <first_editor relative-caret-position="306">
+            <caret line="40" column="89" selection-start-line="40" selection-start-column="89" selection-end-line="40" selection-end-column="89" />
           </first_editor>
           <second_editor />
         </state>

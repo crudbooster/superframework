@@ -25,10 +25,6 @@ If you want to make a new module, you can make a duplicate directory "Site" to y
 ## Helper
 | Helper Name | Description |
 | ------------ | ----------- |
-| abort($code = 404) | To terminate the process |
-| logging($content, $type = "error") | To make a log |
-| string_random($length = 6) | To make a random string |
-| csrf_input() | To add hidden input about CSRF Token |
 | session(["key"=>"value"]) | To set a session with array |
 | session("key") | To retrieve session by a key |
 | config("key") | To retrieve config by a key (from Configs/config.php)| 
@@ -38,6 +34,11 @@ If you want to make a new module, you can make a duplicate directory "Site" to y
 | json($array) | To return the json response by an array |
 | json($array, $cache_in_minutes = 60) | Like a json() function but with a cache in minute |
 | view($view_name, $data = [], $cache_in_minutes = 5) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
+| abort($code = 404) | To terminate the process |
+| logging($content, $type = "error") | To make a log |
+| string_random($length = 6) | To make a random string |
+| csrf_input() | To add hidden input about CSRF Token |
+| dd($array1, $array2 [, $array]) | To debug the array or variable and exit the process |
 
 ## Database ORM
 To make a database query on Super Framework, you can use DB() helper
