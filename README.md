@@ -31,6 +31,7 @@ The result
 | 1. | Super Framework | 367 ms | 544 | 
 | 2. | Lumen 6.0 | 1100 ms | 180 | 
 | 3. | Codeigniter 3 | 1493 ms | 133 | 
+| 4. | Laravel 6.1 | No Comment | No Comment | 
 
 ## Installation
 
