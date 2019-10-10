@@ -3,8 +3,9 @@
 namespace App\Modules\Site\Middleware;
 
 use Closure;
+use System\Interfaces\Middleware;
 
-class SiteMiddleware
+class SiteMiddleware implements Middleware
 {
 
     /**

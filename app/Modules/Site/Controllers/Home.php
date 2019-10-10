@@ -7,13 +7,13 @@ use System\Controllers\Controller;
 /**
  * Class Home
  * @package App\Modules\Site\Controllers
- * @route house
+ * @route home
  */
 class Home extends Controller {
 
     /**
      * @return false|string
-     * @route front
+     * @route index
      */
     public function index()
     {

@@ -32,8 +32,9 @@ class ORM
                     \PDO::ATTR_PERSISTENT => true,
                     \PDO::ERRMODE_EXCEPTION => true));
             } catch (\PDOException $e) {
-                echo "Error: ".$e->getMessage();
-                die();
+                logging($e);
+                abort(500);
+                exit;
             }
         }
     }

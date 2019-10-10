@@ -80,15 +80,9 @@ class Super
         return $obj;
     }
 
-    private function measureStart() {
+    private function measureEnd($response) {
         if($this->config['consume_time_process'] === true) {
-            return microtime(true);
-        }
-    }
-
-    private function measureEnd($response, $start) {
-        if($this->config['consume_time_process'] === true && isset($start)) {
-            $time = microtime(true) - $start;
+            $time = microtime(true) - SUPER_START;
             $content_type = get_header_content("Content-Type")?:"text/html";
             if($content_type == "text/html") {
                 $response .= "\n<!-- Consume time: ".$time." s -->";
@@ -124,11 +118,30 @@ class Super
         return $response;
     }
 
+    private function csrfProtection() {
+        if(request_is_post()) {
+            $csrf_config = config("csrf_exception");
+            if(isset($csrf_config)) {
+                foreach($csrf_config as $pattern) {
+                    if(!preg_match("/{$pattern}(\/|$)/i", str_ireplace(config("base_url"),"",get_current_url()) )) {
+                        if(!csrf_validation()) {
+                            die("Submit aborted, malformed!");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private function middleware(callable $process) {
         $middleware = include getcwd()."../app/Configs/middleware.php";
         $response = null;
         foreach($middleware as $middle) {
             $response = call_user_func((new $middle())->handle(function() use ($process) {
+                // Check CSRF Security
+                $this->csrfProtection();
+
+                // Run the process
                 return call_user_func($process);
             }));
         }
@@ -138,7 +151,6 @@ class Super
     public function run() {
 
         $response = $this->middleware(function() {
-            $start = $this->measureStart();
             $args = $this->urlSlicing();
             $selection = $this->controllerClassSelection($args);
 
@@ -149,11 +161,12 @@ class Super
                 $response = rtrim(include "Views/error/404.php","1");
             }
 
-            $response = $this->measureEnd($response, $start);
+            $response = $this->measureEnd($response);
             return $response;
         });
 
         echo $response;
+        unset($response);
     }
 
 }

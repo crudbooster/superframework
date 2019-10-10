@@ -1,5 +1,19 @@
 <?php
 
+if(!function_exists("abort")) {
+    function abort($response_code = 404) {
+        http_response_code($response_code);
+        include getcwd()."/system/Views/error/any.php";
+        exit;
+    }
+}
+
+if(!function_exists("logging")) {
+    function logging($content, $type = "error") {
+        file_put_contents(getcwd()."/system/Logs/".date("Y-m-d").".log", "[".date("Y-m-d H:i:s")."][".$type."] - ".$content."\n\n", FILE_APPEND);
+    }
+}
+
 if(!function_exists("var_min_export")) {
     function var_min_export($expression, $return=FALSE) {
         $export = var_export($expression, TRUE);
@@ -20,11 +34,12 @@ if(!function_exists("string_random")) {
 
 if(!function_exists("csrf_validation")) {
     function csrf_validation() {
-        if(cache("csrf_".request_string("_token"))) {
-            return true;
-        } else {
-            return false;
+        if(request_string("_token")) {
+            if(cache("csrf_".request_string("_token"))) {
+                return true;
+            }
         }
+        return false;
     }
 }
 
@@ -126,11 +141,13 @@ if(!function_exists("json")) {
         }
 
         $array = is_callable($array)?call_user_func($array):$array;
+        $response = json_encode($array);
+
         if($cache_minutes) {
-            cache($hash, $array, $cache_minutes);
+            cache($hash, $response, $cache_minutes);
         }
 
-        return json_encode($array);
+        return $response;
     }
 }
 
