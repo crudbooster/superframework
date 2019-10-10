@@ -6,7 +6,7 @@ The lightweight and fastest PHP framework from the creator of CRUDBooster
 Requirements
 - php 7.2 >= 
 - Apache 2.4 >= 
-- MySQL 8.0 / MariaDB 10.4 >= 
+- MySQL 8.0 or up / MariaDB 10.4 or up / SQL Server (Coming Soon) / Postgre (Coming Soon) 
 - Composer
 - php Zend OPCache Extension (Optional but very Recommended for speed)
 

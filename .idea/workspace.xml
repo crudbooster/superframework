@@ -54,7 +54,7 @@
           <entry key="gitignore" value="27" />
           <entry key="htaccess" value="48" />
           <entry key="json" value="108" />
-          <entry key="md" value="4046" />
+          <entry key="md" value="4216" />
           <entry key="php" value="5443" />
           <entry key="super" value="84" />
           <entry key="txt" value="8" />
@@ -64,7 +64,7 @@
         <counts>
           <entry key="Bash" value="1" />
           <entry key="JSON" value="108" />
-          <entry key="Markdown" value="4045" />
+          <entry key="Markdown" value="4215" />
           <entry key="PHP" value="5527" />
           <entry key="PLAIN_TEXT" value="62" />
           <entry key="htaccess" value="48" />
@@ -157,8 +157,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="294">
-                <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+              <first_editor relative-caret-position="136">
+                <caret line="8" column="89" selection-start-line="8" selection-start-column="89" selection-end-line="8" selection-end-column="89" />
               </first_editor>
               <second_editor />
             </state>
@@ -361,7 +361,7 @@
       <workItem from="1570519102985" duration="7207000" />
       <workItem from="1570603967683" duration="1072000" />
       <workItem from="1570610895432" duration="10733000" />
-      <workItem from="1570640410425" duration="6725000" />
+      <workItem from="1570640410425" duration="7001000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1570522395865</created>
@@ -447,11 +447,25 @@
       <option name="project" value="LOCAL" />
       <updated>1570684316406</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update">
+      <created>1570685893358</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1570685893358</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update">
+      <created>1570686096817</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1570686096817</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76408000" />
+    <option name="totallyTimeSpent" value="76684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -705,8 +719,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="294">
-            <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+          <first_editor relative-caret-position="136">
+            <caret line="8" column="89" selection-start-line="8" selection-start-column="89" selection-end-line="8" selection-end-column="89" />
           </first_editor>
           <second_editor />
         </state>
