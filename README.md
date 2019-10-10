@@ -33,6 +33,8 @@ The result
 | 3. | Codeigniter 3 | 1493 ms | 133 | 
 | 4. | Laravel 6.1 | No Comment | No Comment | 
 
+The result may different depends on your server specification, and Web Server optimization. In other side, your PHP Framework has been super fast, but your web server's limiting it.
+
 ## Installation
 
 Requirements
