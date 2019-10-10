@@ -17,6 +17,7 @@ ab -n 100 -c 10
 1. PHP version 7.1.3 64 bit
 1. Processor Intel Core i7
 1. RAM 12 GB
+1. Windows 10 OS
 1. SSD
 
 **Scenario Test**
