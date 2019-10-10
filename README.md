@@ -12,7 +12,7 @@ Requirements
 
 Installation command via **composer**: 
 ```bash
-composer create-project superframework/superframework
+composer create-project superframework/superframework my_new_super
 ```
 
 ## Database Configuration
