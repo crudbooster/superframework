@@ -6,7 +6,7 @@ We have made a simple test with Apache Benchmark, to test load how much this fra
 
 Command we use to test: 
 ```bash
-ab -n 100 -c 10 
+ab -n 200 -c 200 
 ```
 **Command legend**<br/>
 -n = Number of requests to perform.<br/>
@@ -26,11 +26,11 @@ ab -n 100 -c 10
 
 The result 
 
-| No | PHP Framework | Time Request ms (Mean) | Request Per Seconds (Mean) |
+| No | PHP Framework | Time Per Request ms (Mean) | Request Per Seconds (Mean) |
 | --- | ----- | ---- | --- |
-| 1. | Super Framework | 26 ms | 380 | 
-| 2. | Lumen 6.0 | 46 ms | 217 | 
-| 3. | Codeigniter 3 | 54.6 ms | 183 | 
+| 1. | Super Framework | 367 ms | 544 | 
+| 2. | Lumen 6.0 | 1100 ms | 180 | 
+| 3. | Codeigniter 3 | 1493 ms | 133 | 
 
 ## Installation
 
