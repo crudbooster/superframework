@@ -1,4 +1,4 @@
-# Super Framework
+# Super Framework <sup>1.0 BETA</sup>
 The lightweight and fastest PHP framework from the creator of CRUDBooster
 
 ## Benchmark Test
