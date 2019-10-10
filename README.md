@@ -56,6 +56,43 @@ app / Configs / database.php
 Super framework use a modular MVC Concept. You have a default MVC after make a installation, that is /app/Modules/Site
 If you want to make a new module, you can make a duplicate directory "Site" to your new module name. 
 
+## Routing
+### Auto Routing
+| Controller | Routing |
+| --- | --- |
+| /app/Modules/Site/Controllers/Home@index | /site/home |
+| /app/Modules/Site/Controllers/Home@create | /site/home/create |
+| /app/Modules/Site/Controllers/Home@edit($id) | /site/home/edit/1 |
+### Routing by Anotation
+You can make a route by just add @route anotation above of method and class name. 
+```php
+<?php 
+
+namespace App\Modules\Site\Controllers;
+
+use System\Controllers\Controller;
+
+/**
+ * @route house
+ */
+class Home extends Controller {
+
+    /**
+     * @route dashboard
+     */
+    public function index()
+    {
+        return view("site.home");
+    }
+}
+```
+Then run command `php super route` to compile the route annotation and saved to /app/Configs/routes.php. 
+
+Now the routing will be 
+```html
+/house/dashboard
+```
+
 ## Helper
 | Helper Name | Description |
 | ------------ | ----------- |
