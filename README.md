@@ -38,7 +38,7 @@ If you want to make a new module, you can make a duplicate directory "Site" to y
 | logging($content, $type = "error") | To make a log |
 | string_random($length = 6) | To make a random string |
 | csrf_input() | To add hidden input about CSRF Token |
-| dd($array1, $array2 [, $array]) | To debug the array or variable and exit the process |
+| dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
 
 ## Database ORM
 To make a database query on Super Framework, you can use DB() helper
