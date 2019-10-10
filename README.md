@@ -1,6 +1,26 @@
 # Super Framework
 The lightweight and fastest PHP framework from the creator of CRUDBooster
 
+## Benchmark Test
+We have a simple test with Apache Benchmark, to test load how much this framework can handle request.
+
+Command we use to test: 
+```bash
+ab -n 100 -c 10 
+```
+
+Scenario Test
+1. Query with ORM and get 50 data from a table
+2. Response the data to JSON format.
+
+The result 
+
+| No | PHP Framework | Time Request ms (Mean) | Request Per Seconds (Mean) |
+| --- | ----- | ---- | --- |
+| 1. | Super Framework | 26 | 380 | 
+| 2. | Lumen 6.0 | 46 | 217 | 
+| 3. | Codeigniter 3 | 54.6 | 183 | 
+
 ## Installation
 
 Requirements

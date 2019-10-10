@@ -34,7 +34,7 @@
           <entry key="gitignore" value="3" />
           <entry key="htaccess" value="3" />
           <entry key="json" value="5" />
-          <entry key="md" value="4" />
+          <entry key="md" value="5" />
           <entry key="php" value="90" />
           <entry key="super" value="3" />
         </counts>
@@ -42,7 +42,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="5" />
-          <entry key="Markdown" value="4" />
+          <entry key="Markdown" value="5" />
           <entry key="PHP" value="93" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="htaccess" value="3" />
@@ -54,7 +54,7 @@
           <entry key="gitignore" value="27" />
           <entry key="htaccess" value="48" />
           <entry key="json" value="108" />
-          <entry key="md" value="4360" />
+          <entry key="md" value="4996" />
           <entry key="php" value="5443" />
           <entry key="super" value="84" />
           <entry key="txt" value="8" />
@@ -64,7 +64,7 @@
         <counts>
           <entry key="Bash" value="1" />
           <entry key="JSON" value="108" />
-          <entry key="Markdown" value="4359" />
+          <entry key="Markdown" value="4995" />
           <entry key="PHP" value="5527" />
           <entry key="PLAIN_TEXT" value="62" />
           <entry key="htaccess" value="48" />
@@ -148,8 +148,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="306">
-                <caret line="40" column="89" selection-start-line="40" selection-start-column="89" selection-end-line="40" selection-end-column="89" />
+              <first_editor relative-caret-position="272">
+                <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               </first_editor>
               <second_editor />
             </state>
@@ -269,17 +269,6 @@
               <item name="super" type="b2602c69:ProjectViewProjectNode" />
               <item name="super" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="super" type="b2602c69:ProjectViewProjectNode" />
-              <item name="super" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Configs" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -334,7 +323,7 @@
       <workItem from="1570519102985" duration="7207000" />
       <workItem from="1570603967683" duration="1072000" />
       <workItem from="1570610895432" duration="10733000" />
-      <workItem from="1570640410425" duration="7801000" />
+      <workItem from="1570640410425" duration="8760000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1570522395865</created>
@@ -448,11 +437,25 @@
       <option name="project" value="LOCAL" />
       <updated>1570686802357</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="update">
+      <created>1570686971366</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1570686971366</updated>
+    </task>
+    <task id="LOCAL-00018" summary="update">
+      <created>1570687010424</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1570687010424</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77484000" />
+    <option name="totallyTimeSpent" value="78443000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -706,8 +709,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="306">
-            <caret line="40" column="89" selection-start-line="40" selection-start-column="89" selection-end-line="40" selection-end-column="89" />
+          <first_editor relative-caret-position="272">
+            <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           </first_editor>
           <second_editor />
         </state>
