@@ -48,6 +48,7 @@ To make a database query on Super Framework, you can use DB() helper
 | DB("table")->all($limit) | To get all table data (in array), and you can pass the limit |
 | DB("table")->find($id) | To get the single record (in array) with a condition |
 | DB("table")->where("status = 'Active'")->all($limit) | To get all table data with a condition |
+| DB("table")->where("status = 'Active' AND price > 100000")->all($limit) | To get all table data with a multiple conditions. So you can write any condition in here, because this is a raw condition actually |
 | DB("table")->limit($limit)->offset($offset)->all() | To get all table data with limit and offset |
 | DB("table")->orderBy("id DESC")->all() | To get all table data with order by |
 | DB("table")->groupBy("id, status")->all() | To get all table data with a group by fields |
