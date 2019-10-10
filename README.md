@@ -14,6 +14,8 @@ Installation command via **composer**:
 ```bash
 composer create-project superframework/superframework my_new_super
 ```
+or
+Download via zip release [Click here to download](https://github.com/crudbooster/superframework/releases)
 
 ## Database Configuration
 app / Configs / database.php
