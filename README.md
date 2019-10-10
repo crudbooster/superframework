@@ -14,7 +14,7 @@ ab -n 200 -c 200
 
 **Server Information**
 1. Apache version 2.4.29
-1. PHP version 7.1.3 64 bit
+1. PHP version 7.2 64 bit
 1. MySQL 5.7
 1. Processor Intel Core i7
 1. RAM 12 GB
