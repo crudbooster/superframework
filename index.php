@@ -1,4 +1,14 @@
-<?php require_once "vendor/autoload.php";
+<?php
+/**
+ * To run php more faster
+ * You may enable garbage collection with gc_enable();
+ */
+gc_disable();
+
+/**
+ * Now let composer auto load all the class
+ */
+require_once "vendor/autoload.php";
 
 /**
  * Set time start to know how much time this engine can work

@@ -8,9 +8,11 @@ class Super
 
     public function __construct()
     {
-        session_name("SuperFW_".basename(getcwd()));
-        session_start();
         $this->config = include getcwd()."../app/Configs/config.php";
+        if($this->config['session_enable']===true) {
+            session_name("SuperFW_".basename(getcwd()));
+            session_start();
+        }
     }
 
     private function urlSlicing() {
@@ -121,12 +123,10 @@ class Super
     private function csrfProtection() {
         if(request_is_post()) {
             $csrf_config = config("csrf_exception");
-            if(isset($csrf_config)) {
-                foreach($csrf_config as $pattern) {
-                    if(!preg_match("/{$pattern}(\/|$)/i", str_ireplace(config("base_url"),"",get_current_url()) )) {
-                        if(!csrf_validation()) {
-                            abort(400,"Submit aborted, csrf token invalid!");
-                        }
+            foreach($csrf_config as $pattern) {
+                if(!preg_match("/{$pattern}(\/|$)/i", str_ireplace(config("base_url"),"",get_current_url()) )) {
+                    if(!csrf_validation()) {
+                        abort(400,"Submit aborted, csrf token invalid!");
                     }
                 }
             }
@@ -166,7 +166,6 @@ class Super
         });
 
         echo $response;
-        unset($response);
     }
 
 }
