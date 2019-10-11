@@ -1,5 +1,47 @@
 <?php
 
+
+if(!function_exists("upload_image")) {
+    function upload_image($input_name, $new_file_name) {
+        if(isset($_FILES[$input_name]["tmp_name"])) {
+            if(!file_exists(getcwd()."/uploads")) {
+                mkdir(getcwd()."/uploads");
+            }
+
+            if(!file_exists(getcwd()."/uploads/".date("Y-m-d"))) {
+                mkdir(getcwd()."/uploads/".date("Y-m-d"));
+            }
+
+            $check = getimagesize($_FILES[$input_name]["tmp_name"]);
+            if($check !== false) {
+                if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name)) {
+                    return "uploads/".date("Y-m-d")."/".$new_file_name;
+                }
+            }
+        }
+        return null;
+    }
+}
+
+if(!function_exists("upload_file")) {
+    function upload_file($input_name, $new_file_name) {
+        if(isset($_FILES[$input_name]["tmp_name"])) {
+            if(!file_exists(getcwd()."/uploads")) {
+                mkdir(getcwd()."/uploads");
+            }
+
+            if(!file_exists(getcwd()."/uploads/".date("Y-m-d"))) {
+                mkdir(getcwd()."/uploads/".date("Y-m-d"));
+            }
+
+            if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name)) {
+                return "uploads/".date("Y-m-d")."/".$new_file_name;
+            }
+        }
+        return null;
+    }
+}
+
 if(!function_exists("abort")) {
     function abort($response_code = 404) {
         http_response_code($response_code);
