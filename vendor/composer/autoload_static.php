@@ -33,11 +33,25 @@ class ComposerStaticInit471379c99be1bcc4fbb0dee114123b44
         ),
     );
 
+    public static $classMap = array (
+        'App\\Modules\\Site\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Modules/Site/Controllers/Home.php',
+        'App\\Modules\\Site\\Middleware\\SiteMiddleware' => __DIR__ . '/../..' . '/app/Modules/Site/Middleware/SiteMiddleware.php',
+        'System\\Commands\\Command' => __DIR__ . '/../..' . '/system/Commands/Command.php',
+        'System\\Commands\\Middleware' => __DIR__ . '/../..' . '/system/Commands/Middleware.php',
+        'System\\Commands\\Route' => __DIR__ . '/../..' . '/system/Commands/Route.php',
+        'System\\Controllers\\Controller' => __DIR__ . '/../..' . '/system/Controllers/Controller.php',
+        'System\\Interfaces\\Middleware' => __DIR__ . '/../..' . '/system/Interfaces/Middleware.php',
+        'System\\ORM\\Drivers\\Mysql' => __DIR__ . '/../..' . '/system/ORM/Drivers/Mysql.php',
+        'System\\ORM\\ORM' => __DIR__ . '/../..' . '/system/ORM/ORM.php',
+        'System\\Super' => __DIR__ . '/../..' . '/system/Super.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit471379c99be1bcc4fbb0dee114123b44::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit471379c99be1bcc4fbb0dee114123b44::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit471379c99be1bcc4fbb0dee114123b44::$classMap;
 
         }, null, ClassLoader::class);
     }

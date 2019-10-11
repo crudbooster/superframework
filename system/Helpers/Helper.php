@@ -43,7 +43,7 @@ if(!function_exists("upload_file")) {
 }
 
 if(!function_exists("abort")) {
-    function abort($response_code = 404) {
+    function abort($response_code = 404, $message = null) {
         http_response_code($response_code);
         include getcwd()."/system/Views/error/any.php";
         exit;

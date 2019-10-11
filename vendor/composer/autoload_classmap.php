@@ -6,4 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Modules\\Site\\Controllers\\Home' => $baseDir . '/app/Modules/Site/Controllers/Home.php',
+    'App\\Modules\\Site\\Middleware\\SiteMiddleware' => $baseDir . '/app/Modules/Site/Middleware/SiteMiddleware.php',
+    'System\\Commands\\Command' => $baseDir . '/system/Commands/Command.php',
+    'System\\Commands\\Middleware' => $baseDir . '/system/Commands/Middleware.php',
+    'System\\Commands\\Route' => $baseDir . '/system/Commands/Route.php',
+    'System\\Controllers\\Controller' => $baseDir . '/system/Controllers/Controller.php',
+    'System\\Interfaces\\Middleware' => $baseDir . '/system/Interfaces/Middleware.php',
+    'System\\ORM\\Drivers\\Mysql' => $baseDir . '/system/ORM/Drivers/Mysql.php',
+    'System\\ORM\\ORM' => $baseDir . '/system/ORM/ORM.php',
+    'System\\Super' => $baseDir . '/system/Super.php',
 );

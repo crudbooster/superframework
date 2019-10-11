@@ -37,7 +37,7 @@ class Super
                 $path .= "/";
                 $total_split_path = count(explode("/", $path))-1;
                 if($total_split_path == ($args_count-1) || $total_split_path == $args_count) {
-                    if(substr($args_merge,0, strlen($path)) == $path) {
+                    if(substr($args_merge,0, strlen($path)) === $path) {
                         $class_split = explode("@", $path_class);
                         if($class_split) {
                             $class = $class_split[0];
@@ -125,7 +125,7 @@ class Super
                 foreach($csrf_config as $pattern) {
                     if(!preg_match("/{$pattern}(\/|$)/i", str_ireplace(config("base_url"),"",get_current_url()) )) {
                         if(!csrf_validation()) {
-                            die("Submit aborted, malformed!");
+                            abort(400,"Submit aborted, csrf token invalid!");
                         }
                     }
                 }

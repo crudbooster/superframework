@@ -9,7 +9,11 @@
 <body>
 <div class="title">
     <h1><?php echo $response_code;?></h1>
-    <p>Something went wrong :(</p>
+    <?php if($message):?>
+        <p><?php echo $message;?></p>
+    <?php else:?>
+        <p>Something went wrong :(</p>
+    <?php endif;?>
 </div>
 </body>
 </html>
