@@ -72,6 +72,8 @@ Now the routing will be
 | request_email($key) | To get request that should be a valid email |
 | request_url($key) | To get request that should be a valid URL |
 | get_current_url() | To get current url |
+| upload_image($input_name, $new_file_name) | To upload an image file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| upload_file($input_name, $new_file_name) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.doc | 
 | session(["key"=>"value"]) | To set a session with array |
 | session("key") | To retrieve session by a key |
 | config("key") | To retrieve config by a key (from Configs/config.php)| 
