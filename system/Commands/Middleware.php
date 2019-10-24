@@ -8,7 +8,7 @@ class Middleware extends Command
 
     public function run() {
         $route = [];
-        $list = glob(getcwd()."/app/Modules/{,*/,*/*/,*/*/*/}Middleware/*.php", GLOB_BRACE);
+        $list = glob(getcwd()."/app/Middleware/*.php", GLOB_BRACE);
         foreach($list as $item) {
             $class = $this->makeClassName($item);
             try {

@@ -11,7 +11,7 @@ return [
     "consume_time_process"=> true,
 
     // Set default controller
-    "default_controller"=> \App\Modules\Site\Controllers\Home::class,
+    "default_controller"=> \App\Modules\Site\Controllers\stub::class,
 
     /*
      * You can disable session by set to false.

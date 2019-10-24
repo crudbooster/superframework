@@ -1,5 +1,15 @@
 <?php
 
+if(!function_exists("url")) {
+    /**
+     * @param null $path
+     * @return string
+     */
+    function url($path = null) {
+        return base_url($path);
+    }
+}
+
 if(!function_exists("auth")) {
     /**
      * To use this auth helper you need to create "users" table

@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Modules\ModuleName\Controllers;
+
+use System\Controllers\Controller;
+
+/**
+ * @route ModuleName
+ */
+class ModuleName extends Controller {
+
+    /**
+     * @route index
+     */
+    public function index()
+    {
+        return view("ModuleName.index");
+    }
+}

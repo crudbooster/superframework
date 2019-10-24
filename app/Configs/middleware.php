@@ -1,5 +1,5 @@
 <?php
 
 return [
-    0 => '\\App\\Modules\\Site\\Middleware\\SiteMiddleware',
+    0 => '\\App\\Middleware\\AppMiddleware',
 ];

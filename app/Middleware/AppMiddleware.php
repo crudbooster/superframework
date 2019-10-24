@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Site\Middleware;
+namespace App\Middleware;
 
 use Closure;
 use System\Interfaces\Middleware;
 
-class SiteMiddleware implements Middleware
+class AppMiddleware implements Middleware
 {
 
     /**

@@ -10,6 +10,13 @@ echo "SUPER FRAMEWORK CLI TOOL\n";
 echo "=================================\n";
 
 switch ($argv[1]) {
+    case "make:module":
+        if($argv[2]) {
+            (new \System\Commands\Module())->run($argv[2]);
+        } else {
+            echo "Argument two is empty! what is module name?";
+        }
+        break;
     case "table:users":
         (new \System\Commands\TableUsers())->run();
         break;
