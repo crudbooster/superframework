@@ -10,7 +10,7 @@ class Auth
     public function attempt($email, $password) {
         $query = DB("users")->where("email = '$email'")->find();
         if($query && password_verify($this->salt.$password, $query['password'])) {
-            session(["users_id"=>$query->id]);
+            session(["users_id"=>$query['id']]);
             return true;
         } else {
             return false;
