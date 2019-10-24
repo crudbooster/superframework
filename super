@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php require_once "vendor/autoload.php";
 
+/**
+ * We want to know where this project run
+ */
+define("BASE_PATH", getcwd());
+
 echo "SUPER FRAMEWORK CLI TOOL\n";
 echo "=================================\n";
 
