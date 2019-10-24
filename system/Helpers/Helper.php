@@ -1,74 +1,5 @@
 <?php
 
-if(!function_exists("get_string_between")) {
-    function get_string_between($string, $start_string, $end_string) {
-        $r = explode($start_string, $string);
-        if (isset($r[1])){
-            $r = explode($end_string, $r[1]);
-            return $r[0];
-        }
-        return '';
-    }
-}
-
-if(!function_exists("alert_html")) {
-    function alert_html() {
-        $message = session_flash();
-        if(isset($message)) {
-            if($message['message'] && $message['type']) {
-                return "<div class='alert alert-".$message['type']."'>".$message['message']."</div>";
-            }
-        }
-        return null;
-    }
-}
-
-if(!function_exists("session_forget")) {
-    function session_forget($key) {
-        if(isset($_SESSION[$key])) {
-            unset($_SESSION[$key]);
-        }
-    }
-}
-
-if(!function_exists("session_flash")) {
-    /**
-     * @param null|array $data
-     * @return mixed
-     */
-    function session_flash($data = null) {
-        if(is_array($data)) {
-            session(["session_flash"=>$data]);
-        } else {
-            $flash = session("session_flash");
-            session_forget("session_flash");
-            return $flash;
-        }
-    }
-}
-
-if(!function_exists("redirect_back")) {
-    function redirect_back($with_session_data = []) {
-        if($with_session_data) {
-            session_flash($with_session_data);
-        }
-
-        header("location: ".$_SERVER['HTTP_REFERER'], false, 301);
-        exit;
-    }
-}
-
-if(!function_exists("redirect")) {
-    function redirect($path, $with_session_data = []) {
-        if($with_session_data) {
-            session_flash($with_session_data);
-        }
-
-        header("location: ".base_url($path), false, 301);
-        exit;
-    }
-}
-
 
 if(!function_exists("upload_image")) {
     function upload_image($input_name, $new_file_name) {
@@ -164,7 +95,7 @@ if(!function_exists("csrf_input")) {
 
 if(!function_exists("session")) {
     /**
-     * @param $data
+     * @param string|array $data
      * @return mixed
      */
     function session($data) {
@@ -174,7 +105,7 @@ if(!function_exists("session")) {
             }
             return true;
         } else {
-            return $_SESSION[$data];
+            return isset($_SESSION[$data])?$_SESSION[$data]:null;
         }
     }
 }
@@ -357,11 +288,10 @@ if(!function_exists("request_url")) {
      * @return mixed|null
      */
     function request_url($name, $default = null) {
-        $value = array_merge($_GET, $_POST);
-        $value = $value?:$default;
-        $value = $value[$name];
+        $value = $_REQUEST;
+        $value = (isset($value[$name]))?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_URL);
-        return (filter_var($value, FILTER_VALIDATE_URL)===TRUE)?$value:null;
+        return (filter_var($value, FILTER_VALIDATE_URL))?$value:null;
     }
 }
 
@@ -372,11 +302,10 @@ if(!function_exists("request_int")) {
      * @return mixed|null
      */
     function request_int($name, $default = null) {
-        $value = array_merge($_GET, $_POST);
-        $value = $value?:$default;
-        $value = $value[$name];
+        $value = $_REQUEST;
+        $value = (isset($value[$name]))?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-        return (filter_var($value, FILTER_VALIDATE_INT)===TRUE)?$value:null;
+        return (filter_var($value, FILTER_VALIDATE_INT))?$value:null;
     }
 }
 
@@ -387,9 +316,8 @@ if(!function_exists("request_string")) {
      * @return mixed|null
      */
     function request_string($name, $default = null) {
-        $value = array_merge($_GET, $_POST);
-        $value = $value?:$default;
-        $value = $value[$name];
+        $value = $_REQUEST;
+        $value = (isset($value[$name]))?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_STRING);
         return $value;
     }
@@ -402,11 +330,10 @@ if(!function_exists("request_email")) {
      * @return mixed|null
      */
     function request_email($name, $default = null) {
-        $value = array_merge($_GET, $_POST);
-        $value = $value?:$default;
-        $value = $value[$name];
+        $value = $_REQUEST;
+        $value = (isset($value[$name]))?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
-        return (filter_var($value, FILTER_VALIDATE_EMAIL)===TRUE)?$value:null;
+        return (filter_var($value, FILTER_VALIDATE_EMAIL))?$value:null;
     }
 }
 
@@ -417,10 +344,9 @@ if(!function_exists("request_float")) {
      * @return mixed|null
      */
     function request_float($name, $default = null) {
-        $value = array_merge($_GET, $_POST);
-        $value = $value?:$default;
-        $value = $value[$name];
+        $value = $_REQUEST;
+        $value = (isset($value[$name]))?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT);
-        return (filter_var($value, FILTER_VALIDATE_FLOAT)===TRUE)?$value:null;
+        return (filter_var($value, FILTER_VALIDATE_FLOAT))?$value:null;
     }
 }
