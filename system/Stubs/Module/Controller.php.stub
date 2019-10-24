@@ -5,7 +5,7 @@ namespace App\Modules\ModuleName\Controllers;
 use System\Controllers\Controller;
 
 /**
- * @route ModuleName
+ * @route RoutePath
  */
 class ModuleName extends Controller {
 
