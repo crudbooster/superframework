@@ -1,5 +1,74 @@
 <?php
 
+if(!function_exists("get_string_between")) {
+    function get_string_between($string, $start_string, $end_string) {
+        $r = explode($start_string, $string);
+        if (isset($r[1])){
+            $r = explode($end_string, $r[1]);
+            return $r[0];
+        }
+        return '';
+    }
+}
+
+if(!function_exists("alert_html")) {
+    function alert_html() {
+        $message = session_flash();
+        if(isset($message)) {
+            if($message['message'] && $message['type']) {
+                return $message['message'];
+            }
+        }
+        return null;
+    }
+}
+
+if(!function_exists("session_forget")) {
+    function session_forget($key) {
+        if(isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+}
+
+if(!function_exists("session_flash")) {
+    /**
+     * @param null|array $data
+     * @return mixed
+     */
+    function session_flash($data = null) {
+        if(is_array($data)) {
+            session(["session_flash"=>$data]);
+        } else {
+            $flash = session("session_flash");
+            session_forget("session_flash");
+            return $flash;
+        }
+    }
+}
+
+if(!function_exists("redirect_back")) {
+    function redirect_back($with_session_data = []) {
+        if($with_session_data) {
+            session_flash($with_session_data);
+        }
+
+        header("location: ".$_SERVER['HTTP_REFERER'], false, 301);
+        exit;
+    }
+}
+
+if(!function_exists("redirect")) {
+    function redirect($path, $with_session_data = []) {
+        if($with_session_data) {
+            session_flash($with_session_data);
+        }
+
+        header("location: ".base_url($path), false, 301);
+        exit;
+    }
+}
+
 
 if(!function_exists("upload_image")) {
     function upload_image($input_name, $new_file_name) {

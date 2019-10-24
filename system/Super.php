@@ -29,7 +29,7 @@ class Super
 
     private function controllerClassSelection($args) {
         if($args) {
-            $class = $method = $param_start = null;
+            $class = $method = $param_start = $module_name = null;
 
             // Check to route file first
             $args_merge = implode("/", $args)."/";
@@ -61,11 +61,9 @@ class Super
                     $method = "index";
                     $param_start = 2;
                 } elseif (isset($args[0]) && !isset($args[1]) && !isset($args[2])) {
-                    $class = $method = null;
-                    $param_start = null;
+                    $class = $method = $module_name = $param_start = null;
                 }  else {
-                    $class = $method = null;
-                    $param_start = null;
+                    $class = $method = $module_name = $param_start = null;
                 }
             }
 
@@ -120,7 +118,7 @@ class Super
         return $response;
     }
 
-    private function csrfProtection() {
+    private function CSRFProtection() {
         if(request_is_post()) {
             $csrf_config = config("csrf_exception");
             foreach($csrf_config as $pattern) {
@@ -139,10 +137,10 @@ class Super
         foreach($middleware as $middle) {
             $response = call_user_func((new $middle())->handle(function() use ($process) {
                 // Check CSRF Security
-                $this->csrfProtection();
+                $this->CSRFProtection();
 
                 // Run the process
-                return call_user_func($process);
+                return $process;
             }));
         }
         return $response;
@@ -150,10 +148,10 @@ class Super
 
     public function run() {
 
-        $response = $this->middleware(function() {
-            $args = $this->urlSlicing();
-            $selection = $this->controllerClassSelection($args);
+        $args = $this->urlSlicing();
+        $selection = $this->controllerClassSelection($args);
 
+        $response = $this->middleware(function() use ($selection, $args) {
             if($selection && $selection->class && $selection->method) {
                 $response = $this->responseBuilder($selection, $args);
             } else {
@@ -165,7 +163,7 @@ class Super
             return $response;
         });
 
-        echo $response;
+        echo call_user_func($response);
     }
 
 }
