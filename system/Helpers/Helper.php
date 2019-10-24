@@ -16,7 +16,7 @@ if(!function_exists("alert_html")) {
         $message = session_flash();
         if(isset($message)) {
             if($message['message'] && $message['type']) {
-                return $message['message'];
+                return "<div class='alert alert-".$message['type']."'>".$message['message']."</div>";
             }
         }
         return null;
