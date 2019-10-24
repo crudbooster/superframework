@@ -158,7 +158,7 @@ if(!function_exists("csrf_input")) {
     function csrf_input() {
         $hash = string_random();
         cache("csrf_".$hash, $hash, 4320);
-        return "<input type='hidden' name='_token' value='".$hash."'/><br/>";
+        return "<input type='hidden' name='_token' value='".$hash."'/>\n";
     }
 }
 
