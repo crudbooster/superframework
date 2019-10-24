@@ -8,9 +8,9 @@ class Super
 
     public function __construct()
     {
-        $this->config = include getcwd()."../app/Configs/config.php";
+        $this->config = include base_path("app/Configs/config.php");
         if($this->config['session_enable']===true) {
-            session_name("SuperFW_".basename(getcwd()));
+            session_name("SuperFW_".basename(base_path()));
             session_start();
         }
     }

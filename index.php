@@ -16,6 +16,11 @@ require_once "vendor/autoload.php";
 define("SUPER_START", microtime(true));
 
 /**
+ * We want to know where this project run
+ */
+define("BASE_PATH", getcwd());
+
+/**
  * Run the main class of super framework
  */
 (new \System\Super())->run();

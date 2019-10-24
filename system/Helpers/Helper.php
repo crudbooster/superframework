@@ -1,7 +1,97 @@
 <?php
 
+if(!function_exists("get_string_between")) {
+    /**
+     * @param $string
+     * @param $start_string
+     * @param $end_string
+     * @return string
+     */
+    function get_string_between($string, $start_string, $end_string) {
+        $r = explode($start_string, $string);
+        if (isset($r[1])){
+            $r = explode($end_string, $r[1]);
+            return $r[0];
+        }
+        return '';
+    }
+}
+
+if(!function_exists("alert_html")) {
+    function alert_html() {
+        $message = session_flash();
+        if(isset($message)) {
+            if($message['message'] && $message['type']) {
+                return "<div class='alert alert-".$message['type']."'>".$message['message']."</div>";
+            }
+        }
+        return null;
+    }
+}
+
+if(!function_exists("session_forget")) {
+    /**
+     * @param string $key
+     */
+    function session_forget($key) {
+        if(isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+    }
+}
+
+if(!function_exists("session_flash")) {
+    /**
+     * @param null|array $data
+     * @return mixed
+     */
+    function session_flash($data = null) {
+        if(is_array($data)) {
+            session(["session_flash"=>$data]);
+        } else {
+            $flash = session("session_flash");
+            session_forget("session_flash");
+            return $flash;
+        }
+    }
+}
+
+if(!function_exists("redirect_back")) {
+    /**
+     * @param array $with_session_data
+     */
+    function redirect_back($with_session_data = []) {
+        if($with_session_data) {
+            session_flash($with_session_data);
+        }
+
+        header("location: ".$_SERVER['HTTP_REFERER'], false, 301);
+        exit;
+    }
+}
+
+if(!function_exists("redirect")) {
+    /**
+     * @param $path
+     * @param array $with_session_data
+     */
+    function redirect($path, $with_session_data = []) {
+        if($with_session_data) {
+            session_flash($with_session_data);
+        }
+
+        header("location: ".base_url($path), false, 301);
+        exit;
+    }
+}
+
 
 if(!function_exists("upload_image")) {
+    /**
+     * @param $input_name
+     * @param $new_file_name
+     * @return null|string
+     */
     function upload_image($input_name, $new_file_name) {
         if(isset($_FILES[$input_name]["tmp_name"])) {
             if(!file_exists(getcwd()."/uploads")) {
@@ -24,6 +114,11 @@ if(!function_exists("upload_image")) {
 }
 
 if(!function_exists("upload_file")) {
+    /**
+     * @param $input_name
+     * @param $new_file_name
+     * @return null|string
+     */
     function upload_file($input_name, $new_file_name) {
         if(isset($_FILES[$input_name]["tmp_name"])) {
             if(!file_exists(getcwd()."/uploads")) {
@@ -43,6 +138,10 @@ if(!function_exists("upload_file")) {
 }
 
 if(!function_exists("abort")) {
+    /**
+     * @param int $response_code
+     * @param null $message
+     */
     function abort($response_code = 404, $message = null) {
         http_response_code($response_code);
         include getcwd()."/system/Views/error/any.php";
@@ -51,12 +150,21 @@ if(!function_exists("abort")) {
 }
 
 if(!function_exists("logging")) {
+    /**
+     * @param $content
+     * @param string $type
+     */
     function logging($content, $type = "error") {
         file_put_contents(getcwd()."/system/Logs/".date("Y-m-d").".log", "[".date("Y-m-d H:i:s")."][".$type."] - ".$content."\n\n", FILE_APPEND);
     }
 }
 
 if(!function_exists("var_min_export")) {
+    /**
+     * @param $expression
+     * @param bool $return
+     * @return mixed|null|string|string[]
+     */
     function var_min_export($expression, $return=FALSE) {
         $export = var_export($expression, TRUE);
         $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
@@ -68,6 +176,10 @@ if(!function_exists("var_min_export")) {
 }
 
 if(!function_exists("string_random")) {
+    /**
+     * @param int $length
+     * @return string
+     */
     function string_random($length = 6) {
         $random = bin2hex(openssl_random_pseudo_bytes($length, $cstrong));
         return $random;
@@ -121,6 +233,16 @@ if(!function_exists("config")) {
         $config_data = include getcwd()."/app/Configs/".$split_name[0].".php";
         $key = $split_name[1];
         return $config_data[$key];
+    }
+}
+
+if(!function_exists("base_path")) {
+    /**
+     * @param null $path
+     * @return string
+     */
+    function base_path($path = null) {
+        return BASE_PATH."/".$path;
     }
 }
 
