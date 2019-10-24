@@ -5,7 +5,7 @@ ServerSignature Off
 RewriteRule ^(app|vendor|system) - [F,L,NC]
 
 # Protect .htaccess, composer, super
-<FilesMatch "^(\.|composer.)">
+<FilesMatch "^(\.|composer.|super)">
   Order allow,deny
   Deny from all
 </FilesMatch>
