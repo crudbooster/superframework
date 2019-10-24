@@ -1,7 +1,7 @@
 <?php
 
 return [
-  // Driver available : mysql, mssql, postgre
+  // Driver available : mysql, sqlite, mssql, postgre
   "driver"      => "mysql",
   "host"        => "localhost",
   "port"        => 3306,

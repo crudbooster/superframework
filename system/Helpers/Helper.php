@@ -1,5 +1,22 @@
 <?php
 
+if(!function_exists("auth")) {
+    /**
+     * To use this auth helper you need to create "users" table
+     * CREATE TABLE IF NOT EXISTS `users` (
+     * id INTEGER NOT NULL AUTOINCREMENT,
+     * name VARCHAR(255) NOT NULL,
+     * email VARCHAR(55) NOT NULL,
+     * password VARCHAR(50) NOT NULL
+     * )
+     *
+     * @return \System\Helpers\Auth
+     */
+    function auth() {
+        return (new \System\Helpers\Auth());
+    }
+}
+
 if(!function_exists("get_string_between")) {
     /**
      * @param $string

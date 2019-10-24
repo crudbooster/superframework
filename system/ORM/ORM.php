@@ -22,7 +22,7 @@ class ORM
 
     public function __construct()
     {
-        $this->config = include getcwd()."/app/configs/database.php";
+        $this->config = include base_path("app/configs/database.php");
     }
 
     private function createConnection() {
@@ -37,6 +37,14 @@ class ORM
                 exit;
             }
         }
+    }
+
+    /**
+     * @return \PDO
+     */
+    public function getInstance() {
+        $this->createConnection();
+        return $this->connection;
     }
 
     /**
