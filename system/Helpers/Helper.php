@@ -1,5 +1,16 @@
 <?php
 
+if(!function_exists("snake_to_kebab")) {
+    /**
+     * @param $SnakeCase
+     * @param string $separator
+     * @return string
+     */
+    function snake_to_kebab($SnakeCase, $separator = "-") {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', $separator.'$0', $SnakeCase));
+    }
+}
+
 if(!function_exists("url")) {
     /**
      * @param null $path
