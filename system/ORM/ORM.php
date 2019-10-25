@@ -109,6 +109,18 @@ class ORM
     }
 
     /**
+     * @param $var
+     * @param $where_query
+     * @return $this
+     */
+    public function whereIsset($var, $where_query) {
+        if(isset($var) && $var!="") {
+            $this->where = $where_query;
+        }
+        return $this;
+    }
+
+    /**
      * @param string $order_by SQL Order By Syntax
      * @return $this
      */
@@ -274,6 +286,8 @@ class ORM
             $result .= "<li><a href='".get_current_url(['page'=>$link_next])."'>&raquo;</a></li>";
             $result .= "<li><a href='".get_current_url(['page'=>$total_page])."'>Last</a></li>";
         }
+
+        $result .= "</ul>";
 
         return $result;
     }
