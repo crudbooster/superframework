@@ -62,7 +62,7 @@ class Mysql
             $where_sql = ($where_sql)?$where_sql." ".$this->where:"WHERE ".$this->where;
         }
 
-        $count = $this->connection->exec("DELETE FROM ".$this->table." WHERE ".$where_sql);
+        $count = $this->connection->exec("DELETE FROM ".$this->table." ".$where_sql);
         return $count;
     }
 
