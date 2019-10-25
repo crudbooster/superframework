@@ -16,7 +16,7 @@ class Super
     }
 
     private function urlSlicing() {
-        $args = explode('/', str_ireplace($this->config['base_url'], "", get_current_url()));
+        $args = explode('/', str_ireplace($this->config['base_url'], "", get_current_url([], false)));
         foreach($args as $i=>$arg) {
             if($arg == "index.php") {
                 for($e=0;$e<=$i;$e++) unset($args[$e]);

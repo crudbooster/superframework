@@ -440,10 +440,22 @@ if(!function_exists("get_header_content")) {
 
 if(!function_exists("get_current_url")) {
     /**
+     * @param array|null $param
+     * @param boolean $with_query
      * @return string
      */
-    function get_current_url() {
-        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    function get_current_url($param = [], $with_query = true) {
+        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $url = strtok($url,"?");
+
+        if($with_query) {
+            $param_array = array_merge($_GET, $param);
+            $param_string = http_build_query($param_array);
+            $param_string = ($param_string)?"?".$param_string:"";
+            $url .= $param_string;
+        }
+
+        return $url;
     }
 }
 

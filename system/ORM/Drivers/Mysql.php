@@ -107,4 +107,33 @@ class Mysql
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
+
+    public function paginate() {
+
+        $page = request_int('page', 1);
+        $this->offset = ($page - 1) * $this->limit;
+
+        $join_sql = "";
+        if($this->join) {
+            foreach($this->join as $i=>$join) {
+                $join_sql .= $this->join_type[$i]." ".$join." ";
+            }
+        }
+        $where_sql = (isset($this->where))?"WHERE ".$this->where:"";
+        $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
+        $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
+        $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";
+
+        $stmt = $this->connection->query("SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+
+        $data = [];
+        $data['data'] = $stmt->fetchAll();
+
+        // Get Total
+        $stmt = $this->connection->query("SELECT COUNT(*) as total_records FROM `".$this->table."` ".$join_sql." ".$where_sql);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        $data['total'] = $stmt->fetch()['total_records'];
+        return $data;
+    }
 }

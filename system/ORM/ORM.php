@@ -222,4 +222,59 @@ class ORM
 
         return null;
     }
+
+    /**
+     * @param $limit
+     * @return array|null
+     */
+    public function paginate($limit) {
+        $this->createConnection();
+
+        if($this->config['driver'] == "mysql") {
+            $query = (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $limit, $this->offset, $this->order_by, $this->group_by, $this->having))->paginate();
+
+            // Generate Pagination
+            $page = request_int('page', 1);
+            $query['links'] = $this->paginationHTML($page, $query['total'], $limit);
+
+            return $query;
+        }
+
+        return null;
+    }
+
+    private function paginationHTML($page, $total, $limit) {
+        $result = "<ul class='pagination'>";
+        if($page==1) {
+            $result .= "<li class=\"disabled\"><a href=\"#\">First</a></li>
+                <li class=\"disabled\"><a href=\"#\">&laquo;</a></li>";
+        } else {
+            $link_prev = ($page > 1) ? $page - 1 : 1;
+            $result .= "<li><a href=\"".get_current_url(['page'=>1])."\">First</a></li>
+                <li><a href=\"".get_current_url(['page'=>$link_prev])."\">&laquo;</a></li>";
+        }
+
+        // Generate link number
+        $total_page = ceil($total / $limit);
+        $total_number = 3;
+        $start_number = ($page > $total_number) ? $page - $total_number : 1;
+        $end_number = ($page < ($total_page - $total_number)) ? $page + $total_number : $total_page;
+
+        for ($i = $start_number; $i <= $end_number; $i++) {
+            $link_active = ($page == $i) ? 'class="active"' : '';
+            $result .= "<li $link_active ><a href='".get_current_url(['page'=>$i])."'>".$i."</a></li>";
+        }
+
+        // Generate next and last
+        if ($page == $total_page) {
+            $result .= "<li class='disabled'><a href='#'>&raquo;</a></li>";
+            $result .= "<li class='disabled'><a href='#'>Last</a></li>";
+        } else {
+            $link_next = ($page < $total_page) ? $page + 1 : $total_page;
+            $result .= "<li><a href='".get_current_url(['page'=>$link_next])."'>&raquo;</a></li>";
+            $result .= "<li><a href='".get_current_url(['page'=>$total_page])."'>Last</a></li>";
+        }
+
+        return $result;
+    }
 }
