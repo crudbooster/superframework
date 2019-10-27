@@ -39,7 +39,7 @@ class Mysql
             $sets[] = $key."='".$value."'";
         }
 
-        $where_sql = (isset($this->where))?"WHERE ".$this->where:"";
+        $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
         $count = $this->connection->exec("UPDATE `".$this->table."` SET ".implode(",",$sets)." ".$where_sql);
         return $count;
     }
@@ -59,7 +59,7 @@ class Mysql
         }
 
         if(isset($this->where)) {
-            $where_sql = ($where_sql)?$where_sql." ".$this->where:"WHERE ".$this->where;
+            $where_sql = ($where_sql)?$where_sql." AND ".implode(" AND ",$this->where):"WHERE ".implode(" AND ",$this->where);
         }
 
         $count = $this->connection->exec("DELETE FROM ".$this->table." ".$where_sql);
@@ -74,7 +74,7 @@ class Mysql
         }
 
         if(isset($this->where)) {
-            $where_sql = ($where_sql)?$where_sql." ".$this->where:"WHERE ".$this->where;
+            $where_sql = ($where_sql)?$where_sql." AND ".implode(" AND ",$this->where):"WHERE ".implode(" AND ",$this->where);
         }
 
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
@@ -99,7 +99,7 @@ class Mysql
                 $join_sql .= $this->join_type[$i]." ".$join." ";
             }
         }
-        $where_sql = (isset($this->where))?"WHERE ".$this->where:"";
+        $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
         $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
         $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";
@@ -107,6 +107,7 @@ class Mysql
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
+
 
     public function paginate() {
 
@@ -119,7 +120,7 @@ class Mysql
                 $join_sql .= $this->join_type[$i]." ".$join." ";
             }
         }
-        $where_sql = (isset($this->where))?"WHERE ".$this->where:"";
+        $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
         $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
         $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";

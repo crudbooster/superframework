@@ -22,29 +22,20 @@ class ORM
 
     public function __construct()
     {
-        $this->config = include base_path("app/configs/database.php");
+        $this->config = include getcwd()."/app/configs/database.php";
     }
 
     private function createConnection() {
         if(!$this->connection) {
             try {
-                $this->connection = new \PDO($this->config['driver'].":host=".$this->config['host'].";dbname=".$this->config['database'], $this->config['username'], $this->config['password'], array(
-                    \PDO::ATTR_PERSISTENT => true,
-                    \PDO::ERRMODE_EXCEPTION => true));
-            } catch (\PDOException $e) {
+                $this->connection = new \PDO($this->config['driver'].":host=".$this->config['host'].";dbname=".$this->config['database'], $this->config['username'], $this->config['password']);
+                $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                $this->connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+            } catch (\Exception $e) {
                 logging($e);
                 abort(500);
-                exit;
             }
         }
-    }
-
-    /**
-     * @return \PDO
-     */
-    public function getInstance() {
-        $this->createConnection();
-        return $this->connection;
     }
 
     /**
@@ -101,28 +92,29 @@ class ORM
 
     /**
      * @param string $where_query SQL where syntax
-     * @return $this
+     * @return ORM $this
      */
     public function where($where_query) {
-        $this->where = $where_query;
+        $this->where[] = $where_query;
         return $this;
     }
+
 
     /**
      * @param $var
      * @param $where_query
-     * @return $this
+     * @return ORM $this
      */
     public function whereIsset($var, $where_query) {
         if(isset($var) && $var!="") {
-            $this->where = $where_query;
+            $this->where[] = $where_query;
         }
         return $this;
     }
 
     /**
      * @param string $order_by SQL Order By Syntax
-     * @return $this
+     * @return ORM $this
      */
     public function orderBy($order_by) {
         $this->order_by = $order_by;
@@ -131,7 +123,7 @@ class ORM
 
     /**
      * @param string $group_by SQL Group By Syntax
-     * @return $this
+     * @return ORM $this
      */
     public function groupBy($group_by) {
         $this->group_by = $group_by;
@@ -234,6 +226,7 @@ class ORM
 
         return null;
     }
+
 
     /**
      * @param $limit
