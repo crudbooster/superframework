@@ -160,6 +160,7 @@ class ORM
     /**
      * @param array $array
      * @return mixed
+     * @throws \Exception
      */
     public function update($array) {
         $this->createConnection();
@@ -173,6 +174,7 @@ class ORM
     /**
      * @param array $array
      * @return mixed
+     * @throws \Exception
      */
     public function insert($array) {
         $this->createConnection();
@@ -186,6 +188,7 @@ class ORM
     /**
      * @param int|array|null $id
      * @return mixed
+     * @throws \Exception
      */
     public function delete($id = null) {
         $this->createConnection();
@@ -199,6 +202,7 @@ class ORM
     /**
      * @param null|int $id
      * @return mixed|array
+     * @throws \Exception
      */
     public function find($id = null) {
         $this->createConnection();
@@ -213,6 +217,7 @@ class ORM
      * @param int $limit
      * @param int $offset
      * @return null
+     * @throws \Exception
      */
     public function all($limit = null, $offset = 0) {
         $this->createConnection();
@@ -231,6 +236,7 @@ class ORM
     /**
      * @param $limit
      * @return array|null
+     * @throws \Exception
      */
     public function paginate($limit) {
         $this->createConnection();
