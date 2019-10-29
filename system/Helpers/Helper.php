@@ -165,10 +165,12 @@ if(!function_exists("upload_image")) {
                 mkdir(getcwd()."/uploads/".date("Y-m-d"));
             }
 
+            $ext = pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION);
+
             $check = getimagesize($_FILES[$input_name]["tmp_name"]);
             if($check !== false) {
-                if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name)) {
-                    return "uploads/".date("Y-m-d")."/".$new_file_name;
+                if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext)) {
+                    return "uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext;
                 }
             }
         }
@@ -192,8 +194,10 @@ if(!function_exists("upload_file")) {
                 mkdir(getcwd()."/uploads/".date("Y-m-d"));
             }
 
-            if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name)) {
-                return "uploads/".date("Y-m-d")."/".$new_file_name;
+            $ext = pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION);
+
+            if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext)) {
+                return "uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext;
             }
         }
         return null;
