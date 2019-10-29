@@ -234,6 +234,22 @@ class ORM
 
 
     /**
+     * @return int
+     */
+    public function count() {
+        $this->createConnection();
+
+        if($this->config['driver'] == "mysql") {
+            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->count();
+        }
+
+        return 0;
+    }
+
+
+
+
+    /**
      * @param $limit
      * @return array|null
      * @throws \Exception

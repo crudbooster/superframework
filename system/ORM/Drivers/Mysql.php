@@ -137,4 +137,19 @@ class Mysql
         $data['total'] = $stmt->fetch()['total_records'];
         return $data;
     }
+
+    public function count() {
+        $join_sql = "";
+
+        if($this->join) {
+            foreach($this->join as $i=>$join) {
+                $join_sql .= $this->join_type[$i]." ".$join." ";
+            }
+        }
+
+        $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
+        $stmt = $this->connection->query("SELECT count(*) as total_records FROM `".$this->table."` ".$join_sql." ".$where_sql);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $stmt->fetch()['total_records'];
+    }
 }
