@@ -2,12 +2,13 @@
 
 namespace System\ORM\Drivers;
 
+use Exception;
+
 class Mysql
 {
     private $connection;
     private $table;
     private $select;
-    private $primary_key;
     private $where;
     private $limit;
     private $offset;
@@ -17,12 +18,11 @@ class Mysql
     private $join;
     private $join_type;
 
-    public function __construct($connection, $table, $select, $primary_key, $join, $join_type, $where, $limit, $offset, $order_by, $group_by, $having)
+    public function __construct(\PDO $connection, $table, $select, $join, $join_type, $where, $limit, $offset, $order_by, $group_by, $having)
     {
         $this->connection = $connection;
         $this->table = $table;
         $this->select = $select;
-        $this->primary_key = $primary_key;
         $this->where = $where;
         $this->limit = $limit;
         $this->offset = $offset;
@@ -31,6 +31,39 @@ class Mysql
         $this->having = $having;
         $this->join = $join;
         $this->join_type = $join_type;
+    }
+
+    public function findPrimaryKey($table) {
+        if($pk = get_singleton("findPrimaryKey_".$table)) {
+            return $pk;
+        } else {
+            $query = $this->connection->query("DESCRIBE ".$table);
+            $query->setFetchMode(\PDO::FETCH_ASSOC);
+            $result = $query->fetchAll();
+            foreach($result as $row) {
+                if($row['Key'] == 'PRI') {
+                    put_singleton("findPrimaryKey_".$table,$row['Field']);
+                    return $row['Field'];
+                }
+            }
+            return null;
+        }
+    }
+
+    public function hasTable($table) {
+
+        // Try a select statement against the table
+        // Run it in try/catch in case PDO is in ERRMODE_EXCEPTION.
+        try {
+            $table = filter_var($table,FILTER_SANITIZE_STRING);
+            $result = $this->connection->query("SELECT 1 FROM `".$table."` LIMIT 1");
+        } catch (Exception $e) {
+            // We got an exception == table not found
+            return FALSE;
+        }
+
+        // Result is either boolean FALSE (no table found) or PDOStatement Object (table found)
+        return $result !== FALSE;
     }
 
     public function update($array) {
@@ -55,7 +88,7 @@ class Mysql
         $where_sql = "";
 
         if($id) {
-            $where_sql = "WHERE ".$this->table.".".$this->primary_key." = '".$id."'";
+            $where_sql = "WHERE ".$this->table.".".$this->findPrimaryKey($this->table)." = '".$id."'";
         }
 
         if(isset($this->where)) {
@@ -70,7 +103,7 @@ class Mysql
         $where_sql = "";
 
         if($id) {
-            $where_sql = "WHERE ".$this->table.".".$this->primary_key." = '".$id."'";
+            $where_sql = "WHERE ".$this->table.".".$this->findPrimaryKey($this->table)." = '".$id."'";
         }
 
         if(isset($this->where)) {
@@ -152,4 +185,21 @@ class Mysql
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetch()['total_records'];
     }
+
+    public function listColumn($table) {
+        $columns = [];
+        $rs = $this->connection->query('SELECT * FROM '.$table.' LIMIT 0');
+        for ($i = 0; $i < $rs->columnCount(); $i++) {
+            $col = $rs->getColumnMeta($i);
+            $columns[] = $col['name'];
+        }
+        return $columns;
+    }
+
+    public function listTable()
+    {
+        $query = $this->connection->query('SHOW TABLES');
+        return $query->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
 }

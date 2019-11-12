@@ -1,5 +1,21 @@
 <?php
 
+$singleton_data = [];
+
+if(!function_exists("put_singleton")) {
+    function put_singleton($key, $value) {
+        global $singleton_data;
+        $singleton_data[$key] = $value;
+    }
+}
+
+if(!function_exists("get_singleton")) {
+    function get_singleton($key) {
+        global $singleton_data;
+        return @$singleton_data[$key];
+    }
+}
+
 if(!function_exists("request_url_is")) {
     /**
      * To detect if current url is contain specific asterisk
@@ -25,14 +41,24 @@ if(!function_exists("request_url_is")) {
     }
 }
 
-if(!function_exists("snake_to_kebab")) {
+if(!function_exists("convert_snake_to_CamelCase")) {
+    function convert_snake_to_CamelCase($snake_case_string, $capitalise_first_char = false) {
+        $str = str_replace(' ','',ucwords(str_replace(['-',' ','_'], ' ', $snake_case_string)));
+        if (!$capitalise_first_char) {
+            $str = lcfirst($str);
+        }
+        return $str;
+    }
+}
+
+if(!function_exists("convert_UpperCamel_to_snake")) {
     /**
-     * @param $SnakeCase
+     * @param $UpperCamel
      * @param string $separator
      * @return string
      */
-    function snake_to_kebab($SnakeCase, $separator = "-") {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', $separator.'$0', $SnakeCase));
+    function convert_UpperCamel_to_snake($UpperCamel, $separator = "-") {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', $separator.'$0', $UpperCamel));
     }
 }
 
@@ -238,6 +264,7 @@ if(!function_exists("var_min_export")) {
         $array = preg_split("/\r\n|\n|\r/", $export);
         $array = preg_replace(["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"], [NULL, ']$1', ' => ['], $array);
         $export = join(PHP_EOL, array_filter(["["] + $array));
+        $export = preg_replace("/[0-9]+ \=\>/i", '', $export);
         if ((bool)$return) return $export; else echo $export;
     }
 }

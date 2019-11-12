@@ -17,6 +17,12 @@ switch ($argv[1]) {
             echo "Argument two is empty! what is module name?";
         }
         break;
+    case "model:make":
+        (new \System\Commands\Model())->run();
+        break;
+    case "model:config":
+        (new \System\Commands\ModelConfiguration())->run();
+        break;
     case "table:users":
         (new \System\Commands\TableUsers())->run();
         break;

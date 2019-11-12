@@ -31,11 +31,52 @@ class ORM
                 $this->connection = new \PDO($this->config['driver'].":host=".$this->config['host'].";dbname=".$this->config['database'], $this->config['username'], $this->config['password']);
                 $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 $this->connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+
             } catch (\Exception $e) {
                 logging($e);
                 abort(500);
             }
         }
+    }
+
+    private function driver() {
+        $this->createConnection();
+        if($this->config['driver'] == "mysql") {
+            return new Mysql($this->connection, $this->table, $this->select, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having);
+        } else {
+            return new Mysql($this->connection, $this->table, $this->select, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having);
+        }
+    }
+
+    /**
+     * @param $table
+     * @return mixed
+     */
+    public function findPrimaryKey($table) {
+        return $this->driver()->findPrimaryKey($table);
+    }
+
+    /**
+     * @param $table
+     * @return bool
+     */
+    public function hasTable($table) {
+        return $this->driver()->hasTable($table);
+    }
+
+    /**
+     * @param $table
+     * @return array
+     */
+    public function listColumn($table) {
+        return $this->driver()->listColumn($table);
+    }
+
+    /**
+     * @return array
+     */
+    public function listTable() {
+        return $this->driver()->listTable();
     }
 
     /**
@@ -163,12 +204,8 @@ class ORM
      * @throws \Exception
      */
     public function update($array) {
-        $this->createConnection();
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->update($array);
-        }
-
-        return null;
+        $this->driver()->update($array);
+        return true;
     }
 
     /**
@@ -177,12 +214,7 @@ class ORM
      * @throws \Exception
      */
     public function insert($array) {
-        $this->createConnection();
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->insert($array);
-        }
-
-        return null;
+        return $this->driver()->insert($array);
     }
 
     /**
@@ -191,12 +223,8 @@ class ORM
      * @throws \Exception
      */
     public function delete($id = null) {
-        $this->createConnection();
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->delete($id);
-        }
-
-        return null;
+        $this->driver()->delete($id);
+        return true;
     }
 
     /**
@@ -205,12 +233,7 @@ class ORM
      * @throws \Exception
      */
     public function find($id = null) {
-        $this->createConnection();
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->find($id);
-        }
-
-        return null;
+        return $this->driver()->find($id);
     }
 
     /**
@@ -220,34 +243,17 @@ class ORM
      * @throws \Exception
      */
     public function all($limit = null, $offset = 0) {
-        $this->createConnection();
-
         if($limit) $this->limit = $limit;
         if($offset) $this->offset = $offset;
-
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->all();
-        }
-
-        return null;
+        return $this->driver()->all();
     }
-
 
     /**
      * @return int
      */
     public function count() {
-        $this->createConnection();
-
-        if($this->config['driver'] == "mysql") {
-            return (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $this->limit, $this->offset, $this->order_by, $this->group_by, $this->having))->count();
-        }
-
-        return 0;
+        return $this->driver()->count();
     }
-
-
-
 
     /**
      * @param $limit
@@ -255,19 +261,13 @@ class ORM
      * @throws \Exception
      */
     public function paginate($limit) {
-        $this->createConnection();
+        $query = $this->driver()->paginate();
 
-        if($this->config['driver'] == "mysql") {
-            $query = (new Mysql($this->connection, $this->table, $this->select, $this->primary_key, $this->join, $this->join_type, $this->where, $limit, $this->offset, $this->order_by, $this->group_by, $this->having))->paginate();
+        // Generate Pagination
+        $page = request_int('page', 1);
+        $query['links'] = $this->paginationHTML($page, $query['total'], $limit);
 
-            // Generate Pagination
-            $page = request_int('page', 1);
-            $query['links'] = $this->paginationHTML($page, $query['total'], $limit);
-
-            return $query;
-        }
-
-        return null;
+        return $query;
     }
 
     private function paginationHTML($page, $total, $limit) {

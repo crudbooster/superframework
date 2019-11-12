@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'house' => '\\App\\Modules\\Site\\Controllers\\Home@index',
-    'house/front' => '\\App\\Modules\\Site\\Controllers\\Home@index',
+    'home' => 'App\\Modules\\Site\\Controllers\\Home@index',
+    'home/index' => 'App\\Modules\\Site\\Controllers\\Home@index',
+    'users' => 'App\\Modules\\Users\\Controllers\\Users@index',
+    'users/index' => 'App\\Modules\\Users\\Controllers\\Users@index',
 ];
