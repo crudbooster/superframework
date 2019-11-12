@@ -61,6 +61,20 @@ Now the routing will be
 /house/dashboard
 ```
 
+## Super
+These bellow are CLI Commands in the Super Framework available.
+```bash
+php super [command]
+```
+
+| Command | Description |
+| ------- | ----------- |
+| make:module [table_name] | Generate a module by table name |
+| model:config | Generate the default all table model configurations. Before you can use model class, you need to generate this model configuration. |
+| model:make | Generate all table to be model class files |
+| table:users | Create users table |
+| compile | Compile all route and middleware |
+
 ## Helper
 | Helper Name | Description |
 | ------------ | ----------- |
