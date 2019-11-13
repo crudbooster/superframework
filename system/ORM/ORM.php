@@ -25,6 +25,11 @@ class ORM
         $this->config = include getcwd()."/app/configs/database.php";
     }
 
+    public function getInstance() {
+        $this->createConnection();
+        return $this->connection;
+    }
+
     private function createConnection() {
         if(!$this->connection) {
             try {

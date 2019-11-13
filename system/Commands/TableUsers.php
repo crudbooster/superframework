@@ -13,16 +13,8 @@ class TableUsers extends Command
 
         // MySQL
         if(config("database.driver") == "mysql") {
-            $query->exec("CREATE TABLE IF NOT EXISTS `users` (
-              id INTEGER NOT NULL AUTO_INCREMENT,
-              name VARCHAR(255) NOT NULL,
-              email VARCHAR(55) NOT NULL,
-              password VARCHAR(50) NOT NULL
-              );");
-            echo "Table users has been created!";
-        } elseif (config("database.driver") == "sqlite") {
-            $query->exec("CREATE TABLE IF NOT EXISTS `users` (
-              id INTEGER NOT NULL AUTOINCREMENT,
+            $query->exec("CREATE TABLE IF NOT EXISTS users (
+              id INT(11) AUTO_INCREMENT PRIMARY KEY,
               name VARCHAR(255) NOT NULL,
               email VARCHAR(55) NOT NULL,
               password VARCHAR(50) NOT NULL
