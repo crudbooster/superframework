@@ -34,7 +34,7 @@ class Super
             // Check to route file first
             $args_merge = implode("/", $args)."/";
             $args_count = count($args);
-            $routes = include base_path("app/Configs/routes.php");
+            $routes = include getcwd()."../app/Configs/routes.php";
             foreach($routes as $path => $path_class) {
                 $path .= "/";
                 $total_split_path = count(explode("/", $path))-1;
@@ -132,7 +132,7 @@ class Super
     }
 
     private function middleware(callable $process) {
-        $middleware = include base_path("app/Configs/middleware.php");
+        $middleware = include getcwd()."../app/Configs/middleware.php";
         $response = null;
         foreach($middleware as $middle) {
             $response = call_user_func((new $middle())->handle(function() use ($process) {
