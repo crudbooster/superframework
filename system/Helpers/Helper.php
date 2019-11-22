@@ -359,7 +359,7 @@ if(!function_exists("cache")) {
      */
     function cache($key, $value = null, $minutes = 60) {
         $key = md5($key);
-        if(file_exists(getcwd()."/system/Caches/".$key)) {
+        if(file_exists(getcwd()."/system/Caches/".$key) && !$value) {
             $cache = file_get_contents(getcwd()."/system/Caches/".$key);
             $cache = json_decode($cache, true);
             if($cache['expired'] > time()) {
