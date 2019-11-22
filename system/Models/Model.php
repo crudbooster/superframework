@@ -145,7 +145,7 @@ class Model
     /**
      * @param $column
      * @param $value
-     * @return mixed|null
+     * @return static
      * @throws \Exception
      */
     public static function findBy($column, $value) {
@@ -154,7 +154,7 @@ class Model
         } else {
             $config = static::getConfig();
             // Get record
-            $row = DB($config['table'])->find([$column => $value]);
+            $row = DB($config['table'])->where($column." = '".$value."'")->find();
             if ($row) {
                 $data = static::modelSetter(new static(), $config['columns'], $row);
                 put_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value, $data);
