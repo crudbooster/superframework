@@ -350,8 +350,22 @@ if(!function_exists("base_url")) {
     }
 }
 
+if(!function_exists('cache_forget')) {
+    /**
+     * Forget the existing cache file
+     * @param $key
+     */
+    function cache_forget($key) {
+        $file_path = getcwd()."/system/Caches/".md5($key);
+        if(file_exists($file_path)) {
+            unlink($file_path);
+        }
+    }
+}
+
 if(!function_exists("cache")) {
     /**
+     * Create or retrieve a cache
      * @param $key
      * @param null $value
      * @param int $minutes
