@@ -5,11 +5,10 @@ namespace System\Helpers;
 
 class Auth
 {
-    private $salt = "super";
 
     public function attempt($email, $password) {
         $query = DB("users")->where("email = '$email'")->find();
-        if($query && password_verify($this->salt.$password, $query['password'])) {
+        if($query && password_verify(config("password_salt").$password, $query['password'])) {
             session(["users_id"=>$query['id']]);
             return true;
         } else {
@@ -30,7 +29,7 @@ class Auth
     }
 
     public function password($password) {
-        return password_hash($this->salt.$password, PASSWORD_BCRYPT);
+        return password_hash(config("password_salt").$password, PASSWORD_BCRYPT);
     }
 
     public function logout() {

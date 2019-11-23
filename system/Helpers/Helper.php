@@ -592,3 +592,45 @@ if(!function_exists("request_float")) {
         return (filter_var($value, FILTER_VALIDATE_FLOAT))?$value:null;
     }
 }
+
+
+if(!function_exists("validate_required")) {
+    /**
+     * @param array $parameters
+     * @throws Exception
+     */
+    function validate_required(array $parameters) {
+        foreach($parameters as $param) {
+            if(!request_string($param)) {
+                throw new Exception("Please complete the parameter `".$param."`");
+            }
+        }
+    }
+}
+
+if(!function_exists('verify_auth_token')) {
+    function verify_auth_token() {
+        $token = get_auth_token();
+        if(!$token) throw new Exception("Auth token is not found");
+
+        if($token_data = get_token_data()) {
+            if($token_data['ip'] != $_SERVER['REMOTE_ADDR']) throw new Exception("IP is not match");
+
+            if($token_data['user_agent'] != $_SERVER['HTTP_USER_AGENT']) throw new Exception("User agent is not match");
+
+        }
+    }
+}
+
+if(!function_exists("get_token_data")) {
+    function get_token_data() {
+        return cache(get_auth_token());
+    }
+}
+
+if(!function_exists("get_auth_token")) {
+    function get_auth_token() {
+        $token = @getallheaders()['Authorization'];
+        return str_replace(["Basic ","Bearer "],"", $token);
+    }
+}

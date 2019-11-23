@@ -20,5 +20,8 @@ return [
     "session_enable"=> false,
 
     // Ignore CSRF security for url prefix pattern
-    "csrf_exception"=> ["api"]
+    "csrf_exception"=> ["api"],
+
+    // Password Salt for security
+    "password_salt"=> "super"
 ];
