@@ -40,8 +40,19 @@ class Model
     }
 
     private static function getConfig($class_name = null) {
-        $class_model_name = ($class_name)?:basename(get_called_class());
+        $class_model_name = ($class_name)?:get_called_class();
+        $class_model_name = array_pop(explode("\\",$class_model_name));
         return (new self)->getInstanceConfig()[$class_model_name];
+    }
+
+    public static function getPrimaryKey() {
+        $config = static::getConfig();
+        return $config['primary_key'];
+    }
+
+    public static function getTableName() {
+        $config = static::getConfig();
+        return $config['table'];
     }
 
     /**
@@ -177,7 +188,12 @@ class Model
             $method_name = "get".convert_snake_to_CamelCase($column['name'], true);
             if($config['primary_key'] != $column['column']) {
                 if($this->$method_name()) {
-                    $data_array[ $column['column'] ] = $this->$method_name();
+                    if(is_object($this->$method_name())) {
+                        $method_pk = "get".convert_snake_to_CamelCase($this->$method_name()->getPrimaryKey(), true);
+                        $data_array[ $column['column'] ] = $this->$method_name()->$method_pk();
+                    } else {
+                        $data_array[ $column['column'] ] = $this->$method_name();
+                    }
                 }
             }
         }
