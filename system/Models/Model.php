@@ -41,7 +41,8 @@ class Model
 
     private static function getConfig($class_name = null) {
         $class_model_name = ($class_name)?:get_called_class();
-        $class_model_name = array_pop(explode("\\",$class_model_name));
+        $class_array = explode("\\",$class_model_name);
+        $class_model_name = end($class_array);
         return (new self)->getInstanceConfig()[$class_model_name];
     }
 
