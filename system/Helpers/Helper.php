@@ -634,3 +634,13 @@ if(!function_exists("get_auth_token")) {
         return str_replace(["Basic ","Bearer "],"", $token);
     }
 }
+
+if(!function_exists("out")) {
+    function out($html, $xss = true) {
+        if($xss) {
+            echo htmlentities($html);
+        } else {
+            echo $html;
+        }
+    }
+}
