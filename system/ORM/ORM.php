@@ -266,6 +266,7 @@ class ORM
      * @throws \Exception
      */
     public function paginate($limit) {
+        $this->limit($limit);
         $query = $this->driver()->paginate();
 
         // Generate Pagination
