@@ -274,9 +274,14 @@ if(!function_exists("string_random")) {
      * @param int $length
      * @return string
      */
-    function string_random($length = 6) {
-        $random = bin2hex(openssl_random_pseudo_bytes($length, $cstrong));
-        return $random;
+    function string_random($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
 
