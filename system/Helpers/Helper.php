@@ -550,7 +550,7 @@ if(!function_exists("request_int")) {
      */
     function request_int($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]))?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
         return (filter_var($value, FILTER_VALIDATE_INT))?$value:null;
     }
@@ -564,7 +564,7 @@ if(!function_exists("request_string")) {
      */
     function request_string($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]))?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_STRING);
         return $value;
     }
@@ -578,7 +578,7 @@ if(!function_exists("request_email")) {
      */
     function request_email($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]))?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
         return (filter_var($value, FILTER_VALIDATE_EMAIL))?$value:null;
     }
@@ -592,7 +592,7 @@ if(!function_exists("request_float")) {
      */
     function request_float($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]))?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT);
         return (filter_var($value, FILTER_VALIDATE_FLOAT))?$value:null;
     }
