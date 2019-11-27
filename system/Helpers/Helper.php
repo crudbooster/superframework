@@ -528,6 +528,20 @@ if(!function_exists("request_is_get")) {
 }
 
 
+if(!function_exists('request')) {
+    /**
+     * @param $name
+     * @param null $default
+     * @return null
+     */
+    function request($name, $default = null) {
+        $value = $_REQUEST;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
+        return $value;
+    }
+}
+
+
 if(!function_exists("request_url")) {
     /**
      * @param $name
@@ -536,7 +550,7 @@ if(!function_exists("request_url")) {
      */
     function request_url($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]))?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_URL);
         return (filter_var($value, FILTER_VALIDATE_URL))?$value:null;
     }
