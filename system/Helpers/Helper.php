@@ -621,7 +621,20 @@ if(!function_exists("request_float")) {
     }
 }
 
-if(!function_exists('request_json'))
+if(!function_exists('request_json_all'))
+{
+    /**
+     * @return mixed
+     */
+    function request_json_all()
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        return $input;
+    }
+}
+
+if(!function_exists('request_json_array'))
 {
     /**
      * @param $key
