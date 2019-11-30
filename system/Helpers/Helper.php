@@ -621,16 +621,136 @@ if(!function_exists("request_float")) {
     }
 }
 
+if(!function_exists('request_json'))
+{
+    /**
+     * @param $key
+     * @return null
+     */
+    function request_json_array($key)
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        if($input) {
+            if(isset($input[$key]) && is_array($input[$key])) return $input[$key];
+        }
+        return null;
+    }
+}
+
+if(!function_exists('request_json_string'))
+{
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    function request_json_string($key)
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        if($input) {
+            if(isset($input[$key])) return filter_var($input[$key],FILTER_SANITIZE_STRING);
+        }
+        return null;
+    }
+}
+
+
+if(!function_exists('request_json_int'))
+{
+    /**
+     * @param $key
+     * @return null
+     */
+    function request_json_int($key)
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        if($input) {
+            if(isset($input[$key])) return filter_var($input[$key], FILTER_VALIDATE_INT)?$input[$key]:null;
+        }
+        return null;
+    }
+}
+
+
+if(!function_exists('request_json_float'))
+{
+    /**
+     * @param $key
+     * @return null
+     */
+    function request_json_float($key)
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        if($input) {
+            if(isset($input[$key])) return filter_var($input[$key], FILTER_VALIDATE_FLOAT)?$input[$key]:null;
+        }
+        return null;
+    }
+}
+
+if(!function_exists('request_json_email'))
+{
+    /**
+     * @param $key
+     * @return null
+     */
+    function request_json_email($key)
+    {
+        $json_data = file_get_contents('php://input');
+        $input = json_decode($json_data, TRUE);
+        if($input) {
+            if(isset($input[$key])) return filter_var($input[$key], FILTER_VALIDATE_EMAIL)?$input[$key]:null;
+        }
+        return null;
+    }
+}
+
+if(!function_exists('month_no_to_name')) {
+    /**
+     * @param $no
+     * @return false|string
+     */
+    function month_no_to_name($no)
+    {
+        return date('F', mktime(0, 0, 0, $no, 10));
+    }
+}
+
+if(!function_exists('base_url_when')) {
+    /**
+     * @param $path
+     * @return null|string
+     */
+    function base_url_when($path)
+    {
+        if($path) {
+            return base_url($path);
+        } else {
+            return null;
+        }
+    }
+}
 
 if(!function_exists("validate_required")) {
     /**
      * @param array $parameters
+     * @param array|null $data_input
      * @throws Exception
      */
-    function validate_required(array $parameters) {
+    function validate_required(array $parameters, array $data_input = null) {
+
         foreach($parameters as $param) {
-            if(!request_string($param)) {
-                throw new Exception("Please complete the parameter `".$param."`");
+            if(isset($data_input)) {
+                if(!$data_input[$param]) {
+                    throw new Exception("Please complete the parameter `".$param."`");
+                }
+            } else {
+                if(!request($param)) {
+                    throw new Exception("Please complete the parameter `".$param."`");
+                }
             }
         }
     }
