@@ -11,8 +11,10 @@ class Model extends Command
 
         $orm = new ORM();
 
-        $model_data = include base_path("app/Configs/model.php");
-        foreach($model_data as $model_name=>$model) {
+        $model_data = glob(base_path("app/Configs/Models/*.php"));
+        foreach($model_data as $model_file) {
+            $model_name = str_replace(".php","",basename($model_file));
+            $model = include $model_file;
             $table_name = $model['table'];
             if($orm->hasTable($table_name)) {
                 $template = file_get_contents(base_path("system/Models/Model.php.stub"));
@@ -29,8 +31,16 @@ class Model extends Command
                     $todo .= "\t\t".'$this->'.$column['name'].' = $value;'."\n";
                     $todo .= "\t}\n\n";
 
+                    if(isset($column['join_model'])) {
+                    $todo .= "\t/** @return ".$column['join_model']." */\n";
+                    }
+
                     $todo .= "\tpublic function get".convert_snake_to_CamelCase($column['name'], true)."() {\n";
+                    if(isset($column['join_model'])) {
+                    $todo .= "\t\t".'return '.$column['join_model'].'::findById($this->'.$column['name'].');'."\n";
+                    } else {
                     $todo .= "\t\t".'return $this->'.$column['name'].';'."\n";
+                    }
                     $todo .= "\t}\n\n";
                 }
 

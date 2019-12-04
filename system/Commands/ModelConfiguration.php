@@ -11,7 +11,6 @@ class ModelConfiguration extends Command
 
         $orm = new ORM();
         $list_table = $orm->listTable();
-        $result = [];
         foreach($list_table as $table) {
             $list_column = $orm->listColumn($table);
             $columns = [];
@@ -33,16 +32,16 @@ class ModelConfiguration extends Command
             }
 
             $table_camel_case = convert_snake_to_CamelCase($table, true);
-            $result[$table_camel_case] = [
+            $result = [
               'table'=>$table,
               'primary_key'=> $orm->findPrimaryKey($table),
               'columns'=>$columns
             ];
+
+            file_put_contents(base_path("app/Configs/Models/".$table_camel_case.".php"), '<?php return '.var_min_export($result, true).';');
         }
 
-        file_put_contents(base_path("app/Configs/model.php"), '<?php return '.var_min_export($result, true).';');
-
-        print "Model configuration has been generated!. You can still customizing it at app/Configs/model.php manually.";
+        print "Model configuration has been generated at /app/Configs/Models/";
     }
 
 }

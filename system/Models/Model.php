@@ -18,12 +18,6 @@ class Model
         foreach($columns as $column) {
             $method_name = "set".convert_snake_to_CamelCase($column['name'], true);
             $value = $row[ $column['column'] ];
-
-            if(isset($column['join_model'])) {
-                $join_model = $column['join_model'];
-                $value = ("\App\Models\\".$join_model)::findById($value);
-            }
-
             $model->$method_name($value);
         }
         return $model;
