@@ -630,7 +630,7 @@ if(!function_exists('request_json_all'))
     {
         $json_data = file_get_contents('php://input');
         $input = json_decode($json_data, TRUE);
-        return $input;
+        return $input?:[];
     }
 }
 
