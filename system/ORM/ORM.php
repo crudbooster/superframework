@@ -117,16 +117,23 @@ class ORM
 
     /**
      * @param string $table_name
+     * @param array $column_exception
      * @param string $join_alias
      * @return $this
      */
-    public function addSelectTable($table_name, $join_alias = null)
+    public function addSelectTable($table_name, $column_exception = [], $join_alias = null)
     {
         $table_columns = $this->listColumn($table_name);
         $result = [];
         foreach($table_columns as $column) {
             $alias = ($join_alias)?$join_alias:$table_name;
-            $result[] = $alias.".".$column." as ".$alias."_".$column;
+            if(count($column_exception)) {
+                if(!in_array($column, $column_exception)) {
+                    $result[] = $alias.".".$column." as ".$alias."_".$column;
+                }
+            } else {
+                $result[] = $alias.".".$column." as ".$alias."_".$column;
+            }
         }
         if($this->select == "*") {
             $this->select = implode(",", $result);
@@ -145,6 +152,36 @@ class ORM
     public function join($join, $join_type = "INNER JOIN") {
         $this->join[] = $join;
         $this->join_type[] = $join_type;
+        return $this;
+    }
+
+    /**
+     * @param $join_sql
+     * @return $this
+     */
+    public function leftJoin($join_sql) {
+        $this->join[] = $join_sql;
+        $this->join_type[] = "LEFT JOIN";
+        return $this;
+    }
+
+    /**
+     * @param $join_sql
+     * @return $this
+     */
+    public function rightJoin($join_sql) {
+        $this->join[] = $join_sql;
+        $this->join_type[] = "RIGHT JOIN";
+        return $this;
+    }
+
+    /**
+     * @param $join_sql
+     * @return $this
+     */
+    public function outerJoin($join_sql) {
+        $this->join[] = $join_sql;
+        $this->join_type[] = "OUTER JOIN";
         return $this;
     }
 
