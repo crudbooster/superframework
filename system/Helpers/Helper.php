@@ -4,8 +4,7 @@ if(!function_exists('get_config_class')) {
     function get_config_class($class_name) {
         $class_array = explode("\\",$class_name);
         $class_model_name = end($class_array);
-        $config = include base_path("app/Configs/model.php");
-        return $config[$class_model_name];
+        return include base_path("app/Configs/Models/".$class_model_name.".php");
     }
 }
 

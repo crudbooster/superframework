@@ -115,6 +115,27 @@ class ORM
         return $this;
     }
 
+    /**
+     * @param string $table_name
+     * @param string $join_alias
+     * @return $this
+     */
+    public function addSelectTable($table_name, $join_alias = null)
+    {
+        $table_columns = $this->listColumn($table_name);
+        $result = [];
+        foreach($table_columns as $column) {
+            $alias = ($join_alias)?$join_alias:$table_name;
+            $result[] = $alias.".".$column." as ".$alias."_".$column;
+        }
+        if($this->select == "*") {
+            $this->select = implode(",", $result);
+        } else {
+            $this->select .= ",".implode(",", $result);
+        }
+        return $this;
+    }
+
 
     /**
      * @param string $join SQL Join Syntax
