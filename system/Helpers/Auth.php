@@ -3,6 +3,8 @@
 namespace System\Helpers;
 
 
+use App\Models\Users;
+
 class Auth
 {
 
@@ -32,11 +34,15 @@ class Auth
     }
 
     /**
-     * @return array|mixed
-     * @throws \Exception
+     * @return Users
      */
     public function user() {
-        return DB("users")->find($this->id());
+        try {
+            return Users::findById($this->id());
+        } catch (\Exception $e) {
+            logging($e);
+            return null;
+        }
     }
 
     public function password($password) {

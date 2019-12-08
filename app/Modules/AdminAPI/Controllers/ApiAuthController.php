@@ -42,8 +42,8 @@ class ApiAuthController extends Controller {
         if(auth()->id()) {
             return json(['message'=>'success','data'=>[
                 'id'=> auth()->id(),
-                'name'=> auth()->user()['name'],
-                'email'=> auth()->user()['email']
+                'name'=> auth()->user()->getName(),
+                'email'=> auth()->user()->getEmail()
             ]]);
         }
 
