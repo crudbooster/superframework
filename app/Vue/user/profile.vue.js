@@ -2,7 +2,7 @@ const template = `
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card" style="margin-top: 40px">
                 <div class="card-header">
                     Profile
                 </div>
