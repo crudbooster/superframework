@@ -2,7 +2,7 @@ RewriteEngine On
 ServerSignature Off
 
 # Protect directory
-RewriteRule ^(app|vendor|system) - [F,L,NC]
+RewriteRule ^(app/Configs|app/Helpers|app/Middleware|app/Models|app/Modules|vendor|system) - [F,L,NC]
 
 # Protect .htaccess, composer, super
 <FilesMatch "^(\.|composer.|super)">
@@ -11,7 +11,7 @@ RewriteRule ^(app|vendor|system) - [F,L,NC]
 </FilesMatch>
 
 # Prevent Index Listing
-IndexIgnore *
+Options -Indexes
 
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>

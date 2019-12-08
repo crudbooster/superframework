@@ -10,6 +10,13 @@ echo "SUPER FRAMEWORK CLI TOOL\n";
 echo "=================================\n";
 
 switch ($argv[1]) {
+    case "admin:make":
+        if($argv[2]) {
+            (new \System\Commands\Admin())->run($argv[2]);
+        } else {
+            echo "Argument two is empty! what is module name?";
+        }
+        break;
     case "make:module":
         if($argv[2]) {
             (new \System\Commands\Module())->run($argv[2]);
@@ -18,10 +25,8 @@ switch ($argv[1]) {
         }
         break;
     case "model:make":
-        (new \System\Commands\Model())->run();
-        break;
-    case "model:config":
-        (new \System\Commands\ModelConfiguration())->run();
+        $table = isset($argv[2])?$argv[2]:null;
+        (new \System\Commands\Model())->run($table);
         break;
     case "table:users":
         (new \System\Commands\TableUsers())->run();

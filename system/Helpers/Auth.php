@@ -6,8 +6,15 @@ namespace System\Helpers;
 class Auth
 {
 
+    /**
+     * @param $email
+     * @param $password
+     * @return bool
+     * @throws \Exception
+     */
     public function attempt($email, $password) {
         $query = DB("users")->where("email = '$email'")->find();
+
         if($query && password_verify(config("password_salt").$password, $query['password'])) {
             session(["users_id"=>$query['id']]);
             return true;
@@ -24,6 +31,10 @@ class Auth
         return session("users_id");
     }
 
+    /**
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function user() {
         return DB("users")->find($this->id());
     }

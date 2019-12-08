@@ -1,10 +1,16 @@
 <?php
 
-if(!function_exists('get_config_class')) {
-    function get_config_class($class_name) {
+if(!function_exists('get_model_config')) {
+    function get_model_config($class_name) {
         $class_array = explode("\\",$class_name);
         $class_model_name = end($class_array);
-        return include base_path("app/Configs/Models/".$class_model_name.".php");
+        if($cache_model = get_singleton("gmc_".$class_model_name)) {
+            return $cache_model;
+        } else {
+            $file = include base_path("app/Configs/Models/".$class_model_name.".php");
+            put_singleton("gmc_".$class_model_name, $file);
+            return $file;
+        }
     }
 }
 
@@ -13,14 +19,22 @@ $singleton_data = [];
 if(!function_exists("put_singleton")) {
     function put_singleton($key, $value) {
         global $singleton_data;
-        $singleton_data[$key] = $value;
+        if(extension_loaded('apcu')) {
+            apcu_add($key, $value, 5);
+        } else {
+            $singleton_data[$key] = $value;
+        }
     }
 }
 
 if(!function_exists("get_singleton")) {
     function get_singleton($key) {
         global $singleton_data;
-        return @$singleton_data[$key];
+        if(extension_loaded('apc')) {
+            return @apcu_fetch($key);
+        } else {
+            return @$singleton_data[$key];
+        }
     }
 }
 
@@ -67,6 +81,16 @@ if(!function_exists("convert_UpperCamel_to_snake")) {
      */
     function convert_UpperCamel_to_snake($UpperCamel, $separator = "-") {
         return strtolower(preg_replace('/(?<!^)[A-Z]/', $separator.'$0', $UpperCamel));
+    }
+}
+
+if(!function_exists("backend_url")) {
+    /**
+     * @param null $path
+     * @return string
+     */
+    function backend_url($path = null) {
+        return base_url(config('backend_path').'/'.$path);
     }
 }
 
@@ -177,7 +201,8 @@ if(!function_exists("redirect")) {
             session_flash($with_session_data);
         }
 
-        header("location: ".base_url($path), false, 301);
+        $url = strpos($path,'http')!==false?$path:base_url($path);
+        header("location: ".$url, false, 301);
         exit;
     }
 }
@@ -337,9 +362,14 @@ if(!function_exists("config")) {
     function config($name) {
         $name = strpos($name,".")!==false?$name:"config.".$name;
         $split_name = explode(".", $name);
-        $config_data = include getcwd()."/app/Configs/".$split_name[0].".php";
-        $key = $split_name[1];
-        return $config_data[$key];
+        if($config_data = get_singleton("config_".$split_name[0])) {
+            return $config_data[$split_name[1]];
+        } else {
+            $config_data = include getcwd()."/app/Configs/".$split_name[0].".php";
+            put_singleton("config_".$split_name[0], $config_data);
+            $key = $split_name[1];
+            return $config_data[$key];
+        }
     }
 }
 
@@ -356,10 +386,15 @@ if(!function_exists("base_path")) {
 if(!function_exists("base_url")) {
     /**
      * @param null $path
+     * @param null $default
      * @return string
      */
-    function base_url($path = null) {
-        return config("base_url").$path;
+    function base_url($path = null, $default = null) {
+        if(isset($path) && $path == "" && $default) {
+            return config("base_url").$default;
+        } else {
+            return config("base_url").$path;
+        }
     }
 }
 

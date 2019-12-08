@@ -17,6 +17,7 @@ class Mysql
     private $having;
     private $join;
     private $join_type;
+    private $last_query;
 
     public function __construct(\PDO $connection, $table, $select, $join, $join_type, $where, $limit, $offset, $order_by, $group_by, $having)
     {
@@ -48,6 +49,16 @@ class Mysql
             }
             return null;
         }
+    }
+
+    /**
+     * @param $table
+     * @param $column
+     * @return bool
+     */
+    public function hasColumn($table, $column) {
+        $columns = $this->listColumn($table);
+        return in_array($column, $columns);
     }
 
     public function hasTable($table) {
@@ -119,7 +130,8 @@ class Mysql
             }
         }
 
-        $stmt = $this->connection->query("SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." LIMIT 1");
+        $this->last_query = "SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." LIMIT 1";
+        $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetch();
     }
@@ -136,7 +148,8 @@ class Mysql
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
         $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
         $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";
-        $stmt = $this->connection->query("SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql);
+        $this->last_query = "SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql;
+        $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
@@ -158,7 +171,8 @@ class Mysql
         $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
         $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";
 
-        $stmt = $this->connection->query("SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql);
+        $this->last_query = "SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql;
+        $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
         $data = [];
@@ -171,6 +185,11 @@ class Mysql
         return $data;
     }
 
+    public function getLastQuery()
+    {
+        return $this->last_query;
+    }
+
     public function count() {
         $join_sql = "";
 
@@ -181,7 +200,8 @@ class Mysql
         }
 
         $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
-        $stmt = $this->connection->query("SELECT count(*) as total_records FROM `".$this->table."` ".$join_sql." ".$where_sql);
+        $this->last_query = "SELECT count(*) as total_records FROM `".$this->table."` ".$join_sql." ".$where_sql;
+        $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetch()['total_records'];
     }

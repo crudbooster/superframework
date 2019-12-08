@@ -7,13 +7,22 @@ use System\ORM\ORM;
 class Model extends Command
 {
 
-    public function run() {
+    public function run($table = null) {
 
         $orm = new ORM();
+        if($table) {
+            $list_table = [$table];
+        } else {
+            $list_table = $orm->listTable();
+        }
 
-        $model_data = glob(base_path("app/Configs/Models/*.php"));
-        foreach($model_data as $model_file) {
-            $model_name = str_replace(".php","",basename($model_file));
+        foreach($list_table as $table) {
+
+            //Create model configuration
+            $this->createModelConfigurationByTable($orm, $table);
+
+            $model_file = base_path("app/Configs/Models/".$table.".php");
+            $model_name = convert_snake_to_CamelCase(str_replace(".php","",basename($model_file)), true);
             $model = include $model_file;
             $table_name = $model['table'];
             if($orm->hasTable($table_name)) {
@@ -53,6 +62,37 @@ class Model extends Command
                 print "Creating model for table `".$table_name."` is failed, table not found!\n";
             }
         }
+    }
+
+
+    public function createModelConfigurationByTable(ORM $orm, $table) {
+        $list_column = $orm->listColumn($table);
+        $columns = [];
+        foreach($list_column as $column) {
+            if(substr(strtolower($column), -3, 3) == "_id") {
+                $join_model = substr($column,0, strpos($column,"_id"));
+                $join_model = convert_snake_to_CamelCase($join_model, true);
+                $columns[] = [
+                    'name'=>$column,
+                    'column'=>$column,
+                    'join_model'=> $join_model
+                ];
+            } else {
+                $columns[] = [
+                    'name'=>$column,
+                    'column'=>$column
+                ];
+            }
+        }
+
+        $table_camel_case = convert_snake_to_CamelCase($table, true);
+        $result = [
+            'table'=>$table,
+            'primary_key'=> $orm->findPrimaryKey($table),
+            'columns'=>$columns
+        ];
+
+        file_put_contents(base_path("app/Configs/Models/".$table_camel_case.".php"), '<?php return '.var_min_export($result, true).';');
     }
 
 }

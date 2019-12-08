@@ -66,7 +66,28 @@ class ORM
      * @return bool
      */
     public function hasTable($table) {
-        return $this->driver()->hasTable($table);
+        if($exist = get_singleton("hasTable_".$table)) {
+            return $exist;
+        } else {
+            $exist = $this->driver()->hasTable($table);
+            put_singleton("hasTable".$table, $exist);
+            return $exist;
+        }
+    }
+
+    /**
+     * @param $table
+     * @param $column
+     * @return bool
+     */
+    public function hasColumn($table, $column) {
+        if($exist = get_singleton("hasColumn_".$table."_".$column)) {
+            return $exist;
+        } else {
+            $exist = $this->driver()->hasColumn($table, $column);
+            put_singleton("hasColumn_".$table."_".$column, $exist);
+            return $exist;
+        }
     }
 
     /**
@@ -82,6 +103,14 @@ class ORM
      */
     public function listTable() {
         return $this->driver()->listTable();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastQuery()
+    {
+        return $this->driver()->getLastQuery();
     }
 
     /**
