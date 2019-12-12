@@ -21,11 +21,11 @@ class Model extends Command
             //Create model configuration
             $this->createModelConfigurationByTable($orm, $table);
 
-            $model_file = base_path("app/Configs/Models/".$table.".php");
+            $model_file = base_path("app/Configs/Models/".convert_snake_to_CamelCase($table,true).".php");
             $model_name = convert_snake_to_CamelCase(str_replace(".php","",basename($model_file)), true);
             $model = include $model_file;
             $table_name = $model['table'];
-            if($orm->hasTable($table_name)) {
+            if($orm->hasTable($table)) {
                 $template = file_get_contents(base_path("system/Models/Model.php.stub"));
                 $template = str_replace("ModelName", $model_name, $template);
 
@@ -41,14 +41,14 @@ class Model extends Command
                     $todo .= "\t}\n\n";
 
                     if(isset($column['join_model'])) {
-                    $todo .= "\t/** @return ".$column['join_model']." */\n";
+                        $todo .= "\t/** @return ".$column['join_model']." */\n";
                     }
 
                     $todo .= "\tpublic function get".convert_snake_to_CamelCase($column['name'], true)."() {\n";
                     if(isset($column['join_model'])) {
-                    $todo .= "\t\t".'return '.$column['join_model'].'::findById($this->'.$column['name'].');'."\n";
+                        $todo .= "\t\t".'return '.$column['join_model'].'::findById($this->'.$column['name'].');'."\n";
                     } else {
-                    $todo .= "\t\t".'return $this->'.$column['name'].';'."\n";
+                        $todo .= "\t\t".'return $this->'.$column['name'].';'."\n";
                     }
                     $todo .= "\t}\n\n";
                 }
@@ -57,9 +57,9 @@ class Model extends Command
 
                 file_put_contents(base_path("app/Models/".$model_name.".php"), $template);
 
-                print "Model table `".$table_name."` has been created!\n";
+                print "Model table `".$table."` has been created!\n";
             } else {
-                print "Creating model for table `".$table_name."` is failed, table not found!\n";
+                print "Creating model for table `".$table."` is failed, table not found!\n";
             }
         }
     }
