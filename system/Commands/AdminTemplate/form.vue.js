@@ -1,6 +1,6 @@
 const template = `
     <div class='card'>
-        <div class='card-header'>{{ form_title }}</div>
+        <div class='card-header'><a href="javascript:;" @click="$router.push('/{permalink}')" title="Back To List" style="font-size: 20px">&laquo;</a> &nbsp; {{ form_title }}</div>
         <form id="{permalink}-form" method="post">
         <div class='card-body'>
            {form_group}          

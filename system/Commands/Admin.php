@@ -6,11 +6,13 @@ use System\ORM\ORM;
 
 class Admin extends Command
 {
+    private $module_name;
 
-    public function run($table_name) {
+    public function run($table_name, $module_name = null) {
 
         $orm = new ORM();
 
+        $this->module_name = ($module_name)?$module_name:ucwords(str_replace("_"," ",$table_name));
 
         if(!file_exists(base_path('app/Vue/'.$table_name))) {
             mkdir(base_path('app/Vue/'.$table_name));
@@ -43,7 +45,7 @@ class Admin extends Command
 
     private function createNavbarMenu($table_name)
     {
-        $module = ucwords(str_replace("_"," ",$table_name));
+        $module = $this->module_name;
         $template = file_get_contents(base_path("app/Modules/Admin/Views/index.php"));
         $pattern = "<!-- User Custom Navbar Menu After This -->";
         $replace_str = "\t\t\t\t\t<li class=\"nav-item\"><a class=\"nav-link\" href=\"javascript:;\" @click=\"\$router.push('/$table_name')\">$module</a></li>";
@@ -87,7 +89,7 @@ class Admin extends Command
         $index_template = file_get_contents(base_path("system/Commands/AdminTemplate/Controller.php.stub"));
         $columns = $orm->listColumn($table_name);
         $pk = $orm->findPrimaryKey($table_name);
-        $module = ucwords(str_replace("_"," ",$table_name));
+        $module = $this->module_name;
 
         // Replace module
         $index_template = str_replace("{module}", $module, $index_template);
@@ -149,7 +151,7 @@ class Admin extends Command
         $pk = $orm->findPrimaryKey($table_name);
 
         // Replace module
-        $module_name = ucwords(str_replace("_"," ", $table_name));
+        $module_name = $this->module_name;
         $index_template = str_replace("{module}", $module_name, $index_template);
 
         // Replace primary key
@@ -241,7 +243,7 @@ class Admin extends Command
         $index_template = str_replace("{primary_key}", $pk, $index_template);
 
         // Replace module
-        $module_name = ucwords(str_replace("_"," ", $table_name));
+        $module_name = $this->module_name;
         $index_template = str_replace("{module}", $module_name, $index_template);
 
         // Replace thead columns

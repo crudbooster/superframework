@@ -72,7 +72,7 @@ php super [command]
 | make:module [table_name] | Generate a module by table name |
 | model:config | Generate the default all table model configurations. Before you can use model class, you need to generate this model configuration. |
 | model:make {table_name} | Generate a model by table |
-| admin:make {table} | Create an Admin module by a table |
+| admin:make {table} {module_name?} | Create an Admin module by a table |
 | table:users | Create users table |
 | compile | Compile all route and middleware |
 

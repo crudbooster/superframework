@@ -12,7 +12,7 @@ echo "=================================\n";
 switch ($argv[1]) {
     case "admin:make":
         if($argv[2]) {
-            (new \System\Commands\Admin())->run($argv[2]);
+            (new \System\Commands\Admin())->run($argv[2], $arv[3]);
         } else {
             echo "Argument two is empty! what is module name?";
         }
