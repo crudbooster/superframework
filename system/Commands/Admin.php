@@ -11,11 +11,12 @@ class Admin extends Command
 
         $orm = new ORM();
 
-        if($orm->hasTable($table_name)) {
-            if(!file_exists(base_path('vue-template/'.$table_name))) {
-                mkdir(base_path('vue-template/'.$table_name));
-            }
 
+        if(!file_exists(base_path('app/Vue/'.$table_name))) {
+            mkdir(base_path('app/Vue/'.$table_name));
+        }
+
+        if($orm->hasTable($table_name)) {
             // Create model
             (new Model())->run($table_name);
 
@@ -36,7 +37,7 @@ class Admin extends Command
 
             print "Create `".$table_name."` vue module has been completed!";
         } else {
-            print "Table ".$table_name." is not found!";
+            print "There is no table `$table_name` found!";
         }
     }
 
@@ -56,7 +57,7 @@ class Admin extends Command
 
     private function createVueRouter($table_name)
     {
-        $template = file_get_contents(base_path("vue-template/router.js"));
+        $template = file_get_contents(base_path("app/Vue/router.js"));
 
         // Insert import router
         $pattern = "/* User Custom Import Router */";
@@ -77,7 +78,7 @@ class Admin extends Command
         // Remove multiple new line
         $template = preg_replace("/(\r?\n){2,}/", "\n", $template);
 
-        file_put_contents(base_path("vue-template/router.js"), $template);
+        file_put_contents(base_path("app/Vue/router.js"), $template);
     }
 
     private function createAPI($table_name)
@@ -223,7 +224,7 @@ class Admin extends Command
         $index_template = str_replace("{data_submit_form}", $data_submit_form, $index_template);
 
         // Put form file
-        file_put_contents(base_path("vue-template/".$table_name."/form.vue.js"), $index_template);
+        file_put_contents(base_path("app/Vue/".$table_name."/form.vue.js"), $index_template);
     }
 
     private function createIndexFile($table_name)
@@ -262,7 +263,7 @@ class Admin extends Command
         $index_template = str_replace("{json_columns}", json_encode($json_columns), $index_template);
 
         // Put file index
-        file_put_contents(base_path("vue-template/".$table_name."/index.vue.js"), $index_template);
+        file_put_contents(base_path("app/Vue/".$table_name."/index.vue.js"), $index_template);
     }
 
 }
