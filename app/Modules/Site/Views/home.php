@@ -5,7 +5,7 @@
     </head>
     <body>
         <div class="title">
-            <h1><?php echo config("app_name");?><sup>1.1</sup></h1>
+            <h1><?php echo config("app_name");?><sup>2</sup></h1>
             <p>Lightweight and Fastest PHP Framework</p>
             <p><a href="https://github.com/crudbooster/superframework">Documentation</a></p>
         </div>
