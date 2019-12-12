@@ -26,5 +26,10 @@ return [
     "csrf_exception"=> ["api"],
 
     // Password Salt for security
-    "password_salt"=> "super"
+    "password_salt"=> "super",
+
+    /*
+     * Google FCM Configuration
+     */
+    "google_fcm_server_key"=> null
 ];
