@@ -49,9 +49,15 @@ class DataTable
         $data = $result->all();
 
         $result = DB($this->model::getTableName());
+        if(isset($this->query)) {
+            $result = call_user_func($this->query, $result);
+        }
         $records_total = $result->count();
 
         $result = DB($this->model::getTableName());
+        if(isset($this->query)) {
+            $result = call_user_func($this->query, $result);
+        }
 
         if($search = request('search')['value']) {
             if($this->searchable_columns) {
