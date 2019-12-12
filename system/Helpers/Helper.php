@@ -621,7 +621,7 @@ if(!function_exists("request_string")) {
      */
     function request_string($name, $default = null) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
+        $value = (isset($value[$name]) && $value[$name] && $value[$name] != "null")?$value[$name]:$default;
         $value = filter_var($value, FILTER_SANITIZE_STRING);
         return $value;
     }
