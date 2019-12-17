@@ -167,7 +167,8 @@ class Model
         foreach($config['columns'] as $column) {
             $method_name = "get".convert_snake_to_CamelCase($column['name'], true);
             if($config['primary_key'] != $column['column']) {
-                if($this->$method_name()) {
+                $value = $this->$method_name();
+                if(isset($value)) {
                     if(is_object($this->$method_name())) {
                         $method_pk = "get".convert_snake_to_CamelCase($this->$method_name()->getPrimaryKey(), true);
                         $data_array[ $column['column'] ] = $this->$method_name()->$method_pk();
