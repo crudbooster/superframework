@@ -47,6 +47,7 @@
 </div><!--end container-->
 <script>
     const base_api = "<?php out(url('admin-api'))?>"
+    const backend_path = "<?php out(config('backend_path'))?>"
 </script>
 <script type="module" src="<?php out(base_url('app/Vue/main.js'))?>"></script>
 </body>

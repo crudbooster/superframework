@@ -64,9 +64,6 @@ new Vue({
                 }
             })
         },
-        login: function() {
-          this.$router.push('/auth/login')
-        },
         logout: function() {
           this.is_loading = true
           axios.get(this.base_api + "/auth/logout")
@@ -74,7 +71,7 @@ new Vue({
                   this.users_id = ""
                   this.users_name = ""
                   this.users_email = ""
-                  this.login()
+                  location.href= backend_path + "/login"
               })
               .catch(err=>{
                   alert('Something went wrong!')
@@ -92,7 +89,7 @@ new Vue({
                 })
                 .catch(err=>{
                     if(err.response.status === 401) {
-                        this.login()
+                        location.href= backend_path + "/login"
                     } else {
                         alert('Something went wrong!');
                     }
@@ -100,7 +97,7 @@ new Vue({
         },
         async guard() {
             await this.checkSession()
-            if (this.users_id === "") this.login()
+            if (this.users_id === "") location.href = backend_path + "/login"
             return true;
         }
     }

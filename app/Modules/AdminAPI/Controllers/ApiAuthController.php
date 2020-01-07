@@ -9,31 +9,6 @@ use System\Controllers\Controller;
  */
 class ApiAuthController extends Controller {
 
-    /**
-     * @route login
-     */
-    public function login()
-    {
-        if(request_is_post()) {
-            try {
-                validate_required(['email', 'password']);
-
-                if(auth()->attempt(request_email('email'), request_string('password'))) {
-                    return json(['message'=>'success']);
-                } else {
-                    http_response_code(400);
-                    return json(['message'=>'Please check your email and or password!']);
-                }
-
-            } catch (\Exception $e) {
-                http_response_code(400);
-                return json(['message'=>$e->getMessage()]);
-            }
-        } else {
-            http_response_code(403);
-            return json(['message'=>'Method not allowed!']);
-        }
-    }
 
     /**
      * @route check-session
