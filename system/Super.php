@@ -148,6 +148,9 @@ class Super
 
     public function run() {
 
+        ini_set("display_errors",0);
+        ini_set("display_startup_errors", 0);
+
         $args = $this->urlSlicing();
         $selection = $this->controllerClassSelection($args);
 
@@ -163,7 +166,13 @@ class Super
             return $response;
         });
 
-        echo call_user_func($response);
+        try {
+            echo call_user_func($response);
+        } catch (\Error $e) {
+            http_response_code(500);
+            logging($e);
+            exit;
+        }
     }
 
 }
