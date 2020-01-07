@@ -15,10 +15,15 @@ class DataTable
 {
     private $model;
     private $searchable_columns;
+    private $query;
 
     public function __construct(Model $model)
     {
         $this->model = $model;
+    }
+
+    public function query($query) {
+        $this->query = $query;
     }
 
     public function searchable(array $columns)
