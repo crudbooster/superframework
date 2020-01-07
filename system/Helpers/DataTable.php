@@ -35,6 +35,10 @@ class DataTable
     public function get() {
         $result = DB($this->model::getTableName());
 
+        if(isset($this->query)) {
+            $result = call_user_func($this->query, $result);
+        }
+
         if($search = request('search')['value']) {
             if($this->searchable_columns) {
                 $likes = [];
