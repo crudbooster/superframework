@@ -116,20 +116,25 @@ class Model
      */
     public static function findById($id) {
 
-        if($last_data = get_singleton(basename(get_called_class()).'_findById_'.$id)) {
-            return $last_data;
-        } else {
-            $config = get_model_config(get_called_class());
-            // Get record
-            $row = DB($config['table'])->find($id);
-            if($row) {
-                $data = static::modelSetter(new static(), $config['columns'], $row);
-                put_singleton(basename(get_called_class()).'_findById_'.$id, $data);
-                return $data;
+        if($id) {
+            if($last_data = get_singleton(basename(get_called_class()).'_findById_'.$id)) {
+                return $last_data;
             } else {
-                return null;
+                $config = get_model_config(get_called_class());
+                // Get record
+                $row = DB($config['table'])->find($id);
+                if($row) {
+                    $data = static::modelSetter(new static(), $config['columns'], $row);
+                    put_singleton(basename(get_called_class()).'_findById_'.$id, $data);
+                    return $data;
+                } else {
+                    return null;
+                }
             }
+        } else {
+            return null;
         }
+
     }
 
     /**
@@ -139,19 +144,23 @@ class Model
      * @throws \Exception
      */
     public static function findBy($column, $value) {
-        if($last_data = get_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value)) {
-            return $last_data;
-        } else {
-            $config = get_model_config(get_called_class());
-            // Get record
-            $row = DB($config['table'])->where($column." = '".$value."'")->find();
-            if ($row) {
-                $data = static::modelSetter(new static(), $config['columns'], $row);
-                put_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value, $data);
-                return $data;
+        if($column && $value) {
+            if($last_data = get_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value)) {
+                return $last_data;
             } else {
-                return null;
+                $config = get_model_config(get_called_class());
+                // Get record
+                $row = DB($config['table'])->where($column." = '".$value."'")->find();
+                if ($row) {
+                    $data = static::modelSetter(new static(), $config['columns'], $row);
+                    put_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value, $data);
+                    return $data;
+                } else {
+                    return null;
+                }
             }
+        } else {
+            return null;
         }
     }
 
