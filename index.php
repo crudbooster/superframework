@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
 /**
  * To run php more faster
  * You may enable garbage collection with gc_enable();

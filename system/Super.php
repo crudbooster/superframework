@@ -150,6 +150,7 @@ class Super
 
         ini_set("display_errors",0);
         ini_set("display_startup_errors", 0);
+        ini_set("error_log", base_path("error_log.log"));
 
         $args = $this->urlSlicing();
         $selection = $this->controllerClassSelection($args);
@@ -168,7 +169,7 @@ class Super
 
         try {
             echo call_user_func($response);
-        } catch (\Error $e) {
+        } catch (\Throwable $e) {
             http_response_code(500);
             logging($e);
             exit;

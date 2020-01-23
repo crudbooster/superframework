@@ -10,6 +10,12 @@ RewriteRule ^(app/Configs|app/Helpers|app/Middleware|app/Models|app/Modules|vend
   Deny from all
 </FilesMatch>
 
+# Protect Log, SH, Ini File
+<FilesMatch "\.(ini|sh|log)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
 # Prevent Index Listing
 Options -Indexes
 
