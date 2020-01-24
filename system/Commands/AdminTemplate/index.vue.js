@@ -1,7 +1,7 @@
 const template = `
     <div class='card'>
         <div class='card-header'>{module} list &nbsp; <button type="button" class="btn btn-sm btn-primary" @click="$router.push('/{permalink}/add')">Add New Data</button></div>
-        <div class='card-body'>                      
+        <div class='card-body table-responsive'>                      
            <table id="{permalink}-table" class="table table-striped table-bordered">
                 <thead>
                     <tr>{thead_columns}<th>Action</th></tr>
@@ -29,8 +29,8 @@ export default {
                 render: function(data, type, full, meta){
                     if(type === 'display'){
                         data = '<div align="right">' +
-                            '<a class="btn btn-sm btn-success datatable-btn-edit" data-id="'+full.{primary_key}+'" href="javascript:;">Edit</a> ' +
-                            '<a class="btn btn-sm btn-danger datatable-btn-delete" data-id="'+full.{primary_key}+'" href="javascript:;">Delete</a> ' +
+                            '<a class="btn btn-sm btn-success datatable-btn-edit" title="Edit data" data-id="'+full.{primary_key}+'" href="javascript:;">Edit</a> ' +
+                            '<a class="btn btn-sm btn-danger datatable-btn-delete" title="Delete data" data-id="'+full.{primary_key}+'" href="javascript:;">Delete</a> ' +
                             '</div>';
                     }
 

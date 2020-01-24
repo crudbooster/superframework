@@ -132,7 +132,11 @@ class Admin extends Command
         // Replace data model assigned
         $data_model_assign = "";
         foreach($columns as $column) {
-            $data_model_assign .= "\$data['$column'] = \$row->get".convert_snake_to_CamelCase($column,true)."();\n\t\t\t\t";
+            if(substr($column,-3,3) == "_id") {
+                $data_model_assign .= "\$data['$column'] = \$row->get".convert_snake_to_CamelCase($column,true)."()->getId();\n\t\t\t\t";
+            } else {
+                $data_model_assign .= "\$data['$column'] = \$row->get".convert_snake_to_CamelCase($column,true)."();\n\t\t\t\t";
+            }
         }
         $index_template = str_replace("{data_model_assign}", $data_model_assign, $index_template);
 

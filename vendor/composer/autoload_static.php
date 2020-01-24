@@ -7,6 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInit471379c99be1bcc4fbb0dee114123b44
 {
     public static $files = array (
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '028fdea3165c4ba1ecccc83b7fec69fc' => __DIR__ . '/..' . '/cakephp/collection/functions.php',
+        '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
         '04d50985c6eed8565f8c4b506efdd47e' => __DIR__ . '/../..' . '/app/Helpers/Helper.php',
         'b7b65ef24a026eefce2d8a39bf156c66' => __DIR__ . '/../..' . '/system/Helpers/Helper.php',
     );
@@ -15,6 +21,31 @@ class ComposerStaticInit471379c99be1bcc4fbb0dee114123b44
         'S' => 
         array (
             'System\\' => 7,
+            'Symfony\\Polyfill\\Php73\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\Yaml\\' => 23,
+            'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Component\\Config\\' => 25,
+        ),
+        'P' => 
+        array (
+            'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
+            'Phinx\\' => 6,
+        ),
+        'C' => 
+        array (
+            'Cake\\Utility\\' => 13,
+            'Cake\\Log\\' => 9,
+            'Cake\\Datasource\\' => 16,
+            'Cake\\Database\\' => 14,
+            'Cake\\Core\\' => 10,
+            'Cake\\Collection\\' => 16,
+            'Cake\\Cache\\' => 11,
         ),
         'A' => 
         array (
@@ -27,6 +58,82 @@ class ComposerStaticInit471379c99be1bcc4fbb0dee114123b44
         array (
             0 => __DIR__ . '/../..' . '/system',
         ),
+        'Symfony\\Polyfill\\Php73\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Contracts\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\Yaml\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Symfony\\Component\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/filesystem',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Symfony\\Component\\Config\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/config',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Phinx\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
+        ),
+        'Cake\\Utility\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/utility',
+        ),
+        'Cake\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/log',
+        ),
+        'Cake\\Datasource\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/datasource',
+        ),
+        'Cake\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/database',
+        ),
+        'Cake\\Core\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/core',
+        ),
+        'Cake\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/collection',
+        ),
+        'Cake\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/cache',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -34,16 +141,7 @@ class ComposerStaticInit471379c99be1bcc4fbb0dee114123b44
     );
 
     public static $classMap = array (
-        'App\\Modules\\Site\\Controllers\\Home' => __DIR__ . '/../..' . '/app/Modules/Site/Controllers/Home.php',
-        'App\\Modules\\Site\\Middleware\\SiteMiddleware' => __DIR__ . '/../..' . '/app/Modules/Site/Middleware/SiteMiddleware.php',
-        'System\\Commands\\Command' => __DIR__ . '/../..' . '/system/Commands/Command.php',
-        'System\\Commands\\Middleware' => __DIR__ . '/../..' . '/system/Commands/Middleware.php',
-        'System\\Commands\\Route' => __DIR__ . '/../..' . '/system/Commands/Route.php',
-        'System\\Controllers\\Controller' => __DIR__ . '/../..' . '/system/Controllers/Controller.php',
-        'System\\Interfaces\\Middleware' => __DIR__ . '/../..' . '/system/Interfaces/Middleware.php',
-        'System\\ORM\\Drivers\\Mysql' => __DIR__ . '/../..' . '/system/ORM/Drivers/Mysql.php',
-        'System\\ORM\\ORM' => __DIR__ . '/../..' . '/system/ORM/ORM.php',
-        'System\\Super' => __DIR__ . '/../..' . '/system/Super.php',
+        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

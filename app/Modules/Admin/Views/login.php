@@ -20,6 +20,7 @@
             margin: 100px auto;
             width: 800px;
         }
+
         .login-wrapper .login-content {
 
         }
@@ -66,6 +67,17 @@
         .login-form .form-control {
             border: 0px;
             border-bottom: 1px solid #dddddd;
+        }
+        @media(max-width: 768px) {
+            .login-wrapper {
+                width: auto;
+            }
+            .login-bg-blue {
+                display: none;
+            }
+            .login-bg-white {
+                border-radius: unset;
+            }
         }
     </style>
 </head>
