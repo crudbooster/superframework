@@ -34,7 +34,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="javascript:;" @click="$router.push('/profile')">Profile</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php echo backend_url('logout')?>" @click="logout">Logout</a>
+                            <a class="dropdown-item" href="<?php echo backend_url('logout')?>">Logout</a>
                         </div>
                     </li>
                 </ul>

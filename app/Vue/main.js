@@ -21,6 +21,12 @@ new Vue({
         }
     },
     methods: {
+        showLoading: function() {
+            this.is_loading = true
+        },
+        hideLoading: function() {
+            this.is_loading = false
+        },
         alertSuccess: function(message) {
             Swal.fire({
                 animation: false,
@@ -63,22 +69,6 @@ new Vue({
                     }
                 }
             })
-        },
-        logout: function() {
-          this.is_loading = true
-          axios.get(this.base_api + "/auth/logout")
-              .then(resp=>{
-                  this.users_id = ""
-                  this.users_name = ""
-                  this.users_email = ""
-                  location.href= backend_path + "/login"
-              })
-              .catch(err=>{
-                  alert('Something went wrong!')
-              })
-              .finally(()=>{
-                  this.is_loading = false
-              })
         },
         checkSession: function() {
             return axios.get(this.base_api + "/auth/check-session")
