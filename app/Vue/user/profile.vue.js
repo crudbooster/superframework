@@ -53,10 +53,8 @@ export default {
     methods: {
         submitForm: function() {
             if( $('#form-profile').valid() ) {
-                this.$parent.is_loading = true
-                var formData = new FormData( $("#form-profile")[0] )
-                formData.append("id", this.$parent.users_id)
-                axios.post(this.$parent.base_api + "/users/update-profile", formData)
+                this.$parent.showLoading()
+                axios.post(this.$parent.base_api + "/profile/update", form_data({id: this.$parent.users_id}))
                     .then(resp=>{
                         this.$parent.alertSuccess(resp.data.message)
                     })
@@ -64,7 +62,7 @@ export default {
                         this.$parent.alertWarning(err.response.data.message)
                     })
                     .finally(()=>{
-                        this.$parent.is_loading = false
+                        this.$parent.hideLoading()
                     })
             }
 

@@ -6,14 +6,14 @@ use App\Models\Users;
 use System\Controllers\Controller;
 
 /**
- * @route admin-api/users
+ * @route admin-api/profile
  */
-class ApiUsersController extends Controller {
+class ApiProfileController extends Controller {
 
     /**
-     * @route update-profile
+     * @route update
      */
-    public function updateProfile()
+    public function update()
     {
         try {
             validate_required(['name', 'email']);
@@ -23,7 +23,7 @@ class ApiUsersController extends Controller {
             $row->setEmail(request_email('email'));
 
             if(request_string('password')) {
-                $row->setPassword(password_hash(request_string('password'), PASSWORD_BCRYPT));
+                $row->setPassword(hashing_password(request_string('password')));
             }
 
             $row->save();
