@@ -23,6 +23,9 @@ class AdminController extends Controller {
      */
     public function login()
     {
+        // Check if user has been logged in
+        if(!auth()->guest()) redirect_backend();
+
         if(request_is_post()) {
             try {
                 validate_required(['email', 'password']);
@@ -39,5 +42,13 @@ class AdminController extends Controller {
         }
 
         return view("Admin.login");
+    }
+
+    /**
+     * @route logout
+     */
+    public function logout() {
+        auth()->logout();
+        redirect(config('backend_path').'/login');
     }
 }

@@ -91,7 +91,8 @@ new Vue({
                     if(err.response.status === 401) {
                         location.href= backend_path + "/login"
                     } else {
-                        alert('Something went wrong!');
+                        alert('Something went wrong while checking session :(');
+                        location.href= backend_path + "/login"
                     }
                 })
         },

@@ -191,6 +191,18 @@ if(!function_exists("redirect_back")) {
     }
 }
 
+if(!function_exists('redirect_backend')) {
+    function redirect_backend($path = null, $with_session = []) {
+        redirect(config('backend_path').'/'.$path, $with_session);
+    }
+}
+
+if(!function_exists('backend_url')) {
+    function backend_url($path = null) {
+        return url(config('backend_path').'/'.$path);
+    }
+}
+
 if(!function_exists("redirect")) {
     /**
      * @param $path

@@ -26,12 +26,4 @@ class ApiAuthController extends Controller {
         return json(['message'=>'Please login first!']);
     }
 
-
-    /**
-     * @route logout
-     */
-    public function logout() {
-        auth()->logout();
-        return json(['message'=>'You have been log out!']);
-    }
 }
