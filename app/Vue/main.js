@@ -15,6 +15,7 @@ new Vue({
         return {
             is_loading: false,
             base_api: base_api,
+            base_url: base_url,
             users_id: "",
             users_name: "",
             users_email: ""
