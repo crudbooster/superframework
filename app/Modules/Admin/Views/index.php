@@ -46,6 +46,7 @@
     </div><!--end wrapper-->
 </div><!--end container-->
 <script>
+    const base_url = "<?php out(base_url())?>"
     const base_api = "<?php out(url('admin-api'))?>"
     const backend_path = "<?php out(config('backend_path'))?>"
 
