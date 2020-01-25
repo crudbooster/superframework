@@ -28,6 +28,9 @@ new Vue({
         hideLoading: function() {
             this.is_loading = false
         },
+        forbiddenAlert: function() {
+            this.alertWarning("You don't have a permission to access the area!")
+        },
         alertSuccess: function(message) {
             Swal.fire({
                 animation: false,

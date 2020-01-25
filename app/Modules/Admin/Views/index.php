@@ -48,6 +48,10 @@
 <script>
     const base_api = "<?php out(url('admin-api'))?>"
     const backend_path = "<?php out(config('backend_path'))?>"
+
+    $(function() {
+        $.fn.dataTable.ext.errMode = 'none';
+    })
 </script>
 <script type="module" src="<?php out(base_url('app/Vue/main.js'))?>?v=1.0"></script>
 </body>

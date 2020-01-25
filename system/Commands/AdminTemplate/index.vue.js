@@ -19,9 +19,30 @@ export default {
         this.$parent.guard()
     },
     mounted() {
-        $('#{permalink}-table').dataTable( {
+        let d = this
+
+        d.$parent.showLoading()
+
+        $('#{permalink}-table').DataTable( {
             serverSide: true,
-            ajax: base_api + "/{permalink}/list",
+            ajax: {
+                url: base_api + "/{permalink}/list",
+                error: function(jqXHR, exception) {
+                    d.$parent.alertWarning(exception)
+                },
+                data: function(param) {
+                    // Additional DataTable Params
+                },
+                initComplete: function(settings,json) {
+                    d.$parent.hideLoading()
+                },
+                statusCode: {
+                    403: function() {
+                        d.$parent.forbiddenAlert()
+                        location.href = backend_path + "/logout"
+                    }
+                }
+            },
             order: [[ 0, "desc" ]],
             columns: {json_columns},
             columnDefs: [{
@@ -45,7 +66,6 @@ export default {
             router.push('/{permalink}/edit/'+id)
         })
 
-        let d = this
         $(document).on('click','.datatable-btn-delete',function() {
             let id = $(this).data('id')
             d.delete(id)
