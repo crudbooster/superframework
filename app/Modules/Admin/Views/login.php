@@ -15,6 +15,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
+            padding: 10px;
         }
         .login-wrapper {
             margin: 100px auto;
