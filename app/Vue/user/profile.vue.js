@@ -54,7 +54,12 @@ export default {
         submitForm: function() {
             if( $('#form-profile').valid() ) {
                 this.$parent.showLoading()
-                axios.post(this.$parent.base_api + "/profile/update", form_data({id: this.$parent.users_id}))
+                axios.post(this.$parent.base_api + "/profile/update", form_data({
+                        id: this.$parent.users_id,
+                        name: this.name,
+                        password: this.password,
+                        email: this.email
+                    }))
                     .then(resp=>{
                         this.$parent.alertSuccess(resp.data.message)
                     })
