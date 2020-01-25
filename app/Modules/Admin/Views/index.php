@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex">
     <title><?php out(config('app_name'))?></title>
-    <link href="<?php echo base_url('assets/css/all.min.css')?>" rel="stylesheet">
-    <script src="<?php echo base_url('assets/js/all.min.js')?>"></script>
+    <link href="<?php echo base_url('assets/css/all.min.css')?>?v=1.1" rel="stylesheet">
+    <script src="<?php echo base_url('assets/js/all.min.js')?>?v=1.1"></script>
 </head>
 <body>
 <div id="app" class="container-fluid">
