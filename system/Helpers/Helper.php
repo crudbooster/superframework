@@ -327,6 +327,27 @@ if(!function_exists("csrf_validation")) {
     }
 }
 
+if(!function_exists('hash_check')) {
+    /**
+     * @param $input_password
+     * @param $hash_password
+     * @return bool
+     */
+    function hash_check($input_password, $hash_password) {
+        return (boolean) password_verify(config('password_salt').$input_password, $hash_password);
+    }
+}
+
+if(!function_exists('hash_make')) {
+    /**
+     * @param $string_text
+     * @return bool|string
+     */
+    function hash_make($string_text) {
+        return password_hash(config('password_salt').$string_text, PASSWORD_BCRYPT);
+    }
+}
+
 if(!function_exists("csrf_input")) {
     function csrf_input() {
         $hash = string_random();
