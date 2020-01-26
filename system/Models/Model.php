@@ -14,6 +14,18 @@ use System\ORM\ORM;
 class Model
 {
 
+    private static function get_model_config($class_name) {
+        $class_array = explode("\\",$class_name);
+        $class_model_name = end($class_array);
+        if($cache_model = get_singleton("gmc_".$class_model_name)) {
+            return $cache_model;
+        } else {
+            $file = include base_path("app/Configs/Models/".$class_model_name.".php");
+            put_singleton("gmc_".$class_model_name, $file);
+            return $file;
+        }
+    }
+
     private static function modelSetter($model, $columns, $row) {
         foreach($columns as $column) {
             $method_name = "set".convert_snake_to_CamelCase($column['name'], true);
@@ -23,14 +35,13 @@ class Model
         return $model;
     }
 
-
     public static function getPrimaryKey() {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         return $config['primary_key'];
     }
 
     public static function getTableName() {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         return $config['table'];
     }
 
@@ -42,11 +53,11 @@ class Model
      * @throws \Exception
      */
     private static function queryAll($limit, $offset, callable $query = null) {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         $data = DB($config['table']);
         foreach($config['columns'] as $i=>$column) {
             if(isset($column['join_model'])) {
-                $join_config = get_model_config($column['join_model']);
+                $join_config = static::get_model_config($column['join_model']);
                 $data->join($join_config['table']." as ".$join_config['table']." on ".$join_config['table'].".".$join_config['primary_key']." = ".$column['column']);
                 foreach($join_config['columns'] as $join_column) {
                     $data->addSelect($join_config['table'].".".$join_column['column']." as ".$join_config['table']."___".$join_column['column']);
@@ -81,7 +92,7 @@ class Model
      * @return mixed
      */
     public static function loadArray(array $data_array) {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         return static::modelSetter(new static(), $config['columns'], $data_array);
     }
 
@@ -120,7 +131,7 @@ class Model
             if($last_data = get_singleton(basename(get_called_class()).'_findById_'.$id)) {
                 return $last_data;
             } else {
-                $config = get_model_config(get_called_class());
+                $config = static::get_model_config(get_called_class());
                 // Get record
                 $row = DB($config['table'])->find($id);
                 if($row) {
@@ -148,7 +159,7 @@ class Model
             if($last_data = get_singleton(basename(get_called_class()).'_findBy_'.$column.'_'.$value)) {
                 return $last_data;
             } else {
-                $config = get_model_config(get_called_class());
+                $config = static::get_model_config(get_called_class());
                 // Get record
                 $row = DB($config['table'])->where($column." = '".$value."'")->find();
                 if ($row) {
@@ -170,7 +181,7 @@ class Model
      * @throws \Exception
      */
     public function save() {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         $method_get_pk = "get".convert_snake_to_CamelCase($config['primary_key'], true);
         $data_array = [];
         foreach($config['columns'] as $column) {
@@ -211,7 +222,7 @@ class Model
      * @throws \Exception
      */
     public static function delete($id) {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         DB($config['table'])->delete($id);
     }
 
@@ -220,7 +231,7 @@ class Model
      * @throws \Exception
      */
     public static function deleteBy(array $param) {
-        $config = get_model_config(get_called_class());
+        $config = static::get_model_config(get_called_class());
         DB($config['table'])->delete($param);
     }
 

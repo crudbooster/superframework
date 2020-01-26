@@ -1,19 +1,5 @@
 <?php
 
-if(!function_exists('get_model_config')) {
-    function get_model_config($class_name) {
-        $class_array = explode("\\",$class_name);
-        $class_model_name = end($class_array);
-        if($cache_model = get_singleton("gmc_".$class_model_name)) {
-            return $cache_model;
-        } else {
-            $file = include base_path("app/Configs/Models/".$class_model_name.".php");
-            put_singleton("gmc_".$class_model_name, $file);
-            return $file;
-        }
-    }
-}
-
 $singleton_data = [];
 
 if(!function_exists("put_singleton")) {
@@ -293,7 +279,7 @@ if(!function_exists("logging")) {
      * @param string $type
      */
     function logging($content, $type = "error") {
-        file_put_contents(getcwd()."/system/Logs/".date("Y-m-d").".log", "[".date("Y-m-d H:i:s")."][".$type."] - ".$content."\n\n", FILE_APPEND);
+        file_put_contents(getcwd()."/logs/".date("Y-m-d").".log", "[".date("Y-m-d H:i:s")."][".$type."] - ".$content."\n\n", FILE_APPEND);
     }
 }
 
