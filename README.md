@@ -1,5 +1,5 @@
-# Super Framework <sup>1.0 BETA</sup>
-The lightweight (Only 120kb~) and fastest PHP framework from the creator of CRUDBooster
+# Super Framework
+The lightweight and fastest PHP framework from the creator of CRUDBooster
 
 ## Installation
 
