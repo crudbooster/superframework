@@ -21,8 +21,6 @@ export default {
     mounted() {
         let d = this
 
-        d.$parent.showLoading()
-
         $('#{permalink}-table').DataTable( {
             serverSide: true,
             ajax: {
@@ -32,9 +30,6 @@ export default {
                 },
                 data: function(param) {
                     // Additional DataTable Params
-                },
-                initComplete: function(settings,json) {
-                    d.$parent.hideLoading()
                 },
                 statusCode: {
                     403: function() {

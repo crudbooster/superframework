@@ -712,8 +712,9 @@ if(!function_exists('request_json_string'))
      */
     function request_json_string($key)
     {
-        $json_data = file_get_contents('php://input');
-        $input = json_decode($json_data, TRUE);
+        // Get Data Raw JSON
+        $input = json_decode(file_get_contents('php://input'), true);
+
         if($input) {
             if(isset($input[$key])) return filter_var($input[$key],FILTER_SANITIZE_STRING);
         }
