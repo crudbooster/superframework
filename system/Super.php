@@ -10,7 +10,8 @@ class Super
     {
         $this->config = include base_path("app/Configs/config.php");
         if($this->config['session_enable']===true) {
-            session_name("SuperFW_".basename(base_path()));
+            $session_name = md5("SuperFW_".basename(base_path()));
+            session_name($session_name);
             session_start();
         }
     }
