@@ -10,6 +10,7 @@ namespace System\Helpers;
 
 
 use System\Models\Model;
+use System\ORM\ORM;
 
 class DataTable
 {
@@ -49,13 +50,25 @@ class DataTable
             }
         }
 
-        $order_column_idx = request('order')[0]['column'];
-        $order_column = request('columns')[$order_column_idx]['data'];
-        $order_column_dir = request('order')[0]['dir'];
+        if(request('order')) {
+            $order_column_idx = request('order')[0]['column'];
+            $order_column = request('columns')[$order_column_idx]['data'];
+            $order_column_dir = request('order')[0]['dir'];
+        } else {
+            $order_column = $this->model::getTableName().".".(new ORM())->findPrimaryKey($this->model::getTableName());
+            $order_column_dir = "desc";
+        }
+
         $result->orderBy("$order_column $order_column_dir");
         $result->offset(request_int('start'));
         $result->limit(request_int('length'));
         $data = $result->all();
+
+        $no_start = request_int('start');
+        foreach($data as &$item) {
+            $no_start++;
+            $item['_number'] = $no_start;
+        }
 
         $result = DB($this->model::getTableName());
         if(isset($this->query)) {
