@@ -5,15 +5,12 @@ namespace System;
 class Super
 {
     private $config;
+    private $bootstrapCache;
 
     public function __construct()
     {
-        $this->config = include base_path("app/Configs/config.php");
-        if($this->config['session_enable']===true) {
-            $session_name = md5("SuperFW_".basename(base_path()));
-            session_name($session_name);
-            session_start();
-        }
+        $this->config = include base_path("configs/App.php");
+        $this->bootstrapCache = include base_path("bootstrap/cache.php");
     }
 
     private function urlSlicing() {
@@ -81,17 +78,6 @@ class Super
         return $obj;
     }
 
-    private function measureEnd($response) {
-        if($this->config['consume_time_process'] === true) {
-            $time = microtime(true) - SUPER_START;
-            $content_type = get_header_content("Content-Type")?:"text/html";
-            if($content_type == "text/html") {
-                $response .= "\n<!-- Consume time: ".$time." s -->";
-            }
-        }
-        return $response;
-    }
-
     private function responseBuilder($selection, $args) {
         $class = $selection->class;
         if(method_exists($selection->class, $selection->method)) {
@@ -119,54 +105,15 @@ class Super
         return $response;
     }
 
-    private function CSRFProtection() {
-        if(request_is_post()) {
-            $csrf_config = config("csrf_exception");
-            foreach($csrf_config as $pattern) {
-                if(!preg_match("/{$pattern}(\/|$)/i", str_ireplace(config("base_url"),"",get_current_url()) )) {
-                    if(!csrf_validation()) {
-                        abort(400,"Submit aborted, csrf token invalid!");
-                    }
-                }
-            }
-        }
-    }
-
-    private function middleware(callable $process) {
-        $middleware = include base_path("app/Configs/middleware.php");
-        $response = null;
-        foreach($middleware as $middle) {
-            $response = call_user_func((new $middle())->handle(function() use ($process) {
-                // Check CSRF Security
-                $this->CSRFProtection();
-
-                // Run the process
-                return $process;
-            }));
-        }
-        return $response;
-    }
 
     public function run() {
 
         ini_set("display_errors",0);
         ini_set("display_startup_errors", 0);
-        ini_set("error_log", base_path("error_log.log"));
+        ini_set("error_log", base_path("error.log"));
 
         $args = $this->urlSlicing();
         $selection = $this->controllerClassSelection($args);
-
-        $response = $this->middleware(function() use ($selection, $args) {
-            if($selection && $selection->class && $selection->method) {
-                $response = $this->responseBuilder($selection, $args);
-            } else {
-                http_response_code(404);
-                $response = rtrim(include "Views/error/404.php","1");
-            }
-
-            $response = $this->measureEnd($response);
-            return $response;
-        });
 
         try {
             echo call_user_func($response);

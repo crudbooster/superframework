@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Modules\Site\Controllers;
+namespace App\Main\Controllers;
 
 use System\Controllers\Controller;
-use System\ORM\ORM;
 
 /**
  * Class Home
@@ -19,6 +18,6 @@ class Home extends Controller {
      */
     public function index()
     {
-        return view("site.home");
+        return view("Main.home");
     }
 }

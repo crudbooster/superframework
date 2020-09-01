@@ -1,4 +1,5 @@
 <?php
+if(!defined("BASE_PATH")) die("Forbidden access");
 
 $singleton_data = [];
 

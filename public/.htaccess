@@ -1,9 +1,6 @@
 RewriteEngine On
 ServerSignature Off
 
-# Protect directory
-RewriteRule ^(app/Configs|app/Helpers|app/Middleware|app/Models|app/Modules|vendor|system) - [F,L,NC]
-
 # Protect .htaccess, composer, super
 <FilesMatch "^(\.|composer.|super)">
   Order allow,deny
