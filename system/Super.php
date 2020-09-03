@@ -2,6 +2,8 @@
 
 namespace System;
 
+use System\Commands\CommandRunner;
+
 class Super
 {
     private $config;
@@ -9,118 +11,148 @@ class Super
 
     public function __construct()
     {
+        ini_set("display_errors", 0);
+        ini_set("display_startup_errors", 0);
+        ini_set("error_log", base_path("error.log"));
+
         $this->config = include base_path("configs/App.php");
         $this->bootstrapCache = include base_path("bootstrap/cache.php");
     }
 
-    private function urlSlicing() {
-        $args = explode('/', str_ireplace($this->config['base_url'], "", get_current_url([], false)));
-        foreach($args as $i=>$arg) {
-            if($arg == "index.php") {
-                for($e=0;$e<=$i;$e++) unset($args[$e]);
+    private function parseUrl() {
+        $request_uri = str_replace([base_url("index.php"),base_url()],"", get_current_url());
+        $args = explode('/', $request_uri);
+        return array_values(array_filter($args));
+    }
+
+    private function findRoute($args_str) {
+        $route_found = null;
+        $route_arguments = [];
+        foreach($this->bootstrapCache['route'] as $pattern => $value) {
+            preg_match("/".$pattern."/", $args_str, $output);
+            if($output) {
+                $route_found = $value;
+                $route_arguments = array_slice($output,1);
                 break;
             }
         }
-
-        return array_filter(array_values($args));
+        return [$route_found, $route_arguments];
     }
 
+    /**
+     * @param $args
+     * @return \stdClass
+     * @throws \Exception
+     */
     private function controllerClassSelection($args) {
         if($args) {
-            $class = $method = $param_start = $module_name = null;
+            $args_str = implode("/",$args);
+            $route = $this->findRoute($args_str);
+            $route_found = $route[0];
+            $route_arguments = $route[1];
 
-            // Check to route file first
-            $args_merge = implode("/", $args)."/";
-            $args_count = count($args);
-            $routes = include base_path("app/Configs/routes.php");
-            foreach($routes as $path => $path_class) {
-                $path .= "/";
-                $total_split_path = count(explode("/", $path))-1;
-                if($total_split_path == ($args_count-1) || $total_split_path == $args_count) {
-                    if(substr($args_merge,0, strlen($path)) === $path) {
-                        $class_split = explode("@", $path_class);
-                        if($class_split) {
-                            $class = $class_split[0];
-                            $method = $class_split[1];
-                            $param_start = count(explode("/", $path));
-                        }
-                    }
-                }
+            if(!$route_found) {
+                throw new \Exception("The route `".$args_str."` is not found!", 404);
             }
 
-
-            if(!$class && !$method) {
-                if(isset($args[0]) && isset($args[1]) && isset($args[2])) {
-                    $class = "\App\Modules\\".ucfirst($args[0])."\\Controllers\\".ucfirst($args[1]);
-                    $method = $args[2];
-                    $param_start = 3;
-                } elseif (isset($args[0]) && isset($args[1]) && !isset($args[2])) {
-                    $class = "\App\Modules\\" . ucfirst($args[0]) . "\\Controllers\\" . ucfirst($args[1]);
-                    $method = "index";
-                    $param_start = 2;
-                } elseif (isset($args[0]) && !isset($args[1]) && !isset($args[2])) {
-                    $class = $method = $module_name = $param_start = null;
-                }  else {
-                    $class = $method = $module_name = $param_start = null;
-                }
-            }
-
+            $class = $route_found[0];
+            $method = $route_found[1];
+            $arguments = $route_arguments;
         } else {
             $class = $this->config['default_controller'];
-            $method = "index";
-            $param_start = 1;
+            $method = $this->config['default_method'];
+            $arguments = [];
         }
 
         $obj = new \stdClass();
         $obj->method = $method;
         $obj->class = $class;
-        $obj->param_start = $param_start;
+        $obj->arguments = $arguments;
         return $obj;
     }
 
-    private function responseBuilder($selection, $args) {
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    private function responseBuilder() {
+        $selection = $this->controllerClassSelection($this->parseUrl());
         $class = $selection->class;
-        if(method_exists($selection->class, $selection->method)) {
-            // Get method params
-            $args = array_slice($args, $selection->param_start-1);
-            $args = array_values($args);
-            if(count($args)==1) {
-                $response = (new $class())->{$selection->method}($args[0]);
-            } elseif (count($args) == 2) {
-                $response = (new $class())->{$selection->method}($args[0], $args[1]);
-            } elseif (count($args) == 3) {
-                $response = (new $class())->{$selection->method}($args[0], $args[1], $args[2]);
-            } elseif (count($args) == 4) {
-                $response = (new $class())->{$selection->method}($args[0], $args[1], $args[2], $args[3]);
-            } elseif (count($args) == 5) {
-                $response = (new $class())->{$selection->method}($args[0], $args[1], $args[2], $args[3], $args[4]);
-            } else {
-                $response = (new $class())->{$selection->method}();
+        $response = call_user_func_array([new $class, $selection->method],$selection->arguments);
+        return $response;
+    }
+
+    private function loadHelpers() {
+        foreach($this->bootstrapCache['helper'] as $helper) require_once base_path($helper.".php");
+    }
+
+    private function middleware(callable $callback) {
+        $response = null;
+        $middleware = $this->bootstrapCache['middleware'];
+        if(count($middleware)) {
+            foreach($middleware as $mid) {
+                $response = (new $mid)->handle(function() use ($callback) {
+                    $response = call_user_func($callback);
+                    return $response;
+                });
             }
         } else {
-            http_response_code(404);
-            $response = rtrim(include "Views/error/404.php","1");
+            $response = call_user_func($callback);
         }
-
         return $response;
+    }
+
+    private function boot() {
+        $boot = $this->bootstrapCache['boot'];
+        if(count($boot)) {
+            foreach($boot as $b) {
+                (new $b)->run();
+            }
+        }
+    }
+
+    public function commandRun($argv) {
+        try {
+            $response = null;
+
+            $this->loadHelpers();
+
+            (new CommandRunner())->run($argv);
+
+        } catch (\Throwable $e) {
+            http_response_code($e->getCode()?:500);
+            logging($e);
+            if($this->config['display_errors']) {
+                die($e);
+            } else {
+                die("Something went wrong!");
+            }
+        }
     }
 
 
     public function run() {
 
-        ini_set("display_errors",0);
-        ini_set("display_startup_errors", 0);
-        ini_set("error_log", base_path("error.log"));
-
-        $args = $this->urlSlicing();
-        $selection = $this->controllerClassSelection($args);
-
         try {
-            echo call_user_func($response);
+            $response = null;
+
+            $this->loadHelpers();
+
+            $this->boot();
+
+            $response = $this->middleware(function () {
+               return $this->responseBuilder();
+            });
+
+            echo $response;
         } catch (\Throwable $e) {
-            http_response_code(500);
+            http_response_code($e->getCode()?:500);
             logging($e);
-            exit;
+            if($this->config['display_errors']) {
+                die($e);
+            } else {
+                die("Something went wrong!");
+            }
         }
     }
 

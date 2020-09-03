@@ -1,7 +1,64 @@
 <?php
 
 return [
-
-    "middleware"=> []
-
+    'boot' => [
+         'App\\Main\\Configs\\Boot',
+         'App\\UtilCache\\Configs\\Boot',
+         'App\\UtilDataTable\\Configs\\Boot',
+         'App\\UtilDateTime\\Configs\\Boot',
+         'App\\UtilFileSystem\\Configs\\Boot',
+         'App\\UtilFirebase\\Configs\\Boot',
+         'App\\UtilLang\\Configs\\Boot',
+         'App\\UtilModel\\Configs\\Boot',
+         'App\\UtilORM\\Configs\\Boot',
+         'App\\UtilRequest\\Configs\\Boot',
+         'App\\UtilResponse\\Configs\\Boot',
+         'App\\UtilSecurity\\Configs\\Boot',
+         'App\\UtilSession\\Configs\\Boot',
+         'App\\UtilString\\Configs\\Boot',
+         'App\\UtilView\\Configs\\Boot',
+    ],
+    'middleware' => [
+         'App\\Main\\Configs\\Middleware',
+         'App\\UtilCache\\Configs\\Middleware',
+         'App\\UtilDataTable\\Configs\\Middleware',
+         'App\\UtilDateTime\\Configs\\Middleware',
+         'App\\UtilFileSystem\\Configs\\Middleware',
+         'App\\UtilFirebase\\Configs\\Middleware',
+         'App\\UtilLang\\Configs\\Middleware',
+         'App\\UtilModel\\Configs\\Middleware',
+         'App\\UtilORM\\Configs\\Middleware',
+         'App\\UtilRequest\\Configs\\Middleware',
+         'App\\UtilResponse\\Configs\\Middleware',
+         'App\\UtilSecurity\\Configs\\Middleware',
+         'App\\UtilSession\\Configs\\Middleware',
+         'App\\UtilString\\Configs\\Middleware',
+         'App\\UtilView\\Configs\\Middleware',
+    ],
+    'route' => [
+        'index' => [
+             'App\\Main\\Controllers\\HomeController',
+             'index',
+        ],
+    ],
+    'helper' => [
+         'App\\Main\\Configs\\Helper',
+         'App\\UtilCache\\Configs\\Helper',
+         'App\\UtilDataTable\\Configs\\Helper',
+         'App\\UtilDateTime\\Configs\\Helper',
+         'App\\UtilFileSystem\\Configs\\Helper',
+         'App\\UtilFirebase\\Configs\\Helper',
+         'App\\UtilLang\\Configs\\Helper',
+         'App\\UtilModel\\Configs\\Helper',
+         'App\\UtilORM\\Configs\\Helper',
+         'App\\UtilRequest\\Configs\\Helper',
+         'App\\UtilResponse\\Configs\\Helper',
+         'App\\UtilSecurity\\Configs\\Helper',
+         'App\\UtilSession\\Configs\\Helper',
+         'App\\UtilString\\Configs\\Helper',
+         'App\\UtilView\\Configs\\Helper',
+    ],
+    'command' => [
+         'App\\UtilModel\\Configs\\Command',
+    ],
 ];

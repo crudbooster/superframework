@@ -12,7 +12,8 @@ define("SUPER_START", microtime(true));
 /**
  * We want to know where this project run
  */
-define("BASE_PATH", getcwd());
+define("BASE_PATH", realpath(getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR));
+define("BASE_DIR", dirname(__FILE__));
 
 /**
  * Run the main class of super framework

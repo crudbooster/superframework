@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Main\Configs;
 
 use Closure;
-use System\Interfaces\Middleware;
+use System\Interfaces\Middleware as BaseMiddleware;
 
-class AppMiddleware implements Middleware
+class Middleware implements BaseMiddleware
 {
 
     /**
      * @param Closure $next
-     * @return Closure
+     * @return mixed
      */
     public function handle(Closure $next) {
-        return $next;
+        return $next();
     }
 
 }
