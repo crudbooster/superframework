@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 9/3/2020
- * Time: 6:57 PM
- */
 
 namespace System\Commands;
 

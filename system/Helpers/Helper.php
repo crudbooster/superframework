@@ -106,7 +106,7 @@ if(!function_exists("config")) {
             if($split_name[0] == "default") {
                 $config_data = include base_path("configs/App.php");
             } else {
-                $config_data = include base_path("app/".$split_name[0]."/Configs/App.php");
+                $config_data = include base_path("app/Components/".$split_name[0]."/Configs/App.php");
             }
             put_singleton("config_".$split_name[0], $config_data);
             $key = $split_name[1];

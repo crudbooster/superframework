@@ -4,7 +4,6 @@
   "type": "project",
   "require": {
     "php": "7.2.*|7.3.*|7.4.*",
-    "ext-Zend-OPcache":"7.2.*|7.3.*|7.4.*",
     "ext-json": "*",
     "ext-pdo": "*",
     "ext-openssl": "*",

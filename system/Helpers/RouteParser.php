@@ -16,17 +16,19 @@ class RouteParser
     static function cleanClassName($class_file) {
         $class_name = str_replace(base_path(),"",$class_file);
         $class_name = str_replace("/","\\", $class_name);
+        $class_name = str_replace("system","System", $class_name);
         $class_name = str_replace("app\\","App\\", $class_name);
         $class_name = str_replace(".php","", $class_name);
         return $class_name;
     }
 
     /**
+     * @param string $prefix_path
      * @throws ReflectionException
      */
-    static function generateRoute() {
+    static function generateRoute($prefix_path = "app/") {
         $result = [];
-        $list = glob(base_path("app/{,*/,*/*/,*/*/*/}Controllers/*.php"), GLOB_BRACE);
+        $list = glob(base_path($prefix_path."{,*/,*/*/,*/*/*/}Controllers/*.php"), GLOB_BRACE);
         foreach($list as $item) {
             $class_name = static::cleanClassName($item);
             $reflect = new \ReflectionClass($class_name);
@@ -42,7 +44,8 @@ class RouteParser
         }
 
         $bootstrap = include base_path("bootstrap/cache.php");
-        $bootstrap['route'] = $result;
+        $bootstrap['route'] = array_merge($bootstrap['route'], $result);
+        $bootstrap['route'] = array_unique($bootstrap['route']);
         $bootstrap = var_min_export($bootstrap, true);
 
         file_put_contents(base_path('bootstrap/cache.php'), "<?php\n\nreturn ".$bootstrap.";");

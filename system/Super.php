@@ -28,14 +28,20 @@ class Super
     private function findRoute($args_str) {
         $route_found = null;
         $route_arguments = [];
-        foreach($this->bootstrapCache['route'] as $pattern => $value) {
-            preg_match("/".$pattern."/", $args_str, $output);
-            if($output) {
-                $route_found = $value;
-                $route_arguments = array_slice($output,1);
-                break;
+        if($args_str == "/") {
+            $route_found = $this->bootstrapCache['route'][$args_str];
+            $route_arguments = [];
+        } else {
+            foreach($this->bootstrapCache['route'] as $pattern => $value) {
+                preg_match("/".$pattern."/", $args_str, $output);
+                if($output) {
+                    $route_found = $value;
+                    $route_arguments = array_slice($output,1);
+                    break;
+                }
             }
         }
+
         return [$route_found, $route_arguments];
     }
 
@@ -45,24 +51,19 @@ class Super
      * @throws \Exception
      */
     private function controllerClassSelection($args) {
-        if($args) {
-            $args_str = implode("/",$args);
-            $route = $this->findRoute($args_str);
-            $route_found = $route[0];
-            $route_arguments = $route[1];
+        $args_str = implode("/",$args) ?: "/";
+        $route = $this->findRoute($args_str);
 
-            if(!$route_found) {
-                throw new \Exception("The route `".$args_str."` is not found!", 404);
-            }
+        $route_found = $route[0];
+        $route_arguments = $route[1];
 
-            $class = $route_found[0];
-            $method = $route_found[1];
-            $arguments = $route_arguments;
-        } else {
-            $class = $this->config['default_controller'];
-            $method = $this->config['default_method'];
-            $arguments = [];
+        if(!$route_found) {
+            throw new \Exception("The route `".$args_str."` is not found!", 404);
         }
+
+        $class = $route_found[0];
+        $method = $route_found[1];
+        $arguments = $route_arguments;
 
         $obj = new \stdClass();
         $obj->method = $method;
