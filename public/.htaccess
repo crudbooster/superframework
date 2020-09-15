@@ -1,12 +1,6 @@
 RewriteEngine On
 ServerSignature Off
 
-# Protect .htaccess, composer, super
-<FilesMatch "^(\.|composer.|super)">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-
 # Protect Log, SH, Ini File
 <FilesMatch "\.(ini|sh|log)">
   Order allow,deny

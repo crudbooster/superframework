@@ -45,7 +45,6 @@ class RouteParser
 
         $bootstrap = include base_path("bootstrap/cache.php");
         $bootstrap['route'] = array_merge($bootstrap['route'], $result);
-        $bootstrap['route'] = array_unique($bootstrap['route']);
         $bootstrap = var_min_export($bootstrap, true);
 
         file_put_contents(base_path('bootstrap/cache.php'), "<?php\n\nreturn ".$bootstrap.";");

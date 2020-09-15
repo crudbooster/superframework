@@ -2,6 +2,7 @@
 
 namespace System;
 
+use Dotenv\Dotenv;
 use System\Commands\CommandRunner;
 
 class Super
@@ -15,8 +16,14 @@ class Super
         ini_set("display_startup_errors", 0);
         ini_set("error_log", base_path("error.log"));
 
+        $this->loadEnv();
+
         $this->config = include base_path("configs/App.php");
         $this->bootstrapCache = include base_path("bootstrap/cache.php");
+    }
+
+    private function loadEnv() {
+        Dotenv::createImmutable(base_path())->load();
     }
 
     private function parseUrl() {
@@ -33,11 +40,17 @@ class Super
             $route_arguments = [];
         } else {
             foreach($this->bootstrapCache['route'] as $pattern => $value) {
-                preg_match("/".$pattern."/", $args_str, $output);
-                if($output) {
-                    $route_found = $value;
-                    $route_arguments = array_slice($output,1);
+                if($pattern == "/") {
+                    $route_found = $this->bootstrapCache['route'][$args_str];
+                    $route_arguments = [];
                     break;
+                } else {
+                    preg_match("/".$pattern."/", $args_str, $output);
+                    if($output) {
+                        $route_found = $value;
+                        $route_arguments = array_slice($output,1);
+                        break;
+                    }
                 }
             }
         }
@@ -87,18 +100,17 @@ class Super
         foreach($this->bootstrapCache['helper'] as $helper) require_once base_path($helper.".php");
     }
 
-    private function middleware(callable $callback) {
-        $response = null;
+    private function middleware(callable $content) {
+        $response = call_user_func($content);
         $middleware = $this->bootstrapCache['middleware'];
         if(count($middleware)) {
             foreach($middleware as $mid) {
-                $response = (new $mid)->handle(function() use ($callback) {
-                    $response = call_user_func($callback);
+                $response = (new $mid)->handle(function() use ($response) {
                     return $response;
                 });
             }
         } else {
-            $response = call_user_func($callback);
+            return $response;
         }
         return $response;
     }
@@ -142,13 +154,17 @@ class Super
             $this->boot();
 
             $response = $this->middleware(function () {
-               return $this->responseBuilder();
+                return $this->responseBuilder();
             });
 
             echo $response;
         } catch (\Throwable $e) {
             http_response_code($e->getCode()?:500);
-            logging($e);
+
+            if($this->config['logging_errors']) {
+                logging($e);
+            }
+
             if($this->config['display_errors']) {
                 die($e);
             } else {

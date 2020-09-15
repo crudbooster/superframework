@@ -1,0 +1,11 @@
+<?php
+
+namespace System\App\UtilModel\Models;
+
+
+use System\App\UtilModel\Model;
+
+class ModelName extends Model
+{
+//Todo
+}

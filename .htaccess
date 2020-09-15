@@ -1,0 +1,14 @@
+# Protect .htaccess, composer, super
+<FilesMatch "^(\.|composer.|super)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect Log, SH, Ini File
+<FilesMatch "\.(ini|sh|log|env)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Prevent Index Listing
+Options -Indexes

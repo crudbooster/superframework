@@ -19,4 +19,11 @@ class HomeController extends Controller {
     {
         return view("Main::home");
     }
+
+    /**
+     * @route test
+     */
+    public function test() {
+        echo "oke bisa";
+    }
 }
