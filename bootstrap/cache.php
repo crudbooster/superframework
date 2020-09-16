@@ -40,14 +40,6 @@ return [
              'App\\Components\\Main\\Controllers\\HomeController',
              'index',
         ],
-        'test' => [
-             'App\\Components\\Main\\Controllers\\HomeController',
-             'test',
-        ],
-        '' => [
-             'App\\Components\\Main\\Controllers\\HomeController',
-             'index',
-        ],
     ],
     'helper' => [
          'System\\App\\UtilCache\\Configs\\Helper',

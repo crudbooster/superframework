@@ -3,6 +3,7 @@
 namespace System;
 
 use Dotenv\Dotenv;
+use FastRoute\RouteCollector;
 use System\Commands\CommandRunner;
 
 class Super
@@ -26,73 +27,52 @@ class Super
         Dotenv::createImmutable(base_path())->load();
     }
 
-    private function parseUrl() {
-        $request_uri = str_replace([base_url("index.php"),base_url()],"", get_current_url());
-        $args = explode('/', $request_uri);
-        return array_values(array_filter($args));
-    }
-
-    private function findRoute($args_str) {
-        $route_found = null;
-        $route_arguments = [];
-        if($args_str == "/") {
-            $route_found = $this->bootstrapCache['route'][$args_str];
-            $route_arguments = [];
-        } else {
-            foreach($this->bootstrapCache['route'] as $pattern => $value) {
-                if($pattern == "/") {
-                    $route_found = $this->bootstrapCache['route'][$args_str];
-                    $route_arguments = [];
-                    break;
-                } else {
-                    preg_match("/".$pattern."/", $args_str, $output);
-                    if($output) {
-                        $route_found = $value;
-                        $route_arguments = array_slice($output,1);
-                        break;
-                    }
-                }
-            }
-        }
-
-        return [$route_found, $route_arguments];
-    }
-
-    /**
-     * @param $args
-     * @return \stdClass
-     * @throws \Exception
-     */
-    private function controllerClassSelection($args) {
-        $args_str = implode("/",$args) ?: "/";
-        $route = $this->findRoute($args_str);
-
-        $route_found = $route[0];
-        $route_arguments = $route[1];
-
-        if(!$route_found) {
-            throw new \Exception("The route `".$args_str."` is not found!", 404);
-        }
-
-        $class = $route_found[0];
-        $method = $route_found[1];
-        $arguments = $route_arguments;
-
-        $obj = new \stdClass();
-        $obj->method = $method;
-        $obj->class = $class;
-        $obj->arguments = $arguments;
-        return $obj;
-    }
-
     /**
      * @return mixed
      * @throws \Exception
      */
     private function responseBuilder() {
-        $selection = $this->controllerClassSelection($this->parseUrl());
-        $class = $selection->class;
-        $response = call_user_func_array([new $class, $selection->method],$selection->arguments);
+        $dispatcher = \FastRoute\simpleDispatcher(function(RouteCollector $r) {
+            $r->addGroup("/".base_path_uri(), function (RouteCollector $r) {
+                foreach ($this->bootstrapCache['route'] as $pattern => $value) {
+                    if($pattern == "/" || $pattern == "") {
+                        $route = "/";
+                    } else {
+                        $route = "/".trim($pattern,"/");
+                    }
+                    $r->addRoute(['GET','POST'], $route,$value[0]."@".$value[1]);
+                }
+            });
+        });
+
+        // Fetch method and URI from somewhere
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
+        $uri = $_SERVER['REQUEST_URI'];
+
+        // Strip query string (?foo=bar) and decode URI
+        if (false !== $pos = strpos($uri, '?')) {
+            $uri = substr($uri, 0, $pos);
+        }
+        $uri = rawurldecode($uri);
+
+        $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+
+        $response = null;
+
+        switch ($routeInfo[0]) {
+            case \FastRoute\Dispatcher::NOT_FOUND:
+                throw new \Exception("The page is not found!", 404);
+                break;
+            case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+                throw new \Exception("The method is not allowed!", 405);
+                break;
+            case \FastRoute\Dispatcher::FOUND:
+                $handler = $routeInfo[1];
+                $vars = $routeInfo[2];
+                list($class, $method) = explode("@", $handler, 2);
+                $response = call_user_func_array([new $class, $method], $vars);
+                break;
+        }
         return $response;
     }
 
@@ -145,7 +125,6 @@ class Super
 
 
     public function run() {
-
         try {
             $response = null;
 
@@ -158,14 +137,15 @@ class Super
             });
 
             echo $response;
+
         } catch (\Throwable $e) {
             http_response_code($e->getCode()?:500);
 
-            if($this->config['logging_errors']) {
+            if($this->config['logging_errors'] == "true") {
                 logging($e);
             }
 
-            if($this->config['display_errors']) {
+            if($this->config['display_errors'] == "true") {
                 die($e);
             } else {
                 die("Something went wrong!");

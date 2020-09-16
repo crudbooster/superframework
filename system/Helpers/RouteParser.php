@@ -23,12 +23,11 @@ class RouteParser
     }
 
     /**
-     * @param string $prefix_path
      * @throws ReflectionException
      */
-    static function generateRoute($prefix_path = "app/") {
+    static function generateRoute() {
         $result = [];
-        $list = glob(base_path($prefix_path."{,*/,*/*/,*/*/*/}Controllers/*.php"), GLOB_BRACE);
+        $list = glob(base_path("app/{,*/,*/*/,*/*/*/}Controllers/*.php"), GLOB_BRACE);
         foreach($list as $item) {
             $class_name = static::cleanClassName($item);
             $reflect = new \ReflectionClass($class_name);
@@ -37,14 +36,29 @@ class RouteParser
 
             foreach($reflect->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
                 $doc = $method->getDocComment();
-                $methodRoute = static::getRouteDoc($doc, $classRoute);
+                $methodRoute = static::getRouteDoc($doc, $classRoute)?:"/";
+                $method_name = $method->getName();
+                $result[$methodRoute] = [$class_name,$method_name];
+            }
+        }
+
+        $list = glob(base_path("system/App/{,*/,*/*/,*/*/*/}Controllers/*.php"), GLOB_BRACE);
+        foreach($list as $item) {
+            $class_name = static::cleanClassName($item);
+            $reflect = new \ReflectionClass($class_name);
+            $doc = $reflect->getDocComment();
+            $classRoute = static::getRouteDoc($doc);
+
+            foreach($reflect->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+                $doc = $method->getDocComment();
+                $methodRoute = static::getRouteDoc($doc, $classRoute)?:"/";
                 $method_name = $method->getName();
                 $result[$methodRoute] = [$class_name,$method_name];
             }
         }
 
         $bootstrap = include base_path("bootstrap/cache.php");
-        $bootstrap['route'] = array_merge($bootstrap['route'], $result);
+        $bootstrap['route'] = $result;
         $bootstrap = var_min_export($bootstrap, true);
 
         file_put_contents(base_path('bootstrap/cache.php'), "<?php\n\nreturn ".$bootstrap.";");
@@ -65,7 +79,7 @@ class RouteParser
             }
         }
 
-        return ($route_path=="/")?null:addcslashes($route_path,"/");
+        return ($route_path=="/")?null:trim($route_path,"/");
     }
 
 }

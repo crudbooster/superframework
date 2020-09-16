@@ -13,15 +13,15 @@ class Compile extends Command
      * @throws \ReflectionException
      */
     public function run() {
+        RouteParser::generateRoute();
+
         // System App Compiling
-        RouteParser::generateRoute("system/App/");
         $this->compileBoot("system/App/");
         $this->compileMiddlewares("system/App/");
         $this->compileHelpers("system/App/");
         $this->compileCommand("system/App/");
 
         // User App Compiling
-        RouteParser::generateRoute("app/");
         $this->compileBoot("app/");
         $this->compileMiddlewares("app/");
         $this->compileHelpers("app/");

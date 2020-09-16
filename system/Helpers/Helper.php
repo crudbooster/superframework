@@ -135,6 +135,21 @@ if(!function_exists("base_path")) {
     }
 }
 
+if(!function_exists('base_path_uri')) {
+    function base_path_uri($path = null) {
+        $tmpURL = BASE_DIR;
+
+        $tmpURL = str_replace(chr(92),'/',$tmpURL);
+
+        $tmpURL = str_replace($_SERVER['DOCUMENT_ROOT'],'',$tmpURL);
+
+        $tmpURL = ltrim($tmpURL,'/');
+        $tmpURL = rtrim($tmpURL, '/');
+
+        return ($path)?$tmpURL."/".$path:$tmpURL;
+    }
+}
+
 if(!function_exists("base_url")) {
     /**
      * @param null $path
