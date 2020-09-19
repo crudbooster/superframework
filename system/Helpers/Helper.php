@@ -34,6 +34,16 @@ if(!function_exists("url")) {
     }
 }
 
+if(!function_exists("asset")) {
+    /**
+     * @param null $path
+     * @return string
+     */
+    function asset($path = null) {
+        return base_url($path);
+    }
+}
+
 
 if(!function_exists("redirect_back")) {
     /**
@@ -183,10 +193,10 @@ if(!function_exists("base_url")) {
 
 if(!function_exists('response')) {
     /**
-     * @return \System\Helpers\Response
+     * @return \System\App\UtilResponse\Response
      */
     function response() {
-        return (new \System\Helpers\Response());
+        return (new \System\App\UtilResponse\Response());
     }
 }
 

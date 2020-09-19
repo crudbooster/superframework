@@ -1,0 +1,49 @@
+@font-face {
+    font-family: OpenSansLight;
+    src: url(../font/OpenSans-Light.ttf);
+}
+@font-face {
+    font-family: OpenSansRegular;
+    src: url(../font/OpenSans-Regular.ttf);
+}
+@font-face {
+    font-family: OpenSansSemiBold;
+    src: url(../font/OpenSans-SemiBold.ttf);
+}
+@font-face {
+    font-family: OpenSansBold;
+    src: url(../font/OpenSans-Bold.ttf);
+}
+.font-light {
+    font-family: OpenSansLight, sans-serif;
+}
+.font-regular {
+    font-family: OpenSansRegular, sans-serif;
+}
+.font-semi-bold {
+    font-family: OpenSansSemiBold, sans-serif;
+}
+.font-bold {
+    font-family: OpenSansBold, sans-serif;
+}
+*, html, body {
+    font-size: 14px;
+    font-family: OpenSansLight, sans-serif;
+}
+h1,h2,h3,h4,h5 {
+    font-family: OpenSansBold, sans-serif;
+}
+/** remove input border radius **/
+.form-control {
+    border-radius: 0;
+}
+.btn {
+    border-radius: 0;
+    font-family: OpenSansSemiBold, sans-serif;
+}
+.card {
+    box-shadow: 0 5px 10px #dddddd;
+}
+.card .card-header {
+    font-family: OpenSansBold, sans-serif;
+}

@@ -17,6 +17,7 @@ return [
          'System\\App\\UtilString\\Configs\\Boot',
          'System\\App\\UtilView\\Configs\\Boot',
          'App\\Components\\Main\\Configs\\Boot',
+         'App\\Components\\AdminAuth\\Configs\\Boot',
     ],
     'middleware' => [
          'System\\App\\UtilCache\\Configs\\Middleware',
@@ -34,8 +35,13 @@ return [
          'System\\App\\UtilString\\Configs\\Middleware',
          'System\\App\\UtilView\\Configs\\Middleware',
          'App\\Components\\Main\\Configs\\Middleware',
+         'App\\Components\\AdminAuth\\Configs\\Middleware',
     ],
     'route' => [
+        'admin/auth/login' => [
+             'App\\Components\\AdminAuth\\Controllers\\AdminAuthController',
+             'login',
+        ],
         '/' => [
              'App\\Components\\Main\\Controllers\\HomeController',
              'index',
@@ -57,6 +63,7 @@ return [
          'System\\App\\UtilString\\Configs\\Helper',
          'System\\App\\UtilView\\Configs\\Helper',
          'App\\Components\\Main\\Configs\\Helper',
+         'App\\Components\\AdminAuth\\Configs\\Helper',
     ],
     'command' => [
          'System\\App\\UtilModel\\Configs\\Command',

@@ -203,6 +203,22 @@ class Sqlsrv
         return $stmt->fetch()['total_records'];
     }
 
+    public function sum($field) {
+        $join_sql = "";
+
+        if($this->join) {
+            foreach($this->join as $i=>$join) {
+                $join_sql .= $this->join_type[$i]." ".$join." ";
+            }
+        }
+
+        $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
+        $this->last_query = "SELECT sum($field) as total_records FROM ".$this->table." ".$join_sql." ".$where_sql;
+        $stmt = $this->connection->query($this->last_query);
+        $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+        return $stmt->fetch()['total_records'];
+    }
+
     public function listColumn($table) {
         $columns = [];
         $rs = $this->connection->query('SELECT TOP 0 * FROM '.$table);

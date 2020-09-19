@@ -4,25 +4,28 @@
 if(!function_exists("request_url_is")) {
     /**
      * To detect if current url is contain specific asterisk
-     * @param $path
+     * @param array|string $path_param
      * @return bool
      */
-    function request_url_is($path) {
-        if(substr($path,-1,1)=="*") {
-            $pattern = str_replace("*","(.*)", $path);
-            $pattern = str_replace("/","\/", $pattern);
-            $pattern = '/(.*)('.$pattern.'|'.rtrim($path,"*").')$/';
-        } else {
-            $pattern = str_replace("*","(.*)", $path);
-            $pattern = str_replace("/","\/", $pattern);
-            $pattern = '/(.*)'.$pattern.'$/';
-        }
+    function request_url_is($path_param) {
+        $paths = is_array($path_param)?$path_param : [ $path_param ];
 
-        if(preg_match($pattern, get_current_url()) === 1) {
-            return true;
-        } else {
-            return false;
+        foreach($paths as $path) {
+            if(substr($path,-1,1)=="*") {
+                $pattern = str_replace("*","(.*)", $path);
+                $pattern = str_replace("/","\/", $pattern);
+                $pattern = '/(.*)('.$pattern.'|'.rtrim($path,"*").')$/';
+            } else {
+                $pattern = str_replace("*","(.*)", $path);
+                $pattern = str_replace("/","\/", $pattern);
+                $pattern = '/(.*)'.$pattern.'$/';
+            }
+
+            if(preg_match($pattern, get_current_url()) === 1) {
+                return true;
+            }
         }
+        return false;
     }
 }
 

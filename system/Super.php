@@ -138,6 +138,8 @@ class Super
 
             echo $response;
 
+            unset($response);
+
         } catch (\Throwable $e) {
             http_response_code($e->getCode()?:500);
 

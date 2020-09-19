@@ -383,6 +383,14 @@ class ORM
     }
 
     /**
+     * @param $field
+     * @return int
+     */
+    public function sum($field) {
+        return $this->driver()->sum($field);
+    }
+
+    /**
      * @param $limit
      * @return array|null
      * @throws \Exception

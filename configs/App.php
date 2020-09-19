@@ -15,5 +15,14 @@ return [
 
     // Application language
     "lang"=> "en",
-    "fallback_lang"=> "en"
+    "fallback_lang"=> "en",
+
+    // CSRF Token
+    "csrf_token"=> true,
+    "csrf_token_ignore"=> ["api/*"],
+
+    // Session Configuration
+    "session_lifetime"=> 130,
+    "session_secure"=> false,
+    "session_httpOnly"=> true
 ];

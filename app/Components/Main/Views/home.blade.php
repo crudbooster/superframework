@@ -6,6 +6,7 @@
     <body>
         <div class="title">
             <p>{{ config('Main.tag_line') }}</p>
+            <p>I Love PHP &hearts;</p>
             <p><a href="https://github.com/crudbooster/superframework">{{ __("default_documentation")  }}</a></p>
         </div>
     </body>
