@@ -32,7 +32,7 @@ class Super
      * @throws \Exception
      */
     private function responseBuilder() {
-        $dispatcher = \FastRoute\simpleDispatcher(function(RouteCollector $r) {
+        $dispatcher = \FastRoute\cachedDispatcher(function(RouteCollector $r) {
             $r->addGroup("/".base_path_uri(), function (RouteCollector $r) {
                 foreach ($this->bootstrapCache['route'] as $pattern => $value) {
                     if($pattern == "/" || $pattern == "") {
@@ -43,7 +43,9 @@ class Super
                     $r->addRoute(['GET','POST'], $route,$value[0]."@".$value[1]);
                 }
             });
-        });
+        },[
+            'cacheFile' => base_path('bootstrap/route.cache')
+        ]);
 
         // Fetch method and URI from somewhere
         $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -137,8 +139,6 @@ class Super
             });
 
             echo $response;
-
-            unset($response);
 
         } catch (\Throwable $e) {
             http_response_code($e->getCode()?:500);
