@@ -106,26 +106,6 @@ class Super
         }
     }
 
-    public function commandRun($argv) {
-        try {
-            $response = null;
-
-            $this->loadHelpers();
-
-            (new CommandRunner())->run($argv);
-
-        } catch (\Throwable $e) {
-            http_response_code($e->getCode()?:500);
-            logging($e);
-            if($this->config['display_errors']) {
-                die($e);
-            } else {
-                die("Something went wrong!");
-            }
-        }
-    }
-
-
     public function run() {
         try {
             $response = null;

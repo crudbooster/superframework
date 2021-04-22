@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php require_once "vendor/autoload.php";
+<?php use System\Commands\CommandRunner;
+
+require_once "vendor/autoload.php";
 
 /**
  * We want to know where this project run
@@ -7,7 +9,4 @@
 define("BASE_PATH", getcwd());
 define("BASE_DIR", dirname(__FILE__));
 
-echo "SUPER FRAMEWORK CLI TOOL\n";
-echo "=================================\n";
-
-(new \System\Super())->commandRun($argv);
+(new CommandRunner())->run($argv);
