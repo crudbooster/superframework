@@ -35,9 +35,13 @@ class CommandRunner
             if($command) {
                 $this->matcher($commands, $command, $argv);
             } else {
-                $this->info("These bellow are available command list: ");
+                $this->warning("Usage:");
+                $this->defaultForeground("\tphp super [command] [arguments]\n");
+
+                $this->warning("Available commands: ");
                 foreach($commands as $c) {
-                    $this->success($c['command'].' - '.$c['description']);
+                    $this->success("\t" . $c['command'], true);
+                    $this->defaultForeground("\t\t".$c['description']);
                 }
             }
         } catch (\Throwable $e) {
