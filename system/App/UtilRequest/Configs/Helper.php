@@ -70,13 +70,15 @@ if(!function_exists("request_url")) {
      * @param null $default
      * @param bool $sanitize
      * @return mixed|null
+     * @throws Exception
      */
     function request_url($name, $default = null, $sanitize = false) {
         $value = $_REQUEST;
         $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
         $value = filter_var($value, FILTER_SANITIZE_URL);
-        return (filter_var($value, FILTER_VALIDATE_URL))?$value:null;
+        if(filter_var($value, FILTER_VALIDATE_URL)) return $value;
+        else throw new Exception("Invalid url value of `".$name."`");
     }
 }
 
@@ -86,13 +88,15 @@ if(!function_exists("request_int")) {
      * @param null $default
      * @param bool $sanitize
      * @return mixed|null
+     * @throws Exception
      */
     function request_int($name, $default = null, $sanitize = false) {
         $value = $_REQUEST;
         $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-        return (filter_var($value, FILTER_VALIDATE_INT))?$value:null;
+        if(filter_var($value, FILTER_VALIDATE_INT)) return $value;
+        else throw new Exception("Invalid integer value of `".$name."`");
     }
 }
 
@@ -107,8 +111,7 @@ if(!function_exists("request_string")) {
         $value = $_REQUEST;
         $value = (isset($value[$name]) && $value[$name] && $value[$name] != "null")?$value[$name]:$default;
         $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-        $value = filter_var($value, FILTER_SANITIZE_STRING);
-        return $value;
+        return filter_var($value, FILTER_SANITIZE_STRING);
     }
 }
 
@@ -118,13 +121,15 @@ if(!function_exists("request_email")) {
      * @param null $default
      * @param bool $sanitize
      * @return mixed|null
+     * @throws Exception
      */
     function request_email($name, $default = null, $sanitize = false) {
         $value = $_REQUEST;
         $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
-        return (filter_var($value, FILTER_VALIDATE_EMAIL))?$value:null;
+        if(filter_var($value, FILTER_VALIDATE_EMAIL)) return $value;
+        else throw new Exception("Invalid email value of `".$name."`");
     }
 }
 
@@ -134,13 +139,15 @@ if(!function_exists("request_float")) {
      * @param null $default
      * @param bool $sanitize
      * @return mixed|null
+     * @throws Exception
      */
     function request_float($name, $default = null, $sanitize = false) {
         $value = $_REQUEST;
         $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
         $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
         $value = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT);
-        return (filter_var($value, FILTER_VALIDATE_FLOAT))?$value:null;
+        if(filter_var($value, FILTER_VALIDATE_FLOAT)) return $value;
+        else throw new Exception("Invalid float value of `".$name."`");
     }
 }
 
@@ -182,7 +189,7 @@ if(!function_exists('request_json_string'))
         if($input) {
             $value = filter_var($input,FILTER_SANITIZE_STRING);
             $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-            return $value ? : $default;
+            return $value ?: $default;
         }
         return null;
     }
@@ -196,6 +203,7 @@ if(!function_exists('request_json_int'))
      * @param null $default
      * @param bool $sanitize
      * @return null
+     * @throws Exception
      */
     function request_json_int($key, $default = null, $sanitize = false)
     {
@@ -204,7 +212,9 @@ if(!function_exists('request_json_int'))
         if($input) {
             $value = filter_var($input,FILTER_SANITIZE_NUMBER_INT);
             $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-            return $value ? : $default;
+            $final = $value ? : $default;
+            if(filter_var($final, FILTER_VALIDATE_INT)) return $final;
+            else throw new Exception("Invalid integer value of `".$key."`");
         }
         return null;
     }
@@ -218,6 +228,7 @@ if(!function_exists('request_json_float'))
      * @param null $default
      * @param bool $sanitize
      * @return null
+     * @throws Exception
      */
     function request_json_float($key, $default = null, $sanitize = false)
     {
@@ -226,7 +237,9 @@ if(!function_exists('request_json_float'))
         if($input) {
             $value = filter_var($input,FILTER_SANITIZE_NUMBER_FLOAT);
             $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-            return $value ? : $default;
+            $final = $value ? : $default;
+            if(filter_var($final, FILTER_VALIDATE_FLOAT)) return $final;
+            else throw new Exception("Invalid float value of `".$key."`");
         }
         return null;
     }
@@ -239,6 +252,7 @@ if(!function_exists('request_json_email'))
      * @param null $default
      * @param bool $sanitize
      * @return null
+     * @throws Exception
      */
     function request_json_email($key, $default = null, $sanitize = false)
     {
@@ -247,7 +261,9 @@ if(!function_exists('request_json_email'))
         if($input) {
             $value = filter_var($input,FILTER_SANITIZE_EMAIL);
             $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-            return $value ? : $default;
+            $final = $value ? : $default;
+            if(filter_var($final, FILTER_VALIDATE_EMAIL)) return $final;
+            else throw new Exception("Invalid email value of `".$key."`");
         }
         return null;
     }

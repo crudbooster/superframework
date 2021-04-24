@@ -29,7 +29,8 @@
       "System\\": "system/"
     },
     "files": [
-      "system/Helpers/Helper.php"
+      "system/Helpers/Helper.php",
+      "app/Helpers/General.php"
     ]
   }
 }

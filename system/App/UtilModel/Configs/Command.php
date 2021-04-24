@@ -40,9 +40,9 @@ class Command
 
                 $template = str_replace("//Todo", $todo, $template);
 
-                file_put_contents(base_path("system/App/UtilModel/Models/".$model_name.".php"), $template);
+                file_put_contents(base_path("app/Models/".$model_name.".php"), $template);
 
-                print "Model table `".$table."` has been created -> /system/App/UtilModel/Models/".$model_name.".php\n";
+                print "Model table `".$table."` has been created -> /app/Models/".$model_name.".php\n";
             } else {
                 print "Creating model for table `".$table."` is failed, table not found!\n";
             }

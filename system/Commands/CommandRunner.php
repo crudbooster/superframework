@@ -3,6 +3,8 @@
 namespace System\Commands;
 
 
+use Dotenv\Dotenv;
+
 class CommandRunner
 {
     use OutputMessage, CommandCore;
@@ -12,6 +14,11 @@ class CommandRunner
     public function __construct()
     {
         $this->bootstrap = include base_path("bootstrap/cache.php");
+        Dotenv::createImmutable(base_path())->load();
+    }
+
+    private function loadHelpers() {
+        foreach($this->bootstrap['helper'] as $helper) require_once base_path($helper.".php");
     }
 
     private function header()
@@ -28,6 +35,7 @@ class CommandRunner
      * @throws \ReflectionException
      */
     public function run($argv) {
+        $this->loadHelpers();
         $this->header();
         try {
             $command = isset($argv[1]) ? $argv[1] : null;
@@ -52,7 +60,7 @@ class CommandRunner
 
     private function matcher($commands, $command, $arguments)
     {
-        $arguments = (isset($args) && count($args) > 1) ? array_slice($args,2) : null;
+        $arguments = (isset($arguments) && count($arguments) > 1) ? array_slice($arguments,2) : null;
         foreach($commands as $c) {
             if($c['command'] == $command) {
                 $class = $c['class'];

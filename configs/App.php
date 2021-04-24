@@ -3,6 +3,9 @@
 return [
     "app_name" => $_ENV['APP_NAME'],
 
+    // Default admin path, should be suffix with /
+    "admin_path" => "admin/",
+
     // The default is false, please be careful if you set the display errors to TRUE, the error will show up public.
     "display_errors"=> $_ENV['DISPLAY_ERRORS'],
 

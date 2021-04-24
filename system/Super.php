@@ -27,6 +27,10 @@ class Super
         Dotenv::createImmutable(base_path())->load();
     }
 
+    private function loadHelpers() {
+        foreach($this->bootstrapCache['helper'] as $helper) require_once base_path($helper.".php");
+    }
+
     /**
      * @return mixed
      * @throws \Exception
@@ -76,10 +80,6 @@ class Super
                 break;
         }
         return $response;
-    }
-
-    private function loadHelpers() {
-        foreach($this->bootstrapCache['helper'] as $helper) require_once base_path($helper.".php");
     }
 
     private function middleware(callable $content) {
