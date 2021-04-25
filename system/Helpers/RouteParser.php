@@ -61,6 +61,7 @@ class RouteParser
         $bootstrap['route'] = $result;
         $bootstrap = var_min_export($bootstrap, true);
 
+        if(file_exists(base_path('bootstrap/route.cache'))) unlink(base_path('bootstrap/route.cache'));
         file_put_contents(base_path('bootstrap/cache.php'), "<?php\n\nreturn ".$bootstrap.";");
     }
 

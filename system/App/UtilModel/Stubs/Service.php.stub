@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Services;
+
+
+use System\App\UtilModel\Model;
+use App\Repositories\RepositoryName;
+
+class ServiceName extends RepositoryName
+{
+    //Todo: create your own service
+}

@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Repositories;
+
+
+use System\App\UtilModel\Model;
+use App\Models\ModelName;
+
+class RepositoryName extends ModelName
+{
+    //Todo: create your own query
+}

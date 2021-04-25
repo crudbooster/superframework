@@ -1,5 +1,18 @@
 <?php
 
+if(!function_exists('admin_url'))
+{
+    /**
+     * Generate admin full url
+     * @param null $path
+     * @return string
+     */
+    function admin_url($path = null)
+    {
+        return url(config('admin_path').$path);
+    }
+}
+
 $singleton_data = [];
 if(!function_exists("put_singleton")) {
     function put_singleton($key, $value) {
