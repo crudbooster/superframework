@@ -12,6 +12,39 @@ namespace System\App\UtilFileSystem;
 class FileSystem
 {
     /**
+     * @param $url
+     * @param $new_file_name
+     * @return string
+     * @throws \Exception
+     */
+    function uploadImageByUrl($url, $new_file_name) {
+        if(filter_var($url, FILTER_VALIDATE_URL)) {
+            if(!file_exists(public_path("uploads"))) {
+                mkdir(public_path("uploads"));
+            }
+
+            if(!file_exists(public_path("uploads/".date("Y-m-d")))) {
+                mkdir(public_path("uploads/".date("Y-m-d")));
+            }
+
+            $ext = strtolower(pathinfo($url,PATHINFO_EXTENSION));
+
+            if(in_array($ext,["jpg","png","jpeg"])) {
+                $fileBlob = file_get_contents($url);
+                if (file_put_contents(public_path("/uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext), $fileBlob)) {
+                    return "uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext;
+                } else {
+                    throw new \Exception("File can't upload, please make sure that directory is exists or permission is writable");
+                }
+            } else {
+                throw new \Exception("The file type is not an image!");
+            }
+        } else {
+            throw new \InvalidArgumentException("The url is invalid!");
+        }
+    }
+
+    /**
      * @param $input_name
      * @param $new_file_name
      * @return null|string
@@ -27,7 +60,7 @@ class FileSystem
                 mkdir(public_path("uploads/".date("Y-m-d")));
             }
 
-            $ext = pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION);
+            $ext = strtolower(pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION));
 
             $check = getimagesize($_FILES[$input_name]["tmp_name"]);
             if($check !== false) {
@@ -60,7 +93,7 @@ class FileSystem
                 mkdir(public_path("uploads/".date("Y-m-d")));
             }
 
-            $ext = pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION);
+            $ext = strtolower(pathinfo($_FILES[$input_name]['name'],PATHINFO_EXTENSION));
 
             if (move_uploaded_file($_FILES[$input_name]["tmp_name"], getcwd()."/uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext)) {
                 return "uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext;

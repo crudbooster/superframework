@@ -143,9 +143,9 @@ class Sqlsrv
         $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
         $limit_sql = (isset($this->limit))?"TOP ".$this->limit:"";
+        $group_by_sql = (isset($this->group_by)) ? "GROUP BY ".$this->group_by : "";
         $offset_sql = (isset($this->offset))?" OFFSET ".$this->offset." ROWS":"";
-        $this->last_query = "SELECT ".$limit_sql." ".$this->select." FROM ".$this->table." ".$join_sql." ".$where_sql." ".$order_by_sql." ".$offset_sql;
-        logging("LastQuery = " . $this->last_query);
+        $this->last_query = "SELECT ".$limit_sql." ".$this->select." FROM ".$this->table." ".$join_sql." ".$where_sql." ".$group_by_sql." ".$order_by_sql." ".$offset_sql;
         $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetchAll();

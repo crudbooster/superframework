@@ -6,7 +6,7 @@ if(!function_exists('cache_forget')) {
      * @param $key
      */
     function cache_forget($key) {
-        $file_path = base_path("app/UtilCache/Cache/".md5($key));
+        $file_path = base_path("system/App/UtilCache/Cache/".md5($key));
         if(file_exists($file_path)) {
             unlink($file_path);
         }
@@ -23,8 +23,8 @@ if(!function_exists("cache")) {
      */
     function cache($key, $value = null, $minutes = 60) {
         $key = md5($key);
-        if(file_exists(base_path("app/UtilCache/Cache/".$key)) && !$value) {
-            $cache = file_get_contents(base_path("app/UtilCache/Cache/".$key));
+        if(file_exists(base_path("system/App/UtilCache/Cache/".$key)) && !$value) {
+            $cache = file_get_contents(base_path("system/App/UtilCache/Cache/".$key));
             $cache = json_decode($cache, true);
             if($cache['expired'] > time()) {
                 return $cache['content'];
@@ -32,7 +32,7 @@ if(!function_exists("cache")) {
         }
 
         if($value) {
-            file_put_contents(base_path("app/UtilCache/Cache/".$key), json_encode([
+            file_put_contents(base_path("system/App/UtilCache/Cache/".$key), json_encode([
                 "expired"=>strtotime("+".$minutes." minutes"),
                 "content"=>$value
             ]));

@@ -80,18 +80,27 @@ class Mysql
     public function update($array) {
         $sets = [];
         foreach($array as $key=>$value) {
-            $sets[] = $key."='".$value."'";
+            $sets[] = $key."= :".$key;
         }
-
         $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
-        $count = $this->connection->exec("UPDATE `".$this->table."` SET ".implode(",",$sets)." ".$where_sql);
-        return $count;
+        $query = "UPDATE `".$this->table."` SET ".implode(",",$sets)." ".$where_sql;
+        $stmt = $this->connection->prepare($query);
+        $execArray = [];
+        foreach($array as $key => $val) {
+            $execArray[":" . $key] = $val;
+        }
+        $stmt->execute($execArray);
+        return $stmt;
     }
 
     public function insert($array) {
         $fields = array_keys($array);
-        $values = array_values($array);
-        $this->connection->exec("INSERT INTO `".$this->table."` (".implode(",", $fields).") VALUES ('".implode("','",$values)."')");
+        $stmt = $this->connection->prepare("INSERT INTO `".$this->table."` (".implode(",", $fields).") VALUES (:".implode(",:", $fields).")");
+        $execArray = [];
+        foreach($array as $key => $val) {
+            $execArray[":" . $key] = $val;
+        }
+        $stmt->execute($execArray);
         return $this->connection->lastInsertId($this->table);
     }
 
@@ -146,9 +155,10 @@ class Mysql
         }
         $where_sql = (isset($this->where))?"WHERE ".implode(" AND ",$this->where):"";
         $order_by_sql = (isset($this->order_by))?"ORDER BY ".$this->order_by:"";
+        $group_by_sql = (isset($this->group_by)) ? "GROUP BY ".$this->group_by : "";
         $limit_sql = (isset($this->limit))?"LIMIT ".$this->limit:"";
         $limit_sql .= (isset($this->offset))?" OFFSET ".$this->offset:"";
-        $this->last_query = "SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$order_by_sql." ".$limit_sql;
+        $this->last_query = "SELECT ".$this->select." FROM `".$this->table."` ".$join_sql." ".$where_sql." ".$group_by_sql." ".$order_by_sql." ".$limit_sql;
         $stmt = $this->connection->query($this->last_query);
         $stmt->setFetchMode(\PDO::FETCH_ASSOC);
         return $stmt->fetchAll();

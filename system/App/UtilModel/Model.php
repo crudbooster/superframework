@@ -13,6 +13,33 @@ use System\App\UtilORM\ORM;
 
 class Model
 {
+    /**
+     * @param $column
+     * @param $value
+     * @param null $limit
+     * @param string $orderBy
+     * @param string $orderDir
+     * @return array|null
+     * @throws \Exception
+     */
+    public static function findAllByPaginate($column = null, $value = null, $limit = 10, $orderBy = "id", $orderDir = "desc")
+    {
+        $data = db(static::tableName());
+        if(is_array($column)) {
+            foreach($column as $key => $val) {
+                if(stripos($key," ") !== false) {
+                    $data->where("{$key} '{$val}'");
+                } else {
+                    $data->where("{$key} = '{$val}'");
+                }
+            }
+        } else {
+            if($column & $value) {
+                $data->where("{$column} = '{$value}'");
+            }
+        }
+        return $data->orderBy($orderBy." ".$orderDir)->paginate($limit);
+    }
 
     private static function modelSetter($model, $row) {
         foreach($row as $column => $value) {
@@ -197,11 +224,14 @@ class Model
 
         $id = $this->{static::primaryKey()};
         if($id) {
-            if((new ORM())->hasColumn(static::tableName(), 'updated_at')) {
+            if(property_exists($this, "updated_at")) {
                 $data_array['updated_at'] = date('Y-m-d H:i:s');
             }
             db(static::tableName())->where(static::primaryKey()." = '".$id."'")->update($data_array);
         } else {
+            if(property_exists($this, "created_at")) {
+                $data_array['created_at'] = date('Y-m-d H:i:s');
+            }
             $id = db(static::tableName())->insert($data_array);
         }
 

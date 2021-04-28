@@ -50,16 +50,20 @@ if(!function_exists("request_is_get")) {
 
 if(!function_exists('request')) {
     /**
-     * @param $name
-     * @param null $default
+     * @param null|string $name
+     * @param null|string $default
      * @param bool $sanitize
-     * @return null
+     * @return null|string|array
      */
-    function request($name, $default = null, $sanitize = false) {
+    function request($name = null, $default = null, $sanitize = false) {
         $value = $_REQUEST;
-        $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
-        $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
-        return $value;
+        if($name) {
+            $value = (isset($value[$name]) && $value[$name])?$value[$name]:$default;
+            $value = ($sanitize) ? htmlspecialchars($value, ENT_COMPAT, "UTF-8") : $value;
+            return $value;
+        } else {
+            return $value;
+        }
     }
 }
 
