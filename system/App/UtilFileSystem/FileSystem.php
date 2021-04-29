@@ -28,8 +28,9 @@ class FileSystem
             }
 
             $ext = strtolower(pathinfo($url,PATHINFO_EXTENSION));
+            $ext = strtok($ext,"?");
 
-            if(in_array($ext,["jpg","png","jpeg"])) {
+            if(in_array($ext,["jpg","png","jpeg","webp"])) {
                 $fileBlob = file_get_contents($url);
                 if (file_put_contents(public_path("/uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext), $fileBlob)) {
                     return "uploads/".date("Y-m-d")."/".$new_file_name.'.'.$ext;

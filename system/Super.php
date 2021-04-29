@@ -21,6 +21,8 @@ class Super
 
         $this->config = include base_path("configs/App.php");
         $this->bootstrapCache = include base_path("bootstrap/cache.php");
+
+        date_default_timezone_set($this->config["timezone"] ?: "UTC");
     }
 
     private function loadEnv() {
@@ -28,7 +30,7 @@ class Super
     }
 
     private function loadHelpers() {
-        foreach($this->bootstrapCache['helper'] as $helper) require_once base_path($helper.".php");
+        foreach($this->bootstrapCache['helper'] as $helper) require_once base_path(lcfirst(str_replace("\\",DIRECTORY_SEPARATOR,$helper)).".php");
     }
 
     /**
@@ -40,9 +42,9 @@ class Super
             $r->addGroup("/".base_path_uri(), function (RouteCollector $r) {
                 foreach ($this->bootstrapCache['route'] as $pattern => $value) {
                     if($pattern == "/" || $pattern == "") {
-                        $route = "/";
+                        $route = null;
                     } else {
-                        $route = "/".trim($pattern,"/");
+                        $route = trim($pattern,"/");
                     }
                     $r->addRoute(['GET','POST'], $route,$value[0]."@".$value[1]);
                 }

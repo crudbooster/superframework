@@ -18,7 +18,7 @@ class CommandRunner
     }
 
     private function loadHelpers() {
-        foreach($this->bootstrap['helper'] as $helper) require_once base_path($helper.".php");
+        foreach($this->bootstrap['helper'] as $helper) require_once base_path(lcfirst(str_replace("\\",DIRECTORY_SEPARATOR,$helper)).".php");
     }
 
     private function header()

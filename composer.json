@@ -12,7 +12,8 @@
     "philipp15b/php-i18n": "^4.0",
     "ext-curl": "*",
     "vlucas/phpdotenv": "^5.2",
-    "nikic/fast-route": "^1.3"
+    "nikic/fast-route": "^1.3",
+    "lavary/crunz": "^3.0"
   },
   "license": "MIT",
   "authors": [

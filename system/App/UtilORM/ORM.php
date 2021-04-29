@@ -23,7 +23,7 @@ class ORM
 
     public function __construct()
     {
-        $this->config = include base_path("configs/database.php");
+        $this->config = include base_path("configs/Database.php");
     }
 
     public function getInstance() {
@@ -356,7 +356,7 @@ class ORM
     /**
      * @param int $limit
      * @param int $offset
-     * @return null
+     * @return array|null
      * @throws \Exception
      */
     public function all($limit = null, $offset = 0) {

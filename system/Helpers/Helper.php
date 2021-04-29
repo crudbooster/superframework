@@ -1,18 +1,5 @@
 <?php
 
-if(!function_exists('admin_url'))
-{
-    /**
-     * Generate admin full url
-     * @param null $path
-     * @return string
-     */
-    function admin_url($path = null)
-    {
-        return url(config('admin_path').$path);
-    }
-}
-
 $singleton_data = [];
 if(!function_exists("put_singleton")) {
     function put_singleton($key, $value) {
@@ -154,7 +141,7 @@ if(!function_exists("base_path")) {
      * @return string
      */
     function base_path($path = null) {
-        return BASE_PATH."/".$path;
+        return BASE_PATH.DIRECTORY_SEPARATOR.$path;
     }
 }
 
@@ -193,7 +180,7 @@ if(!function_exists("base_url")) {
         $tmpURL = rtrim($tmpURL, '/');
 
         if ($tmpURL !== $_SERVER['HTTP_HOST']) {
-            $base_url .= $_SERVER['HTTP_HOST'].'/'.$tmpURL.'/';
+            $base_url .= ($tmpURL) ? $_SERVER['HTTP_HOST'].'/'.$tmpURL.'/' : $_SERVER['HTTP_HOST'].'/';
         } else {
             $base_url .= $tmpURL.'/';
         }

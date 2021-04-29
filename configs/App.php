@@ -27,5 +27,8 @@ return [
     // Session Configuration
     "session_lifetime"=> 130,
     "session_secure"=> false,
-    "session_httpOnly"=> true
+    "session_httpOnly"=> true,
+
+    // Timezone
+    "timezone"=>"Asia/Jakarta"
 ];

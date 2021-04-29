@@ -13,33 +13,6 @@ use System\App\UtilORM\ORM;
 
 class Model
 {
-    /**
-     * @param $column
-     * @param $value
-     * @param null $limit
-     * @param string $orderBy
-     * @param string $orderDir
-     * @return array|null
-     * @throws \Exception
-     */
-    public static function findAllByPaginate($column = null, $value = null, $limit = 10, $orderBy = "id", $orderDir = "desc")
-    {
-        $data = db(static::tableName());
-        if(is_array($column)) {
-            foreach($column as $key => $val) {
-                if(stripos($key," ") !== false) {
-                    $data->where("{$key} '{$val}'");
-                } else {
-                    $data->where("{$key} = '{$val}'");
-                }
-            }
-        } else {
-            if($column & $value) {
-                $data->where("{$column} = '{$value}'");
-            }
-        }
-        return $data->orderBy($orderBy." ".$orderDir)->paginate($limit);
-    }
 
     private static function modelSetter($model, $row) {
         foreach($row as $column => $value) {
@@ -151,6 +124,34 @@ class Model
         return static::queryAll($limit, $offset, function(ORM $query) use ($column,$value) {
             return $query->where($column." = '".$value."'");
         });
+    }
+
+    /**
+     * @param $column
+     * @param $value
+     * @param null $limit
+     * @param string $orderBy
+     * @param string $orderDir
+     * @return array|null
+     * @throws \Exception
+     */
+    public static function findAllByPaginate($column = null, $value = null, $limit = 10, $orderBy = "id", $orderDir = "desc")
+    {
+        $data = db(static::tableName());
+        if(is_array($column)) {
+            foreach($column as $key => $val) {
+                if(stripos($key," ") !== false) {
+                    $data->where("{$key} '{$val}'");
+                } else {
+                    $data->where("{$key} = '{$val}'");
+                }
+            }
+        } else {
+            if($column & $value) {
+                $data->where("{$column} = '{$value}'");
+            }
+        }
+        return $data->orderBy($orderBy." ".$orderDir)->paginate($limit);
     }
 
     /**
