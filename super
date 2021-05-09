@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php use System\Commands\CommandRunner;
+<?php use SuperFrameworkEngine\Commands\CommandRunner;
 
 require_once "vendor/autoload.php";
 

@@ -1,71 +1,74 @@
 <?php
 
 return [
-    'boot' => [
-         'System\\App\\UtilCache\\Configs\\Boot',
-         'System\\App\\UtilDataTable\\Configs\\Boot',
-         'System\\App\\UtilDateTime\\Configs\\Boot',
-         'System\\App\\UtilFileSystem\\Configs\\Boot',
-         'System\\App\\UtilFirebase\\Configs\\Boot',
-         'System\\App\\UtilLang\\Configs\\Boot',
-         'System\\App\\UtilModel\\Configs\\Boot',
-         'System\\App\\UtilORM\\Configs\\Boot',
-         'System\\App\\UtilRequest\\Configs\\Boot',
-         'System\\App\\UtilResponse\\Configs\\Boot',
-         'System\\App\\UtilSecurity\\Configs\\Boot',
-         'System\\App\\UtilSession\\Configs\\Boot',
-         'System\\App\\UtilString\\Configs\\Boot',
-         'System\\App\\UtilView\\Configs\\Boot',
-         'App\\Components\\Main\\Configs\\Boot',
-         'App\\Components\\AdminAuth\\Configs\\Boot',
-    ],
-    'middleware' => [
-         'System\\App\\UtilCache\\Configs\\Middleware',
-         'System\\App\\UtilDataTable\\Configs\\Middleware',
-         'System\\App\\UtilDateTime\\Configs\\Middleware',
-         'System\\App\\UtilFileSystem\\Configs\\Middleware',
-         'System\\App\\UtilFirebase\\Configs\\Middleware',
-         'System\\App\\UtilLang\\Configs\\Middleware',
-         'System\\App\\UtilModel\\Configs\\Middleware',
-         'System\\App\\UtilORM\\Configs\\Middleware',
-         'System\\App\\UtilRequest\\Configs\\Middleware',
-         'System\\App\\UtilResponse\\Configs\\Middleware',
-         'System\\App\\UtilSecurity\\Configs\\Middleware',
-         'System\\App\\UtilSession\\Configs\\Middleware',
-         'System\\App\\UtilString\\Configs\\Middleware',
-         'System\\App\\UtilView\\Configs\\Middleware',
-         'App\\Components\\Main\\Configs\\Middleware',
-         'App\\Components\\AdminAuth\\Configs\\Middleware',
-    ],
     'route' => [
-        'admin/auth/login' => [
-             'App\\Components\\AdminAuth\\Controllers\\AdminAuthController',
-             'login',
-        ],
         '/' => [
-             'App\\Components\\Main\\Controllers\\HomeController',
+             'App\\Modules\\Main\\Controllers\\HomeController',
              'index',
         ],
     ],
+    'boot' => [
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilSession\\Configs\\Boot',
+            'class' => 'SuperFrameworkEngine\\App\\UtilSession\\Configs\\Boot',
+        ],
+         [
+            'path' => 'App\\Modules\\Main\\Configs\\Boot',
+            'class' => 'App\\Modules\\Main\\Configs\\Boot',
+        ],
+    ],
+    'middleware' => [
+         [
+            'path' => 'App\\Modules\\Main\\Configs\\Middleware',
+            'class' => 'App\\Modules\\Main\\Configs\\Middleware',
+        ],
+    ],
     'helper' => [
-         'System\\App\\UtilCache\\Configs\\Helper',
-         'System\\App\\UtilDataTable\\Configs\\Helper',
-         'System\\App\\UtilDateTime\\Configs\\Helper',
-         'System\\App\\UtilFileSystem\\Configs\\Helper',
-         'System\\App\\UtilFirebase\\Configs\\Helper',
-         'System\\App\\UtilLang\\Configs\\Helper',
-         'System\\App\\UtilModel\\Configs\\Helper',
-         'System\\App\\UtilORM\\Configs\\Helper',
-         'System\\App\\UtilRequest\\Configs\\Helper',
-         'System\\App\\UtilResponse\\Configs\\Helper',
-         'System\\App\\UtilSecurity\\Configs\\Helper',
-         'System\\App\\UtilSession\\Configs\\Helper',
-         'System\\App\\UtilString\\Configs\\Helper',
-         'System\\App\\UtilView\\Configs\\Helper',
-         'App\\Components\\Main\\Configs\\Helper',
-         'App\\Components\\AdminAuth\\Configs\\Helper',
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilCache\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilCache\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilDateTime\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilDateTime\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilLang\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilLang\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilORM\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilORM\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilRequest\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilRequest\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilResponse\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilResponse\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilSession\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilSession\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilString\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilString\\Configs\\Helper',
+        ],
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilView\\Configs\\Helper',
+            'class' => 'SuperFrameworkEngine\\App\\UtilView\\Configs\\Helper',
+        ],
+         [
+            'path' => 'App\\Modules\\Main\\Configs\\Helper',
+            'class' => 'App\\Modules\\Main\\Configs\\Helper',
+        ],
     ],
     'command' => [
-         'System\\App\\UtilModel\\Configs\\Command',
+         [
+            'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilModel\\Configs\\Command',
+            'class' => 'SuperFrameworkEngine\\App\\UtilModel\\Configs\\Command',
+        ],
     ],
 ];

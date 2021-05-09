@@ -2,6 +2,9 @@
 /**
  * Now let composer auto load all the class
  */
+
+use SuperFrameworkEngine\Super;
+
 require_once "../vendor/autoload.php";
 
 /**
@@ -18,4 +21,4 @@ define("BASE_DIR", dirname(__FILE__));
 /**
  * Run the main class of super framework
  */
-(new \System\Super())->run();
+(new Super())->run();
