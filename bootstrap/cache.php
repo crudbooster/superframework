@@ -70,5 +70,9 @@ return [
             'path' => 'vendor\\fherryfherry\\super-framework-engine\\src\\App\\UtilModel\\Configs\\Command',
             'class' => 'SuperFrameworkEngine\\App\\UtilModel\\Configs\\Command',
         ],
+         [
+            'path' => 'App\\Modules\\Main\\Configs\\Command',
+            'class' => 'App\\Modules\\Main\\Configs\\Command',
+        ],
     ],
 ];

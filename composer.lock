@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f40c8eb22d156383e847b039fbe5460b",
+    "content-hash": "f5a695e182c1f0bfe92ffb873f11bb12",
     "packages": [
         {
             "name": "cakephp/core",
@@ -541,16 +541,16 @@
         },
         {
             "name": "fherryfherry/super-framework-engine",
-            "version": "v1.0.1",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fherryfherry/super-framework-engine.git",
-                "reference": "8b6420f4b430f7902f4faf26200d7c0bfd6b15e5"
+                "reference": "c244dcdf6c4bfe33a2019ad5d31b30f70d29d193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/8b6420f4b430f7902f4faf26200d7c0bfd6b15e5",
-                "reference": "8b6420f4b430f7902f4faf26200d7c0bfd6b15e5",
+                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/c244dcdf6c4bfe33a2019ad5d31b30f70d29d193",
+                "reference": "c244dcdf6c4bfe33a2019ad5d31b30f70d29d193",
                 "shasum": ""
             },
             "require": {
@@ -564,6 +564,7 @@
                 "nikic/fast-route": "^1.3",
                 "philipp15b/php-i18n": "^4.0",
                 "php": "7.2.*|7.3.*|7.4.*",
+                "robmorgan/phinx": "^0.12.6",
                 "vlucas/phpdotenv": "^5.2"
             },
             "type": "library",
@@ -585,12 +586,12 @@
                     "email": "ferryyangpuny@gmail.com"
                 }
             ],
-            "description": "The engine for super framework",
+            "description": "The core of super framework",
             "support": {
                 "issues": "https://github.com/fherryfherry/super-framework-engine/issues",
-                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.0.1"
+                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.0.5"
             },
-            "time": "2021-05-09T07:47:07+00:00"
+            "time": "2021-05-09T18:56:10+00:00"
         },
         {
             "name": "graham-campbell/result-type",
