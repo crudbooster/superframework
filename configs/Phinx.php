@@ -2,7 +2,7 @@
 
 use Dotenv\Dotenv;
 
-require_once "../vendor/autoload.php";
+require_once __DIR__."/../vendor/autoload.php";
 
 define("BASE_PATH", realpath(getcwd()."/../../"));
 define("BASE_DIR", dirname(__FILE__));

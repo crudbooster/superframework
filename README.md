@@ -217,7 +217,7 @@ Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada se
         }
         
         // Atau 
-        if(Request_method_is_get()) {
+        if(request_method_is_get()) {
             // Lanjut eksekusi setelah get
         }
     }

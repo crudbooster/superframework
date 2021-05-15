@@ -26,5 +26,10 @@
     "files": [
       "app/Helpers/General.php"
     ]
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "@php super package:discover"
+    ]
   }
 }
