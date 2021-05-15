@@ -151,6 +151,79 @@ atau jika menggunakan localhost
 localhost/projek_anda/public/test
 ```
 
+## Routing
+Routing pada superframework diatur langsung pada setiap class controller. 
+### Routing Class
+Routing class adalah routing yang diatur diatas class name. Dengan routing class Anda dapat membuat sebuah awalan routing pada class controller tersebut.
+```php 
+<?php
+
+namespace App\Modules\Main\Controllers;
+
+use SuperFrameworkEngine\Foundation\Controller;
+
+/**
+ * @route test
+ */
+class TestController
+```
+Maka akan menghasilkan :
+```bash 
+example.com/test
+```
+### Routing Method
+Routing method berarti Anda mendefinisikan routing pada setiap method. 
+```php 
+    /**
+     * @route welcome
+     */
+    public function welcome()
+    {
+        echo "Ini controller percobaan";
+    }
+```
+Maka jika digabung dengan routing class tadi akan menghasilkan: 
+```bash 
+example.com/test/welcome
+```
+
+### Routing Dengan Argument
+Anda dapat memasukkan argument pada url dan mencocokan pada method Anda dengan cara sebagai berikut:
+```php 
+    /**
+     * @route welcome/{argument1}/{argument2}
+     */
+    public function welcome($argument1, $argument2)
+    {
+        dd($argument1, $argument2);
+    }
+```
+
+Jangan lupa untuk menjalankan perintah berikut sebelum mendapatkan perubahan : 
+```bash 
+$ php super compile
+```
+
+### POST / GET
+Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada setiap routing. Jadi setiap routing dapat berjalan sebagai GET maupun POST. Apabila Anda ingin memvalidasi method yang dikirimkan oleh user, maka Anda harus menggunakan helper khusus seperti contoh berikut : 
+```php 
+    /**
+     * @route submit
+     */
+    public function submit()
+    {
+        if(request_method_is_post()) {
+            // Lanjut bisnis logik Anda
+        }
+        
+        // Atau 
+        if(Request_method_is_get()) {
+            // Lanjut eksekusi setelah get
+        }
+    }
+```
+
+
 ## CLI (super)
 Seperti layaknya framework lain seperti laravel mempunyai `artisan` pada super framework juga mempunyainya dengan nama `super`. Cara menggunakannya sebagai berikut:
 ```bash
@@ -167,13 +240,14 @@ php super [command]
 ## Helper
 | Helper Name | Description |
 | ------------ | ----------- |
-| request_is_post() | To check the request is post (boolean) |
-| request_is_get() | To check the request is get (boolean) |
+| request_method_is_post() | To check the request is post (boolean) |
+| request_method_is_get() | To check the request is get (boolean) |
 | request_int($key) | To get request that should be integer |
 | request_string($key) | To get request that should be string | 
 | request_float($key) | To get request that should be float |
 | request_email($key) | To get request that should be a valid email |
 | request_url($key) | To get request that should be a valid URL |
+| request() | Get all requests |
 | get_current_url() | To get current url |
 | upload_image($input_name, $new_file_name) | To upload an image file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
 | upload_file($input_name, $new_file_name) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.doc | 
