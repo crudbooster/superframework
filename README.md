@@ -16,7 +16,7 @@ Sebelum melakukan instalasi pastikan sistem Anda sudah memenuhi persyaratan beri
 ### Perintah Instalasi
 Buka terminal / command prompt pada folder yang telah Anda siapkan, dan jalankan perintah berikut:
 ```bash
-composer create-project superframework/superframework my_new_super=^4.0
+composer create-project superframework/superframework=^4.0 my_new_super
 ```
 
 # Memulai
