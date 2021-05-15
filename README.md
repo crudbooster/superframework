@@ -1,80 +1,168 @@
 # Super Framework
 The lightweight and fastest PHP framework from the creator of CRUDBooster
 
-## Installation
+# Instalasi
 
-Requirements
-- php 7.2 >= 
-- Apache 2.4 >= 
-- MySQL 5.7 or up / MariaDB 10.4 or up / SQL Server (Coming Soon) / Postgre (Coming Soon) 
+### Syarat Kebutuhan Sistem
+Sebelum melakukan instalasi pastikan sistem Anda sudah memenuhi persyaratan berikut ini:
+- php 7.3 >= | 7.4 >=
+- Web server Apache / Nginx
+- MySQL / MariaDB / Postgre / SQL Server / SQLite
 - Composer
-- php Zend OPCache Extension (Optional but very Recommended for speed)
 
-Installation command via **composer**: 
+### Opsional, namun direkomendasikan :
+- php Zend OPCache Extension
+
+### Perintah Instalasi
+Buka terminal / command prompt pada folder yang telah Anda siapkan, dan jalankan perintah berikut:
 ```bash
-composer create-project superframework/superframework my_new_super
+composer create-project superframework/superframework my_new_super=^4.0
 ```
-or
-Download via zip release [Click here to download](https://github.com/crudbooster/superframework/releases)
 
-## Database Configuration
-app / Configs / database.php
+# Memulai
+## Konfigurasi Environment (.env)
+Silahkan copy file `.env.example` menjadi `.env`. Apabila OS Anda tidak dapat melakukannya, Anda dapat menggunakan perintah :
+```bash
+$ cp .env.example .env 
+```
+Kemudian atur file .env tersebut.
+```bash
+# Bagian ini Anda dapat menggantinya dengan nama proyek
+APP_NAME="PHP Super Framework" 
+
+# Bagian ini dapat diganti dengan mysql, pgsql, sqlsrv, sqlite
+DB_CONNECTION=mysql
+
+# DB_HOST biarkan localhost
+DB_HOST=localhost
+
+# DB_PORT sesuaikan dengan port servis database Anda, untuk mySQL defaultnya adalah 3306
+DB_PORT=3306
+
+# DB_DATABASE isi dengan nama database proyek Anda
+DB_DATABASE=super
+
+# DB_USERNAME isi dengan user database 
+DB_USERNAME=root
+
+# DB_PASSWORD isi dengan password database
+DB_PASSWORD=
+
+# Apabila Anda ingin error ditampilkan pada browser, maka isi nilai berikut dengan true
+DISPLAY_ERRORS=false
+
+# Apabila Anda ingin merekam setiap kejadian error pada siste, 
+# maka isi nilai berikut dengan true. Maka nanti ketika terjadi error tersimpan pada folder /logs
+LOGGING_ERRORS=false
+```
+## Struktur Folder
+Sebelum Anda lanjut membuat aplikasi dengan framework ini, Anda perlu mengerti terlebih dahulu struktur folder pada framework SuperFramework ini.
+
+```bash
+/app
+    /Helpers 
+    /Lang 
+    /Migrations 
+    /Models 
+    /Modules
+/bootstrap
+/configs
+/logs 
+/public 
+/tasks 
+/vendor 
+```
+### /app
+Folder `app` berisi bisnis logika pada aplikasi Anda. Disini akan berisi semua file controller, helper, model, dan lain-lain.
+
+### /bootstrap
+Folder `bootstrap` berisi file cache yang digenerasi oleh sistem. Secara praktik Anda tidak perlu menambah / mengurangi apapun yang telah digenerasi pada folder ini. 
+
+### /configs
+Folder `configs` berisi file pengaturan dasar pada aplikasi. Anda dapat menyesuaikan beberapa pengaturan disini, namun beberapa sudah diarahkan ke file `.env`
+
+### /logs
+Folder `logs` berisi file `.log` hasil rekaman kejadian - kejadian pada sistem aplikasi Anda, seperti error dan debug.
+
+### /public
+Folder `public` ini digunakan untuk file yang dijalankan pertama kali oleh aplikasi. Berisi file `index.php` serta tempat Anda mengisinya dengan file-file asset css/js.
+
+### /tasks
+Folder `tasks` ini berisi file schedule yang akan dijalankan pada cronjob. Anda dapat menduplikasi file task yang ada, dan menyesuaikan sesuai kebutuhan cron job yang baru.
+
+### /vendor
+Folder `vendor` ini berisi berbagai macam library yang dibutuhkan pada sistem framework ini. Anda tidak perlu mengubah / menambahnya secara manual, karena sudah dikontrol dan dimanajemen oleh Composer.
 
 ## Module
 Super framework use a modular MVC Concept. You have a default MVC after make a installation, that is /app/Modules/Site
-If you want to make a new module, you can make a duplicate directory "Site" to your new module name. 
+If you want to make a new module, you can make a duplicate directory "Site" to your new module name.
 
-## Routing
-### Auto Routing
-| Controller | Routing |
-| --- | --- |
-| /app/Modules/Site/Controllers/Home@index | /site/home |
-| /app/Modules/Site/Controllers/Home@create | /site/home/create |
-| /app/Modules/Site/Controllers/Home@edit($id) | /site/home/edit/1 |
-### Routing by Anotation
-You can make a route by just add @route anotation above of method and class name. 
-```php
-<?php 
+# Controller & Routing
 
-namespace App\Modules\Site\Controllers;
+## Apa itu Controller?
+Controller adalah sebuah class yang dapat mengontrol URL pada sistem aplikasi.
 
-use System\Controllers\Controller;
+## Membuat Controller
+Buka tool editor favorit Anda, dan buat file pada 
+```bash 
+app/Modules/Main/Controllers/TestController.php
+```
+Kemudian isikan file controller tersebut dengan format sebagai berikut : 
+```php 
+<?php
+
+namespace App\Modules\Main\Controllers;
+
+use SuperFrameworkEngine\Foundation\Controller;
 
 /**
- * @route house
+ * Class TestController
+ * @route test
  */
-class Home extends Controller {
+class TestController extends Controller {
 
     /**
-     * @route dashboard
+     * @return false|string
+     * @route /
+     * @throws \Exception
      */
     public function index()
     {
-        return view("site.home");
+        echo "Ini controller percobaan";
     }
 }
 ```
-Then run command `php super route` to compile the route annotation and saved to /app/Configs/routes.php. 
+Lalu kemudian save file tersebut.
 
-Now the routing will be 
-```html
-/house/dashboard
+`# Pastikan Anda membuat nama file controller persis seperti perintah diatas`
+
+Buka terminal pada root folder proyek Anda. Dan jalankan perintah berikut ini : 
+```bash 
+$ php super compile
+```
+Perintah diatas digunakan untuk menyimpan perubahan konfigurasi, routing, dan class lainnya.
+
+Jika sudah, Anda dapat mencobanya pada browser: 
+```bash 
+example.com/test
+```
+atau jika menggunakan localhost
+```bash 
+localhost/projek_anda/public/test
 ```
 
-## Super
-These bellow are CLI Commands in the Super Framework available.
+## CLI (super)
+Seperti layaknya framework lain seperti laravel mempunyai `artisan` pada super framework juga mempunyainya dengan nama `super`. Cara menggunakannya sebagai berikut:
 ```bash
 php super [command]
 ```
 
 | Command | Description |
 | ------- | ----------- |
-| make:module [table_name] | Generate a module by table name |
-| model:config | Generate the default all table model configurations. Before you can use model class, you need to generate this model configuration. |
-| model:make {table_name} | Generate a model by table |
-| admin:make {table} {module_name?} | Create an Admin module by a table |
-| table:users | Create users table |
-| compile | Compile all route and middleware |
+| compile | Untuk menyimpan perubahan route dan konfigurasi |
+| make:migration {table} | Untuk membuat migration |
+| migrate | Untuk menjalankan migrasi |
+| make:model {table} | Untuk membuat file model |
 
 ## Helper
 | Helper Name | Description |
@@ -97,16 +185,16 @@ php super [command]
 | cache($key) | To get the cache value by a key |
 | json($array) | To return the json response by an array |
 | json($array, $cache_in_minutes = 60) | Like a json() function but with a cache in minute |
-| view($view_name, $data = [], $cache_in_minutes = 5) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
-| abort($code = 404) | To terminate the process |
+| view($view_name, $data = []) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
 | logging($content, $type = "error") | To make a log |
-| string_random($length = 6) | To make a random string |
+| random_string($length = 6) | To make a random string |
 | csrf_input() | To add hidden input about CSRF Token |
+| csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
 
 ## Database ORM
-To make a database query on Super Framework, you can use DB() helper
- 
+Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawaan ini.
+
 | Name | Description |
 | ----- | ----- |
 | DB("table")->all($limit) | To get all table data (in array), and you can pass the limit |
@@ -114,7 +202,7 @@ To make a database query on Super Framework, you can use DB() helper
 | DB("table")->where("status = 'Active'")->all($limit) | To get all table data with a condition |
 | DB("table")->where("status = 'Active' AND price > 100000")->all($limit) | To get all table data with a multiple conditions. So you can write any condition in here, because this is a raw condition actually |
 | DB("table")->select("id","name","status")->all() | To set the select of query | 
-| DB("table")->addSelect("id")->addSelect("price")->all() | or Sometime you want to add more select in the next query, just add this method chain, before calling all() / find() | 
+| DB("table")->addSelect("id")->addSelect("price")->all() | or Sometime you want to add more select in the next query, just add this method chain, before calling all() / find() |
 | DB("table")->limit($limit)->offset($offset)->all() | To get all table data with limit and offset |
 | DB("table")->orderBy("id DESC")->all() | To get all table data with order by |
 | DB("table")->groupBy("id, status")->all() | To get all table data with a group by fields |
@@ -127,3 +215,42 @@ To make a database query on Super Framework, you can use DB() helper
 | DB("table")->delete($id) | To delete record with primary key value | 
 | DB("table")->delete() | To delete all record data |
   
+# Model, Repository, Service
+Ini adalah sebuah pattern development. Kami menganjurkan untuk selalu menggunakan pattern ini ketika Anda membuat query pada database.
+## Model
+Berisi attribut-attribute sesuai dengan kolom yang ada pada tabel.
+
+## Repository
+Anda dapat membuat seluruh query pada aplikasi Anda menggunakan repository ini.
+
+## Service
+Anda dapat membuat query yang memiliki logika khusus pada class service ini.
+
+# Cron Job / Scheduler
+Fitur cron job / scheduler pada superframework menggunakan library Crunz/Schedule. 
+Anda dapat membuat sebuah file php baru di folder `/tasks` dengan isian seperti berikut : 
+```php 
+<?php
+
+use Crunz\Schedule;
+
+$schedule = new Schedule();
+
+# Pada bagian ini Anda dapat menuliskan perintah command line
+$task = $schedule->run(PHP_BINARY. ' super {command}');
+
+# Pada bagian ini Anda dapat memberikan timeline waktu kapan cron ini akan dijalankan
+# daily, hourly, everyThreeHours, dll
+$task->daily()->description("Run feed content");
+
+return $schedule;
+```
+Lalu Anda harus menambahkan perintah ini pada sistem `crontab` pada linux Anda.
+```bash
+* * * * * * cd /path/html/project/ && /var/bin/php super schedule:run 
+```
+
+# View
+View pada superframework mengadopsi kehebatan "blade" yang Ada pada Laravel. Maka 
+bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini. 
+Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
