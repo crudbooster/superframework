@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ccd8b28692c61d7e3576d1483dbffba",
+    "content-hash": "f720fc92889a5e094ff0953b521d411b",
     "packages": [
         {
             "name": "cakephp/core",
@@ -540,63 +540,17 @@
             "time": "2021-04-01T18:37:14+00:00"
         },
         {
-            "name": "fherryfherry/crud-generator",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../crud-generator",
-                "reference": "6f846f740615dac2693a86631493abd900499a61"
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-openssl": "*",
-                "ext-pdo": "*",
-                "fherryfherry/super-framework-engine": "^1.0",
-                "php": "7.3.*|7.4.*"
-            },
-            "type": "library",
-            "extra": {
-                "super-framework": {
-                    "providers": [
-                        "CrudGenerator\\CrudGeneratorServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "CrudGenerator\\": "src/"
-                },
-                "files": [
-                    "src/Helpers/General.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ferry",
-                    "email": "ferdevelop15@gmail.com"
-                }
-            ],
-            "description": "CRUD Generator for PHP Super Framework",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "fherryfherry/super-framework-engine",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fherryfherry/super-framework-engine.git",
-                "reference": "bb4acfa2675c5d36477531b08d1e6f2c66362519"
+                "reference": "02afeb5241f71b8b24f7e82907e54dabc05d1cd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/bb4acfa2675c5d36477531b08d1e6f2c66362519",
-                "reference": "bb4acfa2675c5d36477531b08d1e6f2c66362519",
+                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/02afeb5241f71b8b24f7e82907e54dabc05d1cd3",
+                "reference": "02afeb5241f71b8b24f7e82907e54dabc05d1cd3",
                 "shasum": ""
             },
             "require": {
@@ -635,9 +589,9 @@
             "description": "The core of super framework",
             "support": {
                 "issues": "https://github.com/fherryfherry/super-framework-engine/issues",
-                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.0.7"
+                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.0.8"
             },
-            "time": "2021-05-15T18:13:39+00:00"
+            "time": "2021-05-15T19:00:08+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -4014,9 +3968,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fherryfherry/crud-generator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
