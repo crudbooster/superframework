@@ -8,7 +8,7 @@
     "ext-pdo": "*",
     "ext-openssl": "*",
     "ext-curl": "*",
-    "fherryfherry/super-framework-engine": "^1.0"
+    "fherryfherry/super-framework-engine": "^v1.1.0"
   },
   "license": "MIT",
   "authors": [
@@ -28,6 +28,9 @@
     ]
   },
   "scripts": {
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
     "post-autoload-dump": [
       "@php super package:discover"
     ]
