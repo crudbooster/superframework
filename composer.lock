@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f720fc92889a5e094ff0953b521d411b",
+    "content-hash": "e887e603ac5de490a44363fc8fa28a50",
     "packages": [
         {
             "name": "cakephp/core",
@@ -541,16 +541,16 @@
         },
         {
             "name": "fherryfherry/super-framework-engine",
-            "version": "v1.0.8",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fherryfherry/super-framework-engine.git",
-                "reference": "02afeb5241f71b8b24f7e82907e54dabc05d1cd3"
+                "reference": "06fb5b5205bb4bb8c52ba260250d720de19448b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/02afeb5241f71b8b24f7e82907e54dabc05d1cd3",
-                "reference": "02afeb5241f71b8b24f7e82907e54dabc05d1cd3",
+                "url": "https://api.github.com/repos/fherryfherry/super-framework-engine/zipball/06fb5b5205bb4bb8c52ba260250d720de19448b0",
+                "reference": "06fb5b5205bb4bb8c52ba260250d720de19448b0",
                 "shasum": ""
             },
             "require": {
@@ -589,9 +589,9 @@
             "description": "The core of super framework",
             "support": {
                 "issues": "https://github.com/fherryfherry/super-framework-engine/issues",
-                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.0.8"
+                "source": "https://github.com/fherryfherry/super-framework-engine/tree/v1.1.0"
             },
-            "time": "2021-05-15T19:00:08+00:00"
+            "time": "2021-05-15T19:45:18+00:00"
         },
         {
             "name": "graham-campbell/result-type",
