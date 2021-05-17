@@ -253,16 +253,21 @@ php super [command]
 | request_url($key) | To get request that should be a valid URL |
 | request() | Get all requests |
 | get_current_url() | To get current url |
-| upload_image($input_name, $new_file_name) | To upload an image file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| upload_file($input_name, $new_file_name) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.doc | 
+| (new FileSystem())->uploadImageByUrl($url, $newFileName) | To upload an image from url. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| (new FileSystem())->uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
+| (new FileSystem())->uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| (new FileSystem())->uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
 | session(["key"=>"value"]) | To set a session with array |
 | session("key") | To retrieve session by a key |
-| config("key") | To retrieve config by a key (from Configs/config.php)| 
+| session_forget($key) | To forget a session |
+| session_flash($dataArray) | Put a flash session |
+| config("key", $default = null) | To retrieve config by a key (from Configs/config.php)| 
 | base_url($path = "") | To get the base url of your project, and you can set the suffix path |
-| cache($key, $value, $cache_in_minutes = 60) | To make a cache by key and value, you can also set the cache duration in minutes | 
+| cache($key, $value, $tag = "general", $cache_in_minutes = 60) | To make a cache by key and value, you can also set the cache duration in minutes | 
 | cache($key) | To get the cache value by a key |
+| cache_forget($key) | To forget a cache |
+| cache_tag_forget($tag="general") | To forget cache by tag |
 | json($array) | To return the json response by an array |
-| json($array, $cache_in_minutes = 60) | Like a json() function but with a cache in minute |
 | view($view_name, $data = []) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
 | logging($content, $type = "error") | To make a log |
 | random_string($length = 6) | To make a random string |
@@ -270,6 +275,31 @@ php super [command]
 | csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
 
+## Validator
+Anda dapat memvalidasi request user dengan class berikut ini 
+```php 
+Validator::make($requestData, $rules);
+```
+Atau lebih lengkap : 
+```php 
+// Pastikan Anda menambahkan baris ini pada bagian baris use class controller 
+use SuperFrameworkEngine\App\UtilValidator\Validator;
+use SuperFrameworkEngine\Exceptions\ValidatorException;
+
+// Pada method Anda dapat memanggilnya sebagai berikut
+try {
+    Validator::make(request(),[
+        'title'=>'required'
+    ]);
+    
+    // Code milik Anda selanjutnya
+    
+} catch(ValidatorException $e) {
+    redirect_back(['message'=>$e->getMessage(),'type'=>'warning']);
+}
+```
+Berikut rule yang dapat Anda gunakan:
+`required`, `email`, `url`, `int`, `unique:{table}`,`exists:{table},{field}` 
 ## Database ORM
 Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawaan ini.
 
@@ -332,3 +362,25 @@ Lalu Anda harus menambahkan perintah ini pada sistem `crontab` pada linux Anda.
 View pada superframework mengadopsi kehebatan "blade" yang Ada pada Laravel. Maka 
 bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini. 
 Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
+
+# Useful Libraries
+Berikut ini adalah library tambahan yang sangat berguna untuk menunjang pengembangan aplikasi Anda. Anda dapat menggabungkannya dengan *superframework*.
+1. **CRUD Generator** - a crud generator for superframework
+   [https://github.com/fherryfherry/crud-generator](https://github.com/fherryfherry/crud-generator)
+1. **Simple HTML DOM Wrapper** - PHP Dom
+   [https://github.com/Wikia/simplehtmldom](https://github.com/Wikia/simplehtmldom)
+1. **PHPMailer** - Email sender
+    [https://github.com/PHPMailer/PHPMailer](https://github.com/PHPMailer/PHPMailer)
+1. **Imagine** - Image manipulation  
+    [https://imagine.readthedocs.io/en/latest/index.html](https://imagine.readthedocs.io/en/latest/index.html)
+1. **Snappy** - PDF Generation
+    [https://github.com/KnpLabs/snappy](https://github.com/KnpLabs/snappy)
+1. **PHPSpreadsheet** - Spreadsheet XLS Generation
+    [https://phpspreadsheet.readthedocs.io/en/latest/](https://phpspreadsheet.readthedocs.io/en/latest/)
+1. **Spout** - XLS fast read and write
+    [https://opensource.box.com/spout/getting-started/](https://opensource.box.com/spout/getting-started/)
+1. **DOMPDF** - PDF Generation
+    [https://github.com/dompdf/dompdf](https://github.com/dompdf/dompdf)
+   
+# Contact
+Laporan keamanan / celah / security dapat Anda kirimkan ke *ferdevelop15@gmail.com*
