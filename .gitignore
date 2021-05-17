@@ -1,5 +1,5 @@
 vendor/*
-.idea/*
 .env
 *.log
 composer.lock
+.idea
