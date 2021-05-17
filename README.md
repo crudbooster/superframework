@@ -16,12 +16,12 @@ Sebelum melakukan instalasi pastikan sistem Anda sudah memenuhi persyaratan beri
 ### Perintah Instalasi
 Buka terminal / command prompt pada folder yang telah Anda siapkan, dan jalankan perintah berikut:
 ```bash
-$ composer create-project superframework/superframework=^4.0 my_new_super
+$ composer create-project superframework/superframework my_new_super
 ```
 
 Jika kamu mengalami kegagalan instalasi karena issue `platform checking` php version tidak sesuai padahal php kamu sudah kompatibel. Kamu bisa tambahkan parameter `--ignore-platform-reqs`
 ```bash 
-$ composer create-project superframework/superframework=^4.0 my_new_super --ignore-platform-reqs
+$ composer create-project superframework/superframework my_new_super --ignore-platform-reqs
 ```
 # Memulai
 ## Konfigurasi Environment (.env)
