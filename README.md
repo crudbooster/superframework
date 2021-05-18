@@ -1,6 +1,9 @@
 # Super Framework
 The lightweight and fastest PHP framework from the creator of CRUDBooster
 
+# Why Super Framework?
+Kita mengadopsi beberapa pola pada framework laravel dan sekaligus merangkum apa saja yang paling essensial (terutama bagi kami) dalam development web. Sehingga kami dapat memaksimalkan performa kecepatan dari framework ini.
+
 # Instalasi
 
 ### Syarat Kebutuhan Sistem
