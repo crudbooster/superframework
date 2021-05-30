@@ -53,6 +53,8 @@ Jika kamu mengalami kegagalan instalasi karena issue `platform checking` php ver
 ```bash 
 $ composer create-project superframework/superframework my_new_super --ignore-platform-reqs
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Memulai
 ## Konfigurasi Environment (.env)
 Silahkan copy file `.env.example` menjadi `.env`. Apabila OS Anda tidak dapat melakukannya, Anda dapat menggunakan perintah :
@@ -89,6 +91,7 @@ DISPLAY_ERRORS=false
 # maka isi nilai berikut dengan true. Maka nanti ketika terjadi error tersimpan pada folder /logs
 LOGGING_ERRORS=false
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 ## Struktur Folder
 Sebelum Anda lanjut membuat aplikasi dengan framework ini, Anda perlu mengerti terlebih dahulu struktur folder pada framework SuperFramework ini.
 
@@ -106,6 +109,7 @@ Sebelum Anda lanjut membuat aplikasi dengan framework ini, Anda perlu mengerti t
 /tasks 
 /vendor 
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 ### /app
 Folder `app` berisi bisnis logika pada aplikasi Anda. Disini akan berisi semua file controller, helper, model, dan lain-lain.
 
@@ -126,6 +130,8 @@ Folder `tasks` ini berisi file schedule yang akan dijalankan pada cronjob. Anda 
 
 ### /vendor
 Folder `vendor` ini berisi berbagai macam library yang dibutuhkan pada sistem framework ini. Anda tidak perlu mengubah / menambahnya secara manual, karena sudah dikontrol dan dimanajemen oleh Composer.
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Controller & Routing
 
@@ -177,6 +183,7 @@ atau jika menggunakan localhost
 ```bash 
 localhost/projek_anda/public/test
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 ## Routing
 Routing pada superframework diatur langsung pada setiap class controller. 
@@ -198,6 +205,7 @@ Maka akan menghasilkan :
 ```bash 
 example.com/test
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 ### Routing Method
 Routing method berarti Anda mendefinisikan routing pada setiap method. 
 ```php 
@@ -213,6 +221,7 @@ Maka jika digabung dengan routing class tadi akan menghasilkan:
 ```bash 
 example.com/test/welcome
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 ### Routing Dengan Argument
 Anda dapat memasukkan argument pada url dan mencocokan pada method Anda dengan cara sebagai berikut:
@@ -230,6 +239,8 @@ Jangan lupa untuk menjalankan perintah berikut sebelum mendapatkan perubahan :
 ```bash 
 $ php super compile
 ```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 
 # POST / GET
 Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada setiap routing. Jadi setiap routing dapat berjalan sebagai GET maupun POST. Apabila Anda ingin memvalidasi method yang dikirimkan oleh user, maka Anda harus menggunakan helper khusus seperti contoh berikut : 
@@ -249,7 +260,7 @@ Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada se
         }
     }
 ```
-
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # CLI (super)
 Seperti layaknya framework lain seperti laravel mempunyai `artisan` pada super framework juga mempunyainya dengan nama `super`. Cara menggunakannya sebagai berikut:
@@ -263,6 +274,8 @@ php super [command]
 | make:migration {table} | Untuk membuat migration |
 | migrate | Untuk menjalankan migrasi |
 | make:model {table} | Untuk membuat file model |
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # File System
 Anda dapat melakukan upload file dengan helper FileSystem berikut
@@ -280,6 +293,8 @@ Sebelum memanggil fungsi diatas, pasang use berikut ini diatas class controller.
 use SuperFrameworkEngine\App\UtilFileSystem;
 ```
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Session
 Untuk menggunakan session, silahkan gunakan helper berikut ini :
 
@@ -290,6 +305,8 @@ Untuk menggunakan session, silahkan gunakan helper berikut ini :
 | session_forget($key) | To forget a session |
 | session_flash($dataArray) | Put a flash session |
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Cache
 Untuk menggunakan cache, silahkan gunakan helper berikut:
 
@@ -299,6 +316,8 @@ Untuk menggunakan cache, silahkan gunakan helper berikut:
 | cache($key) | To get the cache value by a key |
 | cache_forget($key) | To forget a cache |
 | cache_tag_forget($tag="general") | To forget cache by tag |
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Request
 Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini telah dibungkus ulang menjadi helper berikut
@@ -314,6 +333,8 @@ Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini 
 | request_url($key) | To get request that should be a valid URL |
 | request() | Get all requests |
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Response
 Untuk menampilkan output controller dapat berupa json maupun view blade.
 
@@ -325,6 +346,8 @@ Untuk menampilkan output controller dapat berupa json maupun view blade.
 View pada superframework mengadopsi kehebatan "blade" yang Ada pada Laravel. Maka
 bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini.
 Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 
 # Validation
@@ -351,7 +374,10 @@ try {
 }
 ```
 Berikut rule yang dapat Anda gunakan:
-`required`, `email`, `url`, `int`, `unique:{table}`,`exists:{table},{field}` 
+`required`, `email`, `url`, `int`, `unique:{table}`,`exists:{table},{field}`
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Database ORM
 Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawaan ini.
 
@@ -375,6 +401,8 @@ Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawa
 | DB("table")->delete($id) | To delete record with primary key value | 
 | DB("table")->delete() | To delete all record data |
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Helper
 Berikut ini helper yang tersedia pada superframework 
 
@@ -389,6 +417,7 @@ Berikut ini helper yang tersedia pada superframework
 | csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Model, Repository, Service
 Ini adalah sebuah pattern development. Kami menganjurkan untuk selalu menggunakan pattern ini ketika Anda membuat query pada database.
@@ -400,6 +429,8 @@ Anda dapat membuat seluruh query pada aplikasi Anda menggunakan repository ini.
 
 ## Service
 Anda dapat membuat query yang memiliki logika khusus pada class service ini.
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Cron Job / Scheduler
 Fitur cron job / scheduler pada superframework menggunakan library Crunz/Schedule. 
@@ -425,6 +456,8 @@ Lalu Anda harus menambahkan perintah ini pada sistem `crontab` pada linux Anda.
 * * * * * * cd /path/html/project/ && /var/bin/php super schedule:run 
 ```
 
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
 # Useful Libraries
 Berikut ini adalah library tambahan yang sangat berguna untuk menunjang pengembangan aplikasi Anda. Anda dapat menggabungkannya dengan *superframework*.
 1. **CRUD Generator** - a crud generator for superframework
@@ -443,6 +476,11 @@ Berikut ini adalah library tambahan yang sangat berguna untuk menunjang pengemba
     [https://opensource.box.com/spout/getting-started/](https://opensource.box.com/spout/getting-started/)
 1. **DOMPDF** - PDF Generation
     [https://github.com/dompdf/dompdf](https://github.com/dompdf/dompdf)
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
+
    
 # Contact
 Laporan keamanan / celah / security dapat Anda kirimkan ke *ferdevelop15@gmail.com*
+
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
