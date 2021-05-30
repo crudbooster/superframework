@@ -284,6 +284,8 @@ Anda dapat melakukan upload file dengan helper FileSystem berikut
 | FileSystem::uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
 | FileSystem::uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
 | FileSystem::uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+
+
 Sebelum memanggil fungsi diatas, pasang use berikut ini diatas class controller.
 ```php 
 use SuperFrameworkEngine\App\UtilFileSystem;
