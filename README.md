@@ -12,6 +12,7 @@ Sebelum melakukan instalasi pastikan sistem Anda sudah memenuhi persyaratan beri
 - Web server Apache / Nginx
 - MySQL / MariaDB / Postgre / SQL Server / SQLite
 - Composer
+- PDO
 
 ### Opsional, namun direkomendasikan :
 - php Zend OPCache Extension
@@ -99,10 +100,6 @@ Folder `tasks` ini berisi file schedule yang akan dijalankan pada cronjob. Anda 
 
 ### /vendor
 Folder `vendor` ini berisi berbagai macam library yang dibutuhkan pada sistem framework ini. Anda tidak perlu mengubah / menambahnya secara manual, karena sudah dikontrol dan dimanajemen oleh Composer.
-
-## Module
-Super framework use a modular MVC Concept. You have a default MVC after make a installation, that is /app/Modules/Site
-If you want to make a new module, you can make a duplicate directory "Site" to your new module name.
 
 # Controller & Routing
 
@@ -256,10 +253,10 @@ php super [command]
 | request_url($key) | To get request that should be a valid URL |
 | request() | Get all requests |
 | get_current_url() | To get current url |
-| (new FileSystem())->uploadImageByUrl($url, $newFileName) | To upload an image from url. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| (new FileSystem())->uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
-| (new FileSystem())->uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| (new FileSystem())->uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| FileSystem::uploadImageByUrl($url, $newFileName) | To upload an image from url. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| FileSystem::uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
+| FileSystem::uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| FileSystem::uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
 | session(["key"=>"value"]) | To set a session with array |
 | session("key") | To retrieve session by a key |
 | session_forget($key) | To forget a session |
@@ -277,6 +274,20 @@ php super [command]
 | csrf_input() | To add hidden input about CSRF Token |
 | csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
+
+## Upload File
+Anda dapat melakukan upload file dengan helper FileSystem berikut
+
+| Helper | Deskripsi |
+| ------------ | ----------- |
+| FileSystem::uploadImageByUrl($url, $newFileName) | To upload an image from url. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| FileSystem::uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
+| FileSystem::uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+| FileSystem::uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
+Sebelum memanggil fungsi diatas, pasang use berikut ini diatas class controller.
+```php 
+use SuperFrameworkEngine\App\UtilFileSystem;
+```
 
 ## Validator
 Anda dapat memvalidasi request user dengan class berikut ini 
