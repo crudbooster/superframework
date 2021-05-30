@@ -4,6 +4,32 @@ The lightweight and fastest PHP framework from the creator of CRUDBooster
 # Why Super Framework?
 Kita mengadopsi beberapa pola pada framework laravel dan sekaligus merangkum apa saja yang paling essensial (terutama bagi kami) dalam development web. Sehingga kami dapat memaksimalkan performa kecepatan dari framework ini.
 
+Daftar Isi
+=================
+* [Instalasi](#instalasi)
+* [Memulai](#memulai)
+  * [Konfigurasi Environment](#konfigurasi-environment-env)
+  * [Struktur Folder](#struktur-folder)  
+* [Controller & Routing](#controller--routing)
+  * [Membuat Controller](#membuat-controller)
+  * [Routing](#routing)  
+    * [Routing Class](#routing-class)
+    * [Routing Method](#routing-method)
+    * [Routing Argument](#routing-dengan-argument)
+* [CLI](#cli-super)
+* [File System](#file-system)
+* [Session](#session)
+* [Cache](#cache)
+* [Request](#request)
+* [Response](#response)
+* [Validation](#validation)
+* [Database ORM / Query Builder](#database-orm)
+* [Helper](#helper)
+* [MRS Pattern](#model-repository-service)
+* [Cron Job / Scheduler](#cron-job--scheduler)
+* [Useful Libraries](#useful-libraries)
+* [Contact](#contact)
+
 # Instalasi
 
 ### Syarat Kebutuhan Sistem
@@ -102,9 +128,6 @@ Folder `tasks` ini berisi file schedule yang akan dijalankan pada cronjob. Anda 
 Folder `vendor` ini berisi berbagai macam library yang dibutuhkan pada sistem framework ini. Anda tidak perlu mengubah / menambahnya secara manual, karena sudah dikontrol dan dimanajemen oleh Composer.
 
 # Controller & Routing
-
-## Apa itu Controller?
-Controller adalah sebuah class yang dapat mengontrol URL pada sistem aplikasi.
 
 ## Membuat Controller
 Buka tool editor favorit Anda, dan buat file pada 
@@ -208,7 +231,7 @@ Jangan lupa untuk menjalankan perintah berikut sebelum mendapatkan perubahan :
 $ php super compile
 ```
 
-### POST / GET
+# POST / GET
 Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada setiap routing. Jadi setiap routing dapat berjalan sebagai GET maupun POST. Apabila Anda ingin memvalidasi method yang dikirimkan oleh user, maka Anda harus menggunakan helper khusus seperti contoh berikut : 
 ```php 
     /**
@@ -228,7 +251,7 @@ Pada superframework Anda tidak membutuhkan mendeklarasikan secara manual pada se
 ```
 
 
-## CLI (super)
+# CLI (super)
 Seperti layaknya framework lain seperti laravel mempunyai `artisan` pada super framework juga mempunyainya dengan nama `super`. Cara menggunakannya sebagai berikut:
 ```bash
 php super [command]
@@ -241,7 +264,7 @@ php super [command]
 | migrate | Untuk menjalankan migrasi |
 | make:model {table} | Untuk membuat file model |
 
-## Upload File
+# File System
 Anda dapat melakukan upload file dengan helper FileSystem berikut
 
 | Helper | Deskripsi |
@@ -257,7 +280,7 @@ Sebelum memanggil fungsi diatas, pasang use berikut ini diatas class controller.
 use SuperFrameworkEngine\App\UtilFileSystem;
 ```
 
-## Session
+# Session
 Untuk menggunakan session, silahkan gunakan helper berikut ini :
 
 | Helper Name | Description |
@@ -267,7 +290,7 @@ Untuk menggunakan session, silahkan gunakan helper berikut ini :
 | session_forget($key) | To forget a session |
 | session_flash($dataArray) | Put a flash session |
 
-## Cache
+# Cache
 Untuk menggunakan cache, silahkan gunakan helper berikut:
 
 | Helper Name | Description |
@@ -277,7 +300,7 @@ Untuk menggunakan cache, silahkan gunakan helper berikut:
 | cache_forget($key) | To forget a cache |
 | cache_tag_forget($tag="general") | To forget cache by tag |
 
-## Request
+# Request
 Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini telah dibungkus ulang menjadi helper berikut
 
 | Helper Name | Description |
@@ -291,7 +314,7 @@ Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini 
 | request_url($key) | To get request that should be a valid URL |
 | request() | Get all requests |
 
-## Response
+# Response
 Untuk menampilkan output controller dapat berupa json maupun view blade.
 
 | Helper Name | Description |
@@ -304,7 +327,7 @@ bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini.
 Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
 
 
-## Validator
+# Validation
 Anda dapat memvalidasi request user dengan class berikut ini 
 ```php 
 Validator::make($requestData, $rules);
@@ -329,7 +352,7 @@ try {
 ```
 Berikut rule yang dapat Anda gunakan:
 `required`, `email`, `url`, `int`, `unique:{table}`,`exists:{table},{field}` 
-## Database ORM
+# Database ORM
 Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawaan ini.
 
 | Name | Description |
@@ -352,7 +375,7 @@ Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawa
 | DB("table")->delete($id) | To delete record with primary key value | 
 | DB("table")->delete() | To delete all record data |
 
-## Helper
+# Helper
 Berikut ini helper yang tersedia pada superframework 
 
 | Helper Name | Description |
