@@ -241,40 +241,6 @@ php super [command]
 | migrate | Untuk menjalankan migrasi |
 | make:model {table} | Untuk membuat file model |
 
-## Helper
-| Helper Name | Description |
-| ------------ | ----------- |
-| request_method_is_post() | To check the request is post (boolean) |
-| request_method_is_get() | To check the request is get (boolean) |
-| request_int($key) | To get request that should be integer |
-| request_string($key) | To get request that should be string | 
-| request_float($key) | To get request that should be float |
-| request_email($key) | To get request that should be a valid email |
-| request_url($key) | To get request that should be a valid URL |
-| request() | Get all requests |
-| get_current_url() | To get current url |
-| FileSystem::uploadImageByUrl($url, $newFileName) | To upload an image from url. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| FileSystem::uploadBase64($base64Data, $newFileName, $extension) | To upload a file from base64 data. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.docx |
-| FileSystem::uploadImage($inputName, $newFileName) | To upload an image from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| FileSystem::uploadFile($inputName, $newFileName) | To upload a file from input file. Output is absolute URL of file E.g: /uploads/2019-01-01/filename.jpg |
-| session(["key"=>"value"]) | To set a session with array |
-| session("key") | To retrieve session by a key |
-| session_forget($key) | To forget a session |
-| session_flash($dataArray) | Put a flash session |
-| config("key", $default = null) | To retrieve config by a key (from Configs/config.php)| 
-| base_url($path = "") | To get the base url of your project, and you can set the suffix path |
-| cache($key, $value, $tag = "general", $cache_in_minutes = 60) | To make a cache by key and value, you can also set the cache duration in minutes | 
-| cache($key) | To get the cache value by a key |
-| cache_forget($key) | To forget a cache |
-| cache_tag_forget($tag="general") | To forget cache by tag |
-| json($array) | To return the json response by an array |
-| view($view_name, $data = []) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
-| logging($content, $type = "error") | To make a log |
-| random_string($length = 6) | To make a random string |
-| csrf_input() | To add hidden input about CSRF Token |
-| csrf_token() | To add csrf token |
-| dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
-
 ## Upload File
 Anda dapat melakukan upload file dengan helper FileSystem berikut
 
@@ -290,6 +256,53 @@ Sebelum memanggil fungsi diatas, pasang use berikut ini diatas class controller.
 ```php 
 use SuperFrameworkEngine\App\UtilFileSystem;
 ```
+
+## Session
+Untuk menggunakan session, silahkan gunakan helper berikut ini :
+
+| Helper Name | Description |
+| ------------ | ----------- |
+| session(["key"=>"value"]) | To set a session with array |
+| session("key") | To retrieve session by a key |
+| session_forget($key) | To forget a session |
+| session_flash($dataArray) | Put a flash session |
+
+## Cache
+Untuk menggunakan cache, silahkan gunakan helper berikut:
+
+| Helper Name | Description |
+| ------------ | ----------- |
+| cache($key, $value, $tag = "general", $cache_in_minutes = 60) | To make a cache by key and value, you can also set the cache duration in minutes |
+| cache($key) | To get the cache value by a key |
+| cache_forget($key) | To forget a cache |
+| cache_tag_forget($tag="general") | To forget cache by tag |
+
+## Request
+Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini telah dibungkus ulang menjadi helper berikut
+
+| Helper Name | Description |
+| ------------ | ----------- |
+| request_method_is_post() | To check the request is post (boolean) |
+| request_method_is_get() | To check the request is get (boolean) |
+| request_int($key) | To get request that should be integer |
+| request_string($key) | To get request that should be string | 
+| request_float($key) | To get request that should be float |
+| request_email($key) | To get request that should be a valid email |
+| request_url($key) | To get request that should be a valid URL |
+| request() | Get all requests |
+
+## Response
+Untuk menampilkan output controller dapat berupa json maupun view blade.
+
+| Helper Name | Description |
+| ------------ | ----------- |
+| json($array) | To return the json response by an array |
+| view($view_name, $data = []) | To return a view that  you create in {module}/Views/{view_name}.php. You can assign the data array on second parameter |
+
+View pada superframework mengadopsi kehebatan "blade" yang Ada pada Laravel. Maka
+bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini.
+Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
+
 
 ## Validator
 Anda dapat memvalidasi request user dengan class berikut ini 
@@ -338,7 +351,22 @@ Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawa
 | DB("table")->where("id = {$id}")->delete() | To delete record with a condition | 
 | DB("table")->delete($id) | To delete record with primary key value | 
 | DB("table")->delete() | To delete all record data |
-  
+
+## Helper
+Berikut ini helper yang tersedia pada superframework 
+
+| Helper Name | Description |
+| ------------ | ----------- |
+| get_current_url() | To get current url |
+| config("key", $default = null) | To retrieve config by a key (from Configs/config.php)| 
+| base_url($path = "") | To get the base url of your project, and you can set the suffix path |
+| logging($content, $type = "error") | To make a log |
+| random_string($length = 6) | To make a random string |
+| csrf_input() | To add hidden input about CSRF Token |
+| csrf_token() | To add csrf token |
+| dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
+
+
 # Model, Repository, Service
 Ini adalah sebuah pattern development. Kami menganjurkan untuk selalu menggunakan pattern ini ketika Anda membuat query pada database.
 ## Model
@@ -373,11 +401,6 @@ Lalu Anda harus menambahkan perintah ini pada sistem `crontab` pada linux Anda.
 ```bash
 * * * * * * cd /path/html/project/ && /var/bin/php super schedule:run 
 ```
-
-# View
-View pada superframework mengadopsi kehebatan "blade" yang Ada pada Laravel. Maka 
-bagi Anda pengguna Laravel pasti sudah terbiasa menggunakan blade ini. 
-Anda dapat membaca dokumentasi lebih banyak pada tautan ini [Blade](https://laravel.com/docs/8.x/blade)
 
 # Useful Libraries
 Berikut ini adalah library tambahan yang sangat berguna untuk menunjang pengembangan aplikasi Anda. Anda dapat menggabungkannya dengan *superframework*.
