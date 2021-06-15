@@ -1,8 +1,8 @@
 RewriteEngine On
 ServerSignature Off
 
-# Protect Log, SH, Ini File
-<FilesMatch "\.(ini|sh|log)">
+# Disable anything access to .htaccess, .env, etc
+<FilesMatch "^\.">
   Order allow,deny
   Deny from all
 </FilesMatch>

@@ -1,3 +1,14 @@
+RewriteEngine On
+
+# Disable anything access to .htaccess, .env, etc
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Prevent vendor
+RewriteRule ^vendor/.*\.(php|rb|py)$ - [F,L,NC]
+
 # Protect .htaccess, composer, super
 <FilesMatch "^(\.|composer.|super)">
   Order allow,deny
