@@ -458,6 +458,12 @@ Lalu Anda harus menambahkan perintah ini pada sistem `crontab` pada linux Anda.
 
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
+# FAQ
+**Install projek pada web server Nginx, ke sub folder, hasilnya 404 Not Found**
+
+Biasanya kita harus menulis syntax rewrite khusus pada virtual host nginx. Tidak semua syntax yang Anda dapatkan akan langsung bekerja, biasanya muncul 404 Not Found. Cobalah solusi dari stackoverflow ini : 
+[https://stackoverflow.com/a/61013994/934326](https://stackoverflow.com/a/61013994/934326)
+
 # Useful Libraries
 Berikut ini adalah library tambahan yang sangat berguna untuk menunjang pengembangan aplikasi Anda. Anda dapat menggabungkannya dengan *superframework*.
 1. **CRUD Generator** - a crud generator for superframework
