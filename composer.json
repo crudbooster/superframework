@@ -3,7 +3,7 @@
   "description": "The super fastest framework ever for scalable project",
   "type": "project",
   "require": {
-    "php": "7.3.*|7.4.*",
+    "php": "7.3.*|7.4.*|8.0.*",
     "ext-json": "*",
     "ext-pdo": "*",
     "ext-openssl": "*",
