@@ -332,6 +332,7 @@ Jika pada PHP native Anda mengenal $_GET, $_POST, $_REQUEST, pada framework ini 
 | request_email($key) | To get request that should be a valid email |
 | request_url($key) | To get request that should be a valid URL |
 | request() | Get all requests |
+| request($key) | To get request with key |
 
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
@@ -384,22 +385,31 @@ Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawa
 | Name | Description |
 | ----- | ----- |
 | DB("table")->all($limit) | To get all table data (in array), and you can pass the limit |
+| DB("table")->get($limit = 10, $offset = 0, $paging = false) | This is alias of all() function |
 | DB("table")->find($id) | To get the single record (in array) with a primary key value |
 | DB("table")->where("status = 'Active'")->all($limit) | To get all table data with a condition |
+| DB("table")->where("status = ?",[$status])->all() | To make a condition with bind |
 | DB("table")->where("status = 'Active' AND price > 100000")->all($limit) | To get all table data with a multiple conditions. So you can write any condition in here, because this is a raw condition actually |
-| DB("table")->select("id","name","status")->all() | To set the select of query | 
-| DB("table")->addSelect("id")->addSelect("price")->all() | or Sometime you want to add more select in the next query, just add this method chain, before calling all() / find() |
+| DB("table")->whereIsset($keyword,"name like ?",["%".$keyword."%"])->get() | To make a condition where query. Where condition only applied if keyword is set |
+| DB("table")->select("id","name","status","age as umur")->all() | To set the select of query | 
+| DB("table")->addSelect("id")->addSelect("age as umur")->addSelect("price")->all() | or Sometime you want to add more select in the next query, just add this method chain, before calling all() / find() |
 | DB("table")->limit($limit)->offset($offset)->all() | To get all table data with limit and offset |
 | DB("table")->orderBy("id DESC")->all() | To get all table data with order by |
 | DB("table")->groupBy("id, status")->all() | To get all table data with a group by fields |
 | DB("table")->having("price > 10")->all() | To get al table data with having |
-| DB("table")->join("categories ON categories.id = categories_id", $join_type = "LEFT JOIN")->all() | To get all data with a join, second param you can pass type of join (INNER JOIN, LEFT JOIN, RIGHT JOIN, OUTER JOIN) *mysql |
+| DB("table")->join("categories ON categories.id = categories_id", $join_type = "LEFT JOIN")->addSelect("table.*")->addSelectTable("categories")->all() | To get all data with a join, second param you can pass type of join (INNER JOIN, LEFT JOIN, RIGHT JOIN, OUTER JOIN) *mysql. AddSelectTable is to make all selection to the specific table with format "table_{field}" |
 | DB("table")->with("categories")->all() | You can use this join alias, if you can make sure that the foreign key is meet the naming convention ( {table}_id ) | 
 | DB("table")->insert($data_array) | To insert to the table with an array data | 
-| DB("table")->where("id = {$id}")->update($data_array) | To update the record data |
-| DB("table")->where("id = {$id}")->delete() | To delete record with a condition | 
+| DB("table")->where("id = ?",[$id])->update($data_array) | To update the record data |
+| DB("table")->where("id = ?",[$id])->delete() | To delete record with a condition | 
 | DB("table")->delete($id) | To delete record with primary key value | 
 | DB("table")->delete() | To delete all record data |
+| DB("table")->count() | To count records | 
+| DB("table")->sum("total") | To summarize records | 
+| DB("table")->avg("age") | To average records |
+| DB("table")->min("id") | To Get minimum id | 
+| DB("table")->max("id") | To get maximum id |
+| DB("table")->paginate($limit) | To make a pagination |
 
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
@@ -408,14 +418,39 @@ Berikut ini helper yang tersedia pada superframework
 
 | Helper Name | Description |
 | ------------ | ----------- |
-| get_current_url() | To get current url |
+| get_current_url($param = [], $withQuery = false) | To get current url without query param. To modify query, set `$param` with array. To include query param set `$withQuery` to `true`|
+| get_current_url(["q"=>"test"]) | To get current url and modify query "q" with "test" |'
 | config("key", $default = null) | To retrieve config by a key (from Configs/config.php)| 
 | base_url($path = "") | To get the base url of your project, and you can set the suffix path |
+| asset($path = "") | To make url that pointing to public directory |
+| url($path = "") | To make url that pointing from index web |
 | logging($content, $type = "error") | To make a log |
 | random_string($length = 6) | To make a random string |
-| csrf_input() | To add hidden input about CSRF Token |
+| csrf_input() | To add hidden html input about CSRF Token |
 | csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
+| str_slug($text) | To make a slug url |
+
+# Firebase Cloud Message (FCM)
+Anda bisa menggunakan class berikut untuk mengirim FCM
+
+```php 
+// Tambahkan import ini diatas nama class
+use SuperFrameworkEngine\App\UtilFirebase\FCM;
+
+// ===== Detail Penggunaan Class =====
+$msg = new FCM();
+$msg->title("Judul Pesan");
+$msg->message("Deskripsi pesan");
+
+// Untuk menambahkan data lain
+$msg->data([
+ "data1"=>"value1"
+]); 
+
+// Kirim fcm
+$msg->send();
+```
 
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
@@ -429,6 +464,21 @@ Anda dapat membuat seluruh query pada aplikasi Anda menggunakan repository ini.
 
 ## Service
 Anda dapat membuat query yang memiliki logika khusus pada class service ini.
+
+```php 
+// Anda bisa menggunakan model class untuk query database
+
+// Dari Model
+$data = Users::query()->where("id=?",[$id])->find();
+
+// Dari Repository
+$data = UsersRepository::query()->where("id=?",[$id])->find();
+
+// Dari Service
+$data = UsersService::query()->where("id=?",[$id])->find();
+```
+
+ Anda cukup menambahkan `query()` pada chain yang pertama. 
 
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
