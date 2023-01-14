@@ -25,6 +25,8 @@ Daftar Isi
 * [Validation](#validation)
 * [Database ORM / Query Builder](#database-orm)
 * [Helper](#helper)
+* [Collection](#collection)
+* [Firebase Cloud Message](#firebase-cloud-message-fcm)
 * [MRS Pattern](#model-repository-service)
 * [Cron Job / Scheduler](#cron-job--scheduler)
 * [Useful Libraries](#useful-libraries)
