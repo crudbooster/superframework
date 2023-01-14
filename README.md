@@ -411,6 +411,8 @@ Untuk membuat query pada superframework Anda dapat menggunakan DATABASE ORM bawa
 | DB("table")->max("id") | To get maximum id |
 | DB("table")->paginate($limit) | To make a pagination |
 
+Lebih detail cara kerja fungsi ini Anda bisa merujuk ke file `vendor/fherryfherry/super-framework-engine/src/App/UtilORM/ORM.php` namun jangan mengubah file ini secara langsung karena perubahan Anda akan hilang jika Anda update.
+
 [[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Helper
@@ -422,7 +424,10 @@ Berikut ini helper yang tersedia pada superframework
 | get_current_url(["q"=>"test"]) | To get current url and modify query "q" with "test" |'
 | config("key", $default = null) | To retrieve config by a key (from Configs/config.php)| 
 | base_url($path = "") | To get the base url of your project, and you can set the suffix path |
+| base_path($path = "") | To get a root absolute path of project |
+| admin_url($path = "") | To make an admin url instead you use url(), you can use this |
 | asset($path = "") | To make url that pointing to public directory |
+| public_path($path = "") | To get a root public absolute path of project |
 | url($path = "") | To make url that pointing from index web |
 | logging($content, $type = "error") | To make a log |
 | random_string($length = 6) | To make a random string |
@@ -430,6 +435,59 @@ Berikut ini helper yang tersedia pada superframework
 | csrf_token() | To add csrf token |
 | dd($array1, $var1 [, $array_or_var]) | To debug the array or variable and exit the process |
 | str_slug($text) | To make a slug url |
+| return redirect($path = "",["message"=>"lipsum","type"="warning]) | To redirect a page to some page. In second argument is optional, but you can set if you want give a flash message. |
+| return redirect_back(["message"=>"lipsum","type"="warning]) | To redirect a page to previous page. In first argument is optional, but you can set if you want give a flash message. |
+
+# Collection
+Anda bisa menggunakan fungsi `simple_collect` untuk mengolah suatu array menjadi collection sehingga memudahkan untuk memodifikasi, filtrasi dan lain-lain pada suatu array.
+
+```php
+$data = simple_collect([1,2,3,4])
+
+// Menghitung total array
+$result = $data->count();
+
+// Mendapatkan array 
+$result = $data->get();
+
+// Menghitung summary by key
+$result = $data->sum($key = "key");
+
+// Menghitung rata-rata by key
+$result = $data->avg($key = "key");
+
+// Memberikan kondisi sama dengan dan mendapatkan 1 data
+$result = $data->whereEqual("key","value")->first();
+
+// Memberikan kondisi tidak sama dengan dan mendapatkan 1 data
+$result = $data->whereNotEqual("key","value")->first();
+
+// Memberikan kondisi in array dan mendapatkan data array
+$result = $data->whereIn("key",[1,2,3,4])->get();
+
+// Memberikan kondisi not in array dan mendapatkan data array
+$result = $data->whereNotIn("key",[1,2,3,4])->get();
+
+// Memberikan kondisi like
+$result = $data->whereLike("key","value")->get();
+
+// Memberikan kondisi negtive like
+$result = $data->whereNotLike("key","value")->get();
+
+// Memberikan kondisi lebih besar dari
+$result = $data->whereGreaterThan("key",5)->get();
+
+// Memberikan kondisi lebih kecil dari
+$result = $data->whereLessThan("key",5)->get();
+
+// Memberikan kondisi lebih besar dari sama dengan
+$result = $data->whereGreaterThanEq("key",5)->get();
+
+// Memberikan kondisi lebih kecil dari sama dengan
+$result = $data->whereLessThanEq("key",5)->get();
+
+```
+[[↑ Kembali ke daftar isi ↑]](#daftar-isi)
 
 # Firebase Cloud Message (FCM)
 Anda bisa menggunakan class berikut untuk mengirim FCM
