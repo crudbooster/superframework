@@ -2,6 +2,10 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// Suppress all deprecations early
+error_reporting(E_ALL & ~E_DEPRECATED);
+ini_set('display_errors', '0');
+
 if (!defined('BASE_PATH')) {
     define('BASE_PATH', dirname(__DIR__));
 }

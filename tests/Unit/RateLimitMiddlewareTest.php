@@ -17,9 +17,8 @@ class RateLimitMiddlewareTest extends TestCase
         parent::setUp();
         
         $this->mockRedis = $this->createMock(RedisService::class);
-        $this->app->singleton(RedisService::class, fn() => $this->mockRedis);
-        
         $this->middleware = new RateLimitMiddleware();
+        $this->middleware->setRedis($this->mockRedis);
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
     }
 
@@ -35,8 +34,11 @@ class RateLimitMiddlewareTest extends TestCase
     public function test_passes_when_under_limit()
     {
         $this->mockRedis->method('getClient')->willReturn($this->createMock(\Predis\Client::class));
-        $this->mockRedis->method('incr')->willReturn(1);
-        $this->mockRedis->expects($this->once())->method('expire');
+        $this->mockRedis->expects($this->once())
+            ->method('incr')
+            ->willReturn(1);
+        $this->mockRedis->expects($this->once())
+            ->method('expire');
         
         $next = function() { return 'Passed'; };
         $result = $this->middleware->handle($next);
@@ -46,11 +48,13 @@ class RateLimitMiddlewareTest extends TestCase
 
     public function test_fails_when_over_limit()
     {
+        $this->mockRedis->method('getClient')->willReturn($this->createMock(\Predis\Client::class));
+        $this->mockRedis->expects($this->once())
+            ->method('incr')
+            ->willReturn(61);
+            
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Too many requests');
-        
-        $this->mockRedis->method('getClient')->willReturn($this->createMock(\Predis\Client::class));
-        $this->mockRedis->method('incr')->willReturn(61);
         
         $next = function() { return 'Passed'; };
         $this->middleware->handle($next);

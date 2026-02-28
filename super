@@ -1,5 +1,9 @@
 #!/usr/bin/env php
-<?php use SuperFrameworkEngine\Commands\CommandRunner;
+<?php 
+
+error_reporting(E_ALL & ~E_DEPRECATED);
+
+use SuperFrameworkEngine\Commands\CommandRunner;
 
 require_once "vendor/autoload.php";
 

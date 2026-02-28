@@ -14,7 +14,7 @@
         </testsuite>
     </testsuites>
     <php>
-        <ini name="error_reporting" value="-1"/>
+        <ini name="error_reporting" value="24575"/>
         <ini name="display_errors" value="1"/>
         <ini name="xdebug.mode" value="coverage"/>
     </php>

@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 /**
  * Now let composer auto load all the class
  */

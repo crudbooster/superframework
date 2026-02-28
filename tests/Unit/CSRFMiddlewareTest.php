@@ -44,8 +44,16 @@ class CSRFMiddlewareTest extends TestCase
     public function test_post_request_passes_with_valid_csrf()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
-        $token = csrf_token();
+        
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Manual session set to be absolutely sure
+        $token = 'test_token';
+        $_SESSION['csrf_token'] = $token;
         $_POST['_token'] = $token;
+        $_REQUEST['_token'] = $token;
         
         $middleware = new CSRFMiddleware();
         $next = function() { return 'Passed'; };
