@@ -3,3 +3,7 @@ vendor/*
 *.log
 composer.lock
 .idea
+.php-cs-fixer.cache
+tests/coverage-html/
+bootstrap/route.cache
+bootstrap/views/*

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
@@ -19,8 +20,8 @@ final class CreateSettings extends AbstractMigration
     public function change(): void
     {
         $table = $this->table("settings");
-        $table->addColumn("name", "string", ['limit'=>255]);
-        $table->addColumn("content","text",['null'=>true]);
+        $table->addColumn("name", "string", ['limit' => 255]);
+        $table->addColumn("content", "text", ['null' => true]);
         $table->create();
     }
 }
